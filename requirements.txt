@@ -1,0 +1,2 @@
+django-jazzmin==2.6.0
+easy-thumbnails==2.8.5

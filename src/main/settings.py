@@ -11,11 +11,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os, sys
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = (BASE_DIR/'../data').resolve()
-
+# PROJECT_ROOT = os.path.dirname(__file__)
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-icc=bj0fcnpo6x%02h6-+_40=zgk84l*5n%bha=6dq#q45^1vr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shop',
+    'apps.shop',
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'kolokolnya.urls'
+ROOT_URLCONF = 'main.urls'
 
 TEMPLATES = [
     {
@@ -70,9 +72,14 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'kolokolnya.wsgi.application'
+WSGI_APPLICATION = 'main.wsgi.application'
 
+THUMBNAIL_ALIASES = {
+    "": {
+        "gallery": {'size': (420, 236), 'crop': True},
+    },
 
+}
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
