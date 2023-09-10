@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.shop',
+    'apps.Blog',
     'easy_thumbnails',
 ]
 
@@ -76,7 +77,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 THUMBNAIL_ALIASES = {
     "": {
-        "gallery": {'size': (420, 236), 'crop': True},
+        "apps.Blog": {'size': (420, 236), 'crop': True},
     },
 
 }
