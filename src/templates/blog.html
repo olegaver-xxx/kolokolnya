@@ -7,13 +7,12 @@
 <body>
 {% for blogs in blog %}
 
-
-
-<div class="row tm-mb-90">
-    <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
-        <img src="{{ blogs.article_image.url }}" alt="Image" class="img-fluid">
+    <div class="row tm-mb-90">
+        <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
+            <img src="{{ blogs.article_image.url }}" alt="Image" class="img-fluid">
+        </div>
     </div>
-</div>
+
 {% endfor %}
 </body>
 </html>

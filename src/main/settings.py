@@ -79,6 +79,9 @@ THUMBNAIL_ALIASES = {
     "": {
         "apps.Blog": {'size': (420, 236), 'crop': True},
     },
+    "q": {
+        "apps.Blog": {'size': (1080, 720), 'crop': True},
+    },
 
 }
 # Database
