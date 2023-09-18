@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.shop',
     'apps.Blog',
     'easy_thumbnails',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
