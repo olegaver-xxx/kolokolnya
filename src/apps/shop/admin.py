@@ -4,5 +4,5 @@ from apps.Blog.models import ArticleModel
 
 
 admin.site.register(ItemModel)
-admin.site.register(ArticleModel)
+
 # Register your models here.

@@ -11,11 +11,18 @@ class BlogView(ListView):
 
 class ArticleView(DetailView):
     model = ArticleModel
-    # template_name = 'blog.html'
-    context_object_name = 'model'
+    template_name = 'blog-single-full.html'
+    context_object_name = 'detail'
 
+    def get_context_data(self, **kwargs):
+        ctx = super(ArticleModel).get_context_data(**kwargs)
+        ctx['article_image'] = self.object
+        ctx['article_image'] = self.object.image_set.all().order_by('GalleryImage__index')
+        return ctx
 
 class HomeView(ListView):
+    model = ArticleModel
     template_name = 'home.html'
     context_object_name = 'home'
-    model = ArticleModel
+
+

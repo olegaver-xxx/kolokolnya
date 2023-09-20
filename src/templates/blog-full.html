@@ -2,18 +2,14 @@
 {% load thumbnail %}
 
 {% block head %}
-   <style>
-
-       .text-overflow-ellipses {
-            {#border: 2px solid #2a70a5;#}
-           padding: 20px 0;
-            white-space: nowrap;
+    <style>
+        .truncate {
             width: 200px;
-           overflow: hidden;
-          text-overflow: ellipsis;
-           font-size: 25px;
-       }
-   </style>
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -54,31 +50,32 @@
 
 
 
-                    <article class="post side-item content-padding">
-                        <i class="fa fa-thumb-tack" aria-hidden="true"></i>
-                        <div class="item-wrap">
-                            <div class="item-media cover-image">
-                                <img src="{% thumbnail blogs.article_image 420x236%}" alt="img">
-                                <div class="media-links">
-                                    <a class="abs-link" title="" href="blog-single-full.html"></a>
+                        <article class="post side-item content-padding">
+{#                            <i class="fa fa-thumb-tack" aria-hidden="true"></i>#}
+                            <div class="item-wrap">
+                                <div class="item-media cover-image">
+                                    <img src="{% thumbnail blogs.article_image 420x236 %}" alt="img">
+                                    <div class="media-links">
+                                        <a class="abs-link" title="" href="{% url 'article' pk=blogs.pk %}"></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="item-content">
-                            <h5>
-                                <a href="blog-single-full.html">{{ blogs.article_title }}</a>
-                            </h5>
+                            <div class="item-content">
+                                <h5>
+                                    <a href="{% url 'article' pk=blogs.pk %}">{{ blogs.article_title }}</a>
+                                </h5>
 
-                           <main class="text-overflow-ellipses"> <p>{{ blogs.article_text }}</p></main>
-                            <p class="item-meta flex-wrap d-flex ">
-                                <a href="blog-single-full.html"><i class="fa fa-calendar color-main3"></i>{{ blogs.published }}
-                                </a>
-{#                                <a href="blog-full.html"><i class="fa fa-tags color-main3"></i>travel</a>#}
-{#                                <a href="blog-single-full.html"><i class="fa fa-user color-main3"></i>Floyd Powers</a>#}
-                            </p>
-                        </div>
-                    </article>
+                                <p class="truncate"> {{ blogs.article_text }}</p>
+                                <p class="item-meta flex-wrap d-flex ">
+                                    <a href="{% url 'article' pk=blogs.pk %}"><i
+                                            class="fa fa-calendar color-main3"></i>{{ blogs.published }}
+                                    </a>
+                                    {#                                <a href="blog-full.html"><i class="fa fa-tags color-main3"></i>travel</a>#}
+                                    {#                                <a href="blog-single-full.html"><i class="fa fa-user color-main3"></i>Floyd Powers</a>#}
+                                </p>
+                            </div>
+                        </article>
                     {% endfor %}
 
 
