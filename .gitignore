@@ -3,3 +3,4 @@ data/
 src/venv
 src/db.sqlite3
 .idea
+/mountis/

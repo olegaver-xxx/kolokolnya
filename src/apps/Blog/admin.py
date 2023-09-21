@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import ArticleModel, ImageModel, ArticleToImagModel
+from .models import ArticleModel, ImageModel
 
 
 class ArticleImageInline(admin.TabularInline):
-    model = ArticleToImagModel
+    model = ImageModel
     extra = 1
 
 
@@ -12,4 +12,4 @@ class ArticleModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ArticleModel, ArticleModelAdmin)
-# admin.site.register(ImageModel)
+
