@@ -1,0 +1,400 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <section class="page_title ds s-py-5">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 text-center">
+                    <h1 class="bold">Shopping Cart</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#">Shop</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Shopping Cart
+                        </li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </div>
+
+
+    <section class="ls s-py-80 s-py-md-120 s-py-xl-160">
+        <div class="container">
+            <div class="row">
+
+                <main class="col-lg-12">
+                    <div class="woocommerce-message">
+                        "Premium quality" removed. <a href="#">Undo?</a>
+                    </div>
+
+                    <form class="woocommerce-cart-form" action="https://html.modernwebtemplates.com/" method="post">
+
+                        <table class="shop_table shop_table_responsive cart">
+                            <thead>
+                            <tr>
+                                <th class="product-remove">&nbsp;</th>
+                                <th class="product-thumbnail">&nbsp;</th>
+                                <th class="product-name">Product</th>
+                                <th class="product-price">Price</th>
+                                <th class="product-quantity">Quantity</th>
+                                <th class="product-subtotal">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr class="cart_item">
+
+                                <td class="product-remove">
+                                    <a href="#" class="remove" aria-label="Remove this item" data-product_id="73"
+                                       data-product_sku="">×</a>
+                                </td>
+
+                                <td class="product-thumbnail">
+                                    <a href="shop-product-right.html">
+                                        <img width="180" height="180" src="images/shop/01.jpg" class="" alt="img">
+                                    </a>
+                                </td>
+
+                                <td class="product-name" data-title="Product">
+                                    <a href="shop-product-right.html">Premium Quality</a>
+                                </td>
+
+                                <td class="product-price" data-title="Price">
+												<span class="amount">
+													<span>$</span>12.00
+												</span>
+                                </td>
+
+                                <td class="product-quantity" data-title="Quantity">
+                                    <div class="quantity">
+                                        <input type="button" value="+" class="plus">
+                                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                        <input type="number" class="input-text qty text" step="1" min="1" max="1000"
+                                               name="quantity" value="1" title="Qty" size="4">
+                                        <input type="button" value="-" class="minus">
+                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    </div>
+                                </td>
+
+                                <td class="product-subtotal" data-title="Total">
+												<span class="amount">
+													<span>$</span>12.00
+												</span>
+                                </td>
+                            </tr>
+                            <tr class="cart_item">
+
+                                <td class="product-remove">
+                                    <a href="#" class="remove" aria-label="Remove this item" data-product_id="76"
+                                       data-product_sku="">×</a>
+                                </td>
+
+                                <td class="product-thumbnail">
+                                    <a href="shop-product-right.html">
+                                        <img width="180" height="180" src="images/shop/02.jpg" class="" alt="img">
+                                    </a>
+                                </td>
+
+                                <td class="product-name" data-title="Product">
+                                    <a href="shop-product-right.html">Woo Ninja</a>
+                                </td>
+
+                                <td class="product-price" data-title="Price">
+												<span class="amount">
+													<span>$</span>15.00
+												</span>
+                                </td>
+
+                                <td class="product-quantity" data-title="Quantity">
+                                    <div class="quantity">
+                                        <input type="button" value="+" class="plus">
+                                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                        <input type="number" class="input-text qty text" step="1" min="1" max="1000"
+                                               name="quantity" value="1" title="Qty" size="4">
+                                        <input type="button" value="-" class="minus">
+                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    </div>
+                                </td>
+
+                                <td class="product-subtotal" data-title="Total">
+												<span class="amount">
+													<span>$</span>15.00
+												</span>
+                                </td>
+                            </tr>
+                            <tr class="cart_item">
+
+                                <td class="product-remove">
+                                    <a href="#" class="remove" aria-label="Remove this item" data-product_id="90"
+                                       data-product_sku="">×</a>
+                                </td>
+
+                                <td class="product-thumbnail">
+                                    <a href="shop-product-right.html">
+                                        <img width="180" height="180" src="images/shop/03.jpg" class="" alt="img">
+                                    </a>
+                                </td>
+
+                                <td class="product-name" data-title="Product">
+                                    <a href="shop-product-right.html">Woo Album #3</a>
+                                </td>
+
+                                <td class="product-price" data-title="Price">
+												<span class="amount">
+													<span>$</span>9.00
+												</span>
+                                </td>
+
+                                <td class="product-quantity" data-title="Quantity">
+                                    <div class="quantity">
+                                        <input type="button" value="+" class="plus">
+                                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                        <input type="number" class="input-text qty text" step="1" min="1" max="1000"
+                                               name="quantity" value="1" title="Qty" size="4">
+                                        <input type="button" value="-" class="minus">
+                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    </div>
+                                </td>
+
+                                <td class="product-subtotal" data-title="Total">
+												<span class="amount">
+													<span>$</span>18.00
+												</span>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="6" class="actions">
+
+                                    <div class="coupon">
+                                        <label for="coupon_code">Coupon:</label>
+                                        <input type="text" name="coupon_code" class="input-text form-control"
+                                               id="coupon_code" value="" placeholder="Coupon code">
+                                        <button type="submit" class="btn btn-maincolor" name="apply_coupon"
+                                                value="Apply coupon">
+                                            Apply coupon
+                                        </button>
+                                        <button type="submit" class="btn btn-maincolor" name="update_cart"
+                                                value="Update cart" disabled>Update cart
+                                        </button>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </form>
+
+                    <div class="cart-collaterals mb--5">
+
+                        <div class="cross-sells">
+
+                            <h2>You may be interested in…</h2>
+
+                            <ul class="products">
+
+                                <li class="product type-product">
+                                    <a href="shop-product-right.html">
+                                        <img src="images/shop/04.jpg" class="" alt="img">
+                                        <div class="star-rating">
+													<span style="width:80%">Rated <strong class="rating">4.00
+                        </strong> out of 5</span>
+                                        </div>
+                                        <h2>Woo Ninja 2</h2>
+                                        <span class="price">
+													<span class="amount">
+														<span>$</span>34.00
+													</span>
+												</span>
+                                    </a>
+                                    <a rel="nofollow" href="shop-cart.html" data-quantity="1" data-product_id="47"
+                                       data-product_sku=""
+                                       class="button product_type_simple add_to_cart_button ajax_add_to_cart">Add
+                                        to cart</a>
+                                </li>
+
+                                <li class="product">
+                                    <a href="shop-product-right.html">
+												<span class="img-wrap">
+													<img src="images/shop/09.jpg" alt="img">
+												</span>
+                                        <div class="product-wrap">
+                                            <div class="star-rating">
+														<span style="width:40%">Rated <strong
+                                                                class="rating">3.00</strong> out of 5</span>
+                                            </div>
+                                            <h2>Flying Ninja</h2>
+                                            <span class="price">
+														<span>
+															<span>$</span>14.99
+														</span>
+													</span>
+                                        </div>
+
+                                    </a>
+                                    <a rel="nofollow" href="shop-cart.html"
+                                       class="button product_type_simple add_to_cart_button">Add to
+                                        cart</a>
+                                </li>
+
+                                <li class="product">
+                                    <a href="shop-product-right.html">
+                                        <div class="img-wrap">
+                                            <img src="images/shop/03.jpg" alt="img">
+                                        </div>
+                                        <div class="product-wrap">
+                                            <div class="star-rating">
+														<span style="width:80%">Rated <strong
+                                                                class="rating">4.00</strong> out of 5</span>
+                                            </div>
+                                            <h2>Patient Ninja</h2>
+                                            <span class="price">
+														<span>
+															<span>$</span>75.99
+														</span>
+													</span>
+                                        </div>
+
+                                    </a>
+                                    <a rel="nofollow" href="shop-cart.html"
+                                       class="button product_type_simple add_to_cart_button">Add to
+                                        cart</a>
+                                </li>
+
+                                <li class="product">
+                                    <a href="shop-product-right.html">
+                                        <div class="img-wrap">
+                                            <img src="images/shop/25.jpg" alt="img">
+                                        </div>
+                                        <div class="product-wrap">
+                                            <div class="star-rating">
+														<span style="width:60%">Rated <strong
+                                                                class="rating">3.00</strong> out of 5</span>
+                                            </div>
+                                            <h2>Flying Ninja</h2>
+                                            <span class="price">
+														<span>
+															<span>$</span>30.99
+														</span>
+													</span>
+                                        </div>
+                                    </a>
+                                    <a rel="nofollow" href="shop-cart.html"
+                                       class="button product_type_simple add_to_cart_button">Add to
+                                        cart</a>
+                                </li>
+
+                                <li class="product">
+                                    <a href="shop-product-right.html">
+                                        <div class="img-wrap">
+                                            <img src="images/shop/09_back.jpg" alt="img">
+                                        </div>
+                                        <div class="product-wrap">
+                                            <div class="star-rating">
+														<span style="width:80%">Rated <strong
+                                                                class="rating">4.00</strong> out of 5</span>
+                                            </div>
+                                            <h2>Ninja Silhouette</h2>
+                                            <span class="price">
+														<span>
+															<span>$</span>16.99
+														</span>
+													</span>
+                                        </div>
+                                    </a>
+                                    <a rel="nofollow" href="shop-cart.html"
+                                       class="button product_type_simple add_to_cart_button">Add to
+                                        cart</a>
+                                </li>
+
+                                <li class="product">
+                                    <a href="shop-product-right.html">
+                                        <div class="img-wrap">
+                                            <img src="images/shop/24.jpg" alt="img">
+                                        </div>
+                                        <div class="product-wrap">
+                                            <div class="star-rating">
+														<span style="width:93.4%">Rated <strong
+                                                                class="rating">4.67</strong> out of 5</span>
+                                            </div>
+                                            <h2>Patient Ninja</h2>
+                                            <span class="price">
+														<span>
+															<span>$</span>155.99
+														</span>
+													</span>
+                                        </div>
+                                    </a>
+                                    <a rel="nofollow" href="shop-cart.html"
+                                       class="button product_type_simple add_to_cart_button">Add to
+                                        cart</a>
+                                </li>
+
+
+                            </ul>
+
+                        </div>
+
+                        <div class="cart_totals ">
+
+
+                            <h2>Cart totals</h2>
+
+                            <table class="shop_table shop_table_responsive d-table">
+
+                                <tbody>
+                                <tr class="cart-subtotal">
+                                    <th>Subtotal</th>
+                                    <td data-title="Subtotal">
+													<span class="amount">
+														<span>$</span>45.00
+													</span>
+                                    </td>
+                                </tr>
+
+
+                                <tr class="order-total">
+                                    <th>Total</th>
+                                    <td data-title="Total">
+                                        <strong>
+                        <span class="amount">
+                            <span>$</span>45.00
+                        </span>
+                                        </strong>
+                                    </td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+
+                            <div class="wc-proceed-to-checkout">
+
+                                <a href="shop-checkout.html" class="checkout-button button alt wc-forward">
+                                    Proceed to checkout</a>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </main>
+
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

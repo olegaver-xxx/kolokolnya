@@ -16,16 +16,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-# from apps.shop.views import ShopView
+from apps.users.views import LoginView
 from apps.Blog.views import BlogView, HomeView, ArticleView
 from main import settings
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', HomeView.as_view()),
+    # path('shop/', view_cart, name = 'shop'),
+    path('', HomeView.as_view(), name='home'),
     path('blog/', BlogView.as_view(), name='blog'),
     path('blog/<int:pk>', ArticleView.as_view(), name='article'),
+    # path('register/', views.register, name='register'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('change_password/', auth_views.PasswordChangeView.as_view(), name='change_password'),
 ]
 
 if settings.DEBUG:
