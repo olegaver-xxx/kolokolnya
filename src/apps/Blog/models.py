@@ -6,15 +6,19 @@ class ArticleModel(models.Model):
     article_title = models.CharField('Название статьи', max_length=40)
     article_text = models.TextField('Текст статьи', max_length=2000)
     published = models.DateTimeField()
-    article_image = ThumbnailerImageField(upload_to='media/', blank=True, null=True)
+    article_image = ThumbnailerImageField(upload_to='articles/', blank=True, null=True)
+
+    def __str__(self):
+        return self.article_title
 
 
-class Image(models.Model):
-    gallery = models.ManyToManyField(ArticleModel, through='GalleryImage')
+class ImageModel(models.Model):
+    article = models.ManyToManyField(ArticleModel, through='ArticleToImagModel', related_name='images')
+    image = ThumbnailerImageField(upload_to='gallery/', blank=True, null=True)
 
 
-class GalleryImage(models.Model):
-    gallery = models.ForeignKey(ArticleModel, on_delete=models.CASCADE)
-    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+class ArticleToImagModel(models.Model):
+    article = models.ForeignKey(ArticleModel, on_delete=models.CASCADE)
+    image = models.ForeignKey(ImageModel, on_delete=models.CASCADE)
     index = models.PositiveIntegerField()
 

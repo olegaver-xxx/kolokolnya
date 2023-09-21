@@ -1,5 +1,15 @@
 from django.contrib import admin
-from apps.Blog.models import ArticleModel
+from .models import ArticleModel, ImageModel, ArticleToImagModel
 
 
-admin.site.register(ArticleModel)
+class ArticleImageInline(admin.TabularInline):
+    model = ArticleToImagModel
+    extra = 1
+
+
+class ArticleModelAdmin(admin.ModelAdmin):
+    inlines = [ArticleImageInline]
+
+
+admin.site.register(ArticleModel, ArticleModelAdmin)
+# admin.site.register(ImageModel)

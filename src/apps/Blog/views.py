@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
-from .models import ArticleModel, Image
+from .models import ArticleModel, ImageModel
 
 
 class BlogView(ListView):
@@ -16,8 +16,9 @@ class ArticleView(DetailView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
-        ctx['article_image'] = self.object.image_set.all().order_by('galleryimage__index')
+        ctx['article_images'] = self.object.articletoimagmodel_set.all()
         return ctx
+
 
 class HomeView(ListView):
     model = ArticleModel
