@@ -14,7 +14,7 @@ class ArticleModel(models.Model):
 class ImageModel(models.Model):
     article = models.ForeignKey(ArticleModel, related_name='images', on_delete=models.CASCADE)
     image = ThumbnailerImageField(upload_to='gallery/', blank=True, null=True)
-    # index = models.PositiveIntegerField()
+    index = models.PositiveIntegerField()
 
 
 
