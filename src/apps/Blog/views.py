@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
-from .models import ArticleModel
+from .models import ArticleModel, Image
 
 
 class BlogView(ListView):
@@ -15,9 +15,8 @@ class ArticleView(DetailView):
     context_object_name = 'detail'
 
     def get_context_data(self, **kwargs):
-        ctx = super(ArticleModel).get_context_data(**kwargs)
-        ctx['article_image'] = self.object
-        ctx['article_image'] = self.object.image_set.all().order_by('GalleryImage__index')
+        ctx = super().get_context_data()
+        ctx['article_image'] = self.object.image_set.all().order_by('galleryimage__index')
         return ctx
 
 class HomeView(ListView):
