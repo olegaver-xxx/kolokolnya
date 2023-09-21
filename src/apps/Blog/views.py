@@ -16,7 +16,8 @@ class ArticleView(DetailView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
-        ctx['image'] = self.object
+        ctx['images'] = self.object.images.all()
+        return ctx
 
 
 class HomeView(ListView):

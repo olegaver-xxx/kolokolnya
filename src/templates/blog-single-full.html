@@ -2,14 +2,18 @@
 {% load thumbnail %}
 {% block content %}
 
-{{ detail }}
+
 			<section class="ls s-py-80 s-py-md-120 s-py-xl-160 c-gutter-60">
 				<div class="container">
 					<div class="row">
+                        <div class="col-md-12 pt-4">
+                            {% for image in images %}
+                                <p>{{ image.image.url }}</p>
+                            {% endfor %}
 
-						<main class="offset-lg-1 col-lg-10">
-							<article class="vertical-item hero-bg post type-post status-publish format-standard has-post-thumbnail">
-
+                        </div>
+						<main class="offset-lg-1 col-lg-10" style="display: none">
+                            <article class="vertical-item hero-bg post type-post status-publish format-standard has-post-thumbnail">
 								<!-- .post-thumbnail -->
 								<div class="item-media overflow-visible">
 									<div class="owl-carousel" data-margin="0" data-responsive-lg="1" data-responsive-md="1" data-responsive-sm="1" data-responsive-xs="1" data-dots="true">
