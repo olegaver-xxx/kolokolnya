@@ -1,4 +1,4 @@
 django-jazzmin==2.6.0
 easy-thumbnails==2.8.5
 Django~=4.2.5
-bootstrap5=2.0.0
+bootstrap-py==2.0.0
