@@ -1,7 +1,5 @@
 fixes/
 data/
 src/venv
-src/static
 src/db.sqlite3
-src/apps/shop/migrations
-src/apps/Blog/migrations
+.idea
