@@ -16,8 +16,7 @@ class ArticleView(DetailView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
-        ctx['article_images'] = self.object.articletoimagmodel_set.all()
-        return ctx
+        ctx['image'] = self.object
 
 
 class HomeView(ListView):
