@@ -6,11 +6,11 @@ class ArticleModel(models.Model):
     article_title = models.CharField('Название статьи', max_length=40)
     article_text = models.TextField('Текст статьи', max_length=2000)
     published = models.DateTimeField()
+    article_image = ThumbnailerImageField(upload_to='media/', blank=True, null=True)
 
 
 class Image(models.Model):
     gallery = models.ManyToManyField(ArticleModel, through='GalleryImage')
-    article_image = ThumbnailerImageField(upload_to='media/', blank=True, null=True)
 
 
 class GalleryImage(models.Model):
