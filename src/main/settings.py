@@ -1,8 +1,6 @@
+import django
 from pathlib import Path
 import os, sys
-import django
-from django import setup
-django.setup()
 import apps.users.models
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -123,7 +121,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-AUTH_USER_MODEL = apps.users.models.User
+AUTH_USER_MODEL = 'users.User'
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 STATIC_ROOT = DATA_DIR/'static'
