@@ -1,7 +1,6 @@
 import django
 from pathlib import Path
 import os, sys
-import apps.users.models
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = (BASE_DIR/'../data').resolve()

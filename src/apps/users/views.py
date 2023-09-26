@@ -1,21 +1,19 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib.auth.views import LoginView, LogoutView
 from .forms import LoginForm, RegistrationForm
 
 
-class LoginView(View):
-    def get(self, request):
-        return render(request, 'shop-account-login.html', {'form': LoginForm()})
+class UserLoginView(LoginView):
+    template_name = 'login.html'
+    success_url = '/'
 
-    def post(self, request):
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            if user is not None:
-                login(request, user)
-                return redirect('products:product_list')
-        return render(request, 'shop-account-login.html', {'form': form})
+class UserLogoutView(LogoutView):
+    template_name = 'users/logout.html'
+
+
+
 
 
 # class RegistrationView(View):
