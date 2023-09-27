@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 {% block content %}
 
 
@@ -51,126 +52,50 @@
                             </thead>
                             <tbody>
 
-                            <tr class="cart_item">
+                            {% for image in images %}
 
-                                <td class="product-remove">
-                                    <a href="#" class="remove" aria-label="Remove this item" data-product_id="73"
-                                       data-product_sku="">×</a>
-                                </td>
 
-                                <td class="product-thumbnail">
-                                    <a href="shop-product-right.html">
-                                        <img width="180" height="180" src="images/shop/01.jpg" class="" alt="img">
-                                    </a>
-                                </td>
+                                <tr class="cart_item">
 
-                                <td class="product-name" data-title="Product">
-                                    <a href="shop-product-right.html">Premium Quality</a>
-                                </td>
+                                    <td class="product-remove">
+                                        <a href="#" class="remove" aria-label="Remove this item" data-product_id="73"
+                                           data-product_sku="">×</a>
+                                    </td>
 
-                                <td class="product-price" data-title="Price">
+                                    <td class="product-thumbnail">
+                                        <a href="shop-product-right.html">
+                                            <img width="180" height="180" src="{% thumbnail image.image 900x900 %}" class="" alt="img">
+                                        </a>
+                                    </td>
+
+                                    <td class="product-name" data-title="Product">
+                                        <a href="shop-product-right.html">Premium Quality</a>
+                                    </td>
+
+                                    <td class="product-price" data-title="Price">
 												<span class="amount">
 													<span>$</span>12.00
 												</span>
-                                </td>
+                                    </td>
 
-                                <td class="product-quantity" data-title="Quantity">
-                                    <div class="quantity">
-                                        <input type="button" value="+" class="plus">
-                                        <i class="fa fa-angle-up" aria-hidden="true"></i>
-                                        <input type="number" class="input-text qty text" step="1" min="1" max="1000"
-                                               name="quantity" value="1" title="Qty" size="4">
-                                        <input type="button" value="-" class="minus">
-                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                    </div>
-                                </td>
+                                    <td class="product-quantity" data-title="Quantity">
+                                        <div class="quantity">
+                                            <input type="button" value="+" class="plus">
+                                            <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                            <input type="number" class="input-text qty text" step="1" min="1" max="1000"
+                                                   name="quantity" value="1" title="Qty" size="4">
+                                            <input type="button" value="-" class="minus">
+                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                        </div>
+                                    </td>
 
-                                <td class="product-subtotal" data-title="Total">
+                                    <td class="product-subtotal" data-title="Total">
 												<span class="amount">
 													<span>$</span>12.00
 												</span>
-                                </td>
-                            </tr>
-                            <tr class="cart_item">
-
-                                <td class="product-remove">
-                                    <a href="#" class="remove" aria-label="Remove this item" data-product_id="76"
-                                       data-product_sku="">×</a>
-                                </td>
-
-                                <td class="product-thumbnail">
-                                    <a href="shop-product-right.html">
-                                        <img width="180" height="180" src="images/shop/02.jpg" class="" alt="img">
-                                    </a>
-                                </td>
-
-                                <td class="product-name" data-title="Product">
-                                    <a href="shop-product-right.html">Woo Ninja</a>
-                                </td>
-
-                                <td class="product-price" data-title="Price">
-												<span class="amount">
-													<span>$</span>15.00
-												</span>
-                                </td>
-
-                                <td class="product-quantity" data-title="Quantity">
-                                    <div class="quantity">
-                                        <input type="button" value="+" class="plus">
-                                        <i class="fa fa-angle-up" aria-hidden="true"></i>
-                                        <input type="number" class="input-text qty text" step="1" min="1" max="1000"
-                                               name="quantity" value="1" title="Qty" size="4">
-                                        <input type="button" value="-" class="minus">
-                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                    </div>
-                                </td>
-
-                                <td class="product-subtotal" data-title="Total">
-												<span class="amount">
-													<span>$</span>15.00
-												</span>
-                                </td>
-                            </tr>
-                            <tr class="cart_item">
-
-                                <td class="product-remove">
-                                    <a href="#" class="remove" aria-label="Remove this item" data-product_id="90"
-                                       data-product_sku="">×</a>
-                                </td>
-
-                                <td class="product-thumbnail">
-                                    <a href="shop-product-right.html">
-                                        <img width="180" height="180" src="images/shop/03.jpg" class="" alt="img">
-                                    </a>
-                                </td>
-
-                                <td class="product-name" data-title="Product">
-                                    <a href="shop-product-right.html">Woo Album #3</a>
-                                </td>
-
-                                <td class="product-price" data-title="Price">
-												<span class="amount">
-													<span>$</span>9.00
-												</span>
-                                </td>
-
-                                <td class="product-quantity" data-title="Quantity">
-                                    <div class="quantity">
-                                        <input type="button" value="+" class="plus">
-                                        <i class="fa fa-angle-up" aria-hidden="true"></i>
-                                        <input type="number" class="input-text qty text" step="1" min="1" max="1000"
-                                               name="quantity" value="1" title="Qty" size="4">
-                                        <input type="button" value="-" class="minus">
-                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                    </div>
-                                </td>
-
-                                <td class="product-subtotal" data-title="Total">
-												<span class="amount">
-													<span>$</span>18.00
-												</span>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            {% endfor %}
 
 
                             <tr>

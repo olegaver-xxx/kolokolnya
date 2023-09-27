@@ -9,8 +9,9 @@ class UserLoginView(LoginView):
     template_name = 'login.html'
     success_url = '/'
 
+
 class UserLogoutView(LogoutView):
-    template_name = 'users/logout.html'
+    success_url_allowed_hosts = '/'
 
 
 

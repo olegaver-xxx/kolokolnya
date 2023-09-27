@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{% static 'css/animations.css' %}">
     <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}" class="color-switcher-link">
+    <link rel="stylesheet" href="{% static 'css/shop.css' %}" class="color-switcher-link">
     <script src="{% static 'js/vendor/modernizr-custom.js' %}"></script>
 
     <!--[if lt IE 9]>
@@ -30,10 +31,10 @@
 {#		<script src="js/vendor/respond.min.js"></script>#}
 {#		<script src="js/vendor/jquery-1.12.4.min.js"></script>#}
 	<![endif]-->
-   {% block head %}
+    {% block head %}
 
 
-{% endblock %}
+    {% endblock %}
 </head>
 
 <body>
@@ -162,14 +163,22 @@
                                         <a href="{% url 'home' %}">HomePage</a>
                                         <ul>
                                             <li>
-                                                <a href="index-2.html">MultiPage</a>
+                                                <a href="{% url 'blog' %}">Blog</a>
                                             </li>
                                             <li>
-                                                <a href="index_static.html">Static Intro</a>
+                                                <a href="{% url 'shop' %}">Shop</a>
                                             </li>
-                                            <li>
-                                                <a href="index_singlepage.html">Single Page</a>
-                                            </li>
+                                            {% if user.is_authenticated %}
+
+                                                <li>
+                                                    <a href="{% url 'logout' %}">Logout</a>
+                                                </li>
+                                            {% else %}
+
+                                                <li>
+                                                    <a href="{% url 'login' %}">Login</a>
+                                                </li>
+                                            {% endif %}
                                         </ul>
                                     </li>
                                     <li>
@@ -648,9 +657,9 @@
             </header>
 
         </div>
-{% block content %}
+        {% block content %}
 
-{% endblock %}
+        {% endblock %}
 
 
 
@@ -756,7 +765,7 @@
         src="https://html.modernwebtemplates.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script src="{% static 'js/compressed.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
-<script src="{% static 'js/switcher.js' %}"></script>
+{#<script src="{% static 'js/switcher.js' %}"></script>#}
 
 </body>
 

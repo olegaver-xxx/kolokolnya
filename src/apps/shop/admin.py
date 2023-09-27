@@ -1,8 +1,14 @@
 from django.contrib import admin
-# from apps.shop.models import ItemModel
-from apps.Blog.models import ArticleModel
+from .models import Product, ProductImage
 
 
-# admin.site.register(ItemModel)
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
 
-# Register your models here.
+
+class ProductModelAdmin(admin.ModelAdmin):
+    inlines = [ProductImageInline]
+
+
+admin.site.register(Product, ProductModelAdmin)

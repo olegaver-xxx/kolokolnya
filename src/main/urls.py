@@ -18,19 +18,24 @@ from django.contrib import admin
 from django.urls import path
 from apps.users.views import UserLoginView
 from apps.Blog.views import BlogView, HomeView, ArticleView
+from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView
 from main import settings
+from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('shop/', view_cart, name = 'shop'),
+    path('shop/', ProductListView.as_view(), name = 'shop'),
+    path('cart/', CartView.as_view(), name = 'cart'),
     path('', HomeView.as_view(), name='home'),
     path('blog/', BlogView.as_view(), name='blog'),
     path('blog/<int:pk>', ArticleView.as_view(), name='article'),
+    path('detail/<int:pk>', ProductDetailView.as_view(), name='detail'),
+    path('add_to_cart/<int:product_id>/', AddCartView.as_view(), name='add_to_cart'),
     # path('register/', views.register, name='register'),
     path('login/', UserLoginView.as_view(), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('change_password/', auth_views.PasswordChangeView.as_view(), name='change_password'),
 ]
 

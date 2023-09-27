@@ -6,8 +6,11 @@ from django.db import models
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
+    description = models.TextField(max_length=1000)
     price = models.FloatField()
-    image = models.ImageField(upload_to='products/')
+
+    def __str__(self):
+        return self.name
 
 
 class Cart(models.Model):
@@ -20,3 +23,9 @@ class CartProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+
+
+class ProductImage(models.Model):
+    gallery = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
+    gallery_cart = models.ForeignKey(CartProduct, related_name='images_cart', on_delete=models.CASCADE)
+    image = ThumbnailerImageField(upload_to='products/', blank=True, null=True)

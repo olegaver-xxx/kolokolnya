@@ -1,0 +1,336 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block content %}
+
+    <section class="page_title ds s-py-5">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 text-center">
+                    <h1 class="bold">Shop with Right Sidebar</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#">Shop</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Shop with Right Sidebar
+                        </li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </div>
+
+
+    <section class="ls s-py-80 s-py-md-120 s-py-xl-160 c-gutter-60">
+        <div class="container">
+            <div class="row">
+
+                <main class="col-lg-7 col-xl-9">
+                    <div class="columns-3 column-base">
+
+                        <p class="woocommerce-result-count">
+                            Showing 10 - 19 of 30 results</p>
+                        <form class="woocommerce-ordering" method="get">
+                            <select name="orderby" class="orderby">
+                                <option value="menu_order" selected="selected">Default sorting</option>
+                                <option value="popularity">Sort by popularity</option>
+                                <option value="rating">Sort by average rating</option>
+                                <option value="date">Sort by newness</option>
+                                <option value="price">Sort by price: low to high</option>
+                                <option value="price-desc">Sort by price: high to low</option>
+                            </select>
+                        </form>
+
+                        <ul class="products">
+
+                            {% for product in products %}
+
+
+                            <li class="product">
+                                <a href="shop-product.html">
+
+                                    <div class="img-wrap">
+                                        <img src="{% thumbnail product.image 200x300 %}" alt="img">
+                                    </div>
+                                    <div class="product-wrap">
+                                        <div class="star-rating">
+													<span style="width:60%">Rated <strong
+                                                            class="rating">3.00</strong> out of 5</span>
+                                        </div>
+                                        <h2>{{ product.name }}</h2>
+                                        <span class="price">
+													<span>
+														<span>P</span>{{ product.price }}
+													</span>
+												</span>
+                                    </div>
+                                </a>
+                                <a rel="nofollow" href="shop-cart.html"
+                                   class="button product_type_simple add_to_cart_button">Add to
+                                    cart</a>
+                            </li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                    <!-- columns 2 -->
+
+                    <nav class="woocommerce-pagination mt-30">
+                        <ul class="page-numbers">
+                            <li>
+                                <a class="prev page-numbers" href="shop-right.html">
+                                    <i class="fa fa-chevron-left"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <span class="page-numbers current">1</span>
+                            </li>
+                            <li>
+                                <a class="page-numbers" href="shop-right.html">...</a>
+                            </li>
+                            <li>
+                                <a class="page-numbers" href="shop-right.html">13</a>
+                            </li>
+                            <li>
+                                <a class="next page-numbers" href="shop-right.html">
+                                    <i class="fa fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </main>
+
+                <aside class="col-lg-5 col-xl-3 mb-0">
+                    <div class="widget widget_product_search">
+
+                        <h3 class="widget-title">Search</h3>
+
+                        <form role="search" class="woocommerce-product-search"
+                              action="https://html.modernwebtemplates.com/">
+
+                            <label class="screen-reader-text" for="woocommerce-product-search-field-widget">
+                                Search for:
+                            </label>
+
+                            <input type="search" id="woocommerce-product-search-field-widget" class="search-field"
+                                   placeholder="Search here..." value="" name="search">
+                            <input type="submit" value="Search">
+                        </form>
+                    </div>
+
+                    <div class="widget woocommerce widget_product_categories">
+                        <h3 class="widget-title">Categories</h3>
+                        <ul class="product-categories">
+                            <li class="cat-item cat-parent">
+                                <a href="shop-right.html">All Products</a>
+                                <span class="count">/ 375</span>
+                            </li>
+                            <li class="cat-item cat-parent">
+                                <a href="shop-right.html">Flying Ninja</a>
+                                <span class="count">/ 75</span>
+                            </li>
+                            <li class="cat-item cat-parent">
+                                <a href="shop-right.html">Patient Ninja</a>
+                                <span class="count">/ 142</span>
+                            </li>
+                            <li class="cat-item cat-parent">
+                                <a href="shop-right.html">Ninja Silhouette</a>
+                                <span class="count">/ 269</span>
+                            </li>
+                            <li class="cat-item">
+                                <a href="shop-right.html">Happy Ninja</a>
+                                <span class="count">/ 142</span>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="widget woocommerce widget_price_filter">
+
+                        <h3 class="widget-title">Filter By Price</h3>
+
+                        <form method="get" action="https://html.modernwebtemplates.com/">
+                            <div class="price_slider_wrapper">
+                                <div class="price_slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                                     style="">
+                                    <div class="ui-slider-range ui-widget-header ui-corner-all"
+                                         style="left: 0; width: 65%;">
+
+                                    </div>
+                                    <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"
+                                          style="left: 0;">
+
+											</span>
+                                    <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"
+                                          style="left: 65%;">
+
+											</span>
+                                </div>
+                                <div class="price_slider_amount">
+                                    <input type="text" id="min_price" name="min_price" value="" data-min="20"
+                                           placeholder="Min price" style="display: none;">
+                                    <input type="text" id="max_price" name="max_price" value="" data-max="30"
+                                           placeholder="Max price" style="display: none;">
+                                    <button type="submit" class="button">Filter Now</button>
+                                    <div class="price_label" style="">
+                                        Price: <span class="from">$30</span> - <span class="to">$220</span>
+                                    </div>
+
+                                    <div class="clear"></div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <div class="widget woocommerce widget_shopping_cart">
+
+                        <h3 class="widget-title">Shopping Cart</h3>
+
+                        <div class="widget_shopping_cart_content">
+
+                            <ul class="woocommerce-mini-cart cart_list product_list_widget ">
+                                <li class="woocommerce-mini-cart-item mini_cart_item">
+                                    <a href="#" class="remove" aria-label="Remove this item" data-product_id="73"
+                                       data-product_sku="">×</a>
+                                    <a href="shop-product-right.html">
+                                        <img src="images/shop/14.jpg" alt="img">Happy Ninja
+                                    </a>
+
+                                    <span class="quantity">1 X
+												<span class="woocommerce-Price-amount amount">
+													<span class="woocommerce-Price-currencySymbol">$</span>
+													15.50
+												</span>
+											</span>
+                                </li>
+                                <li class="woocommerce-mini-cart-item mini_cart_item">
+                                    <a href="#" class="remove" aria-label="Remove this item" data-product_id="76"
+                                       data-product_sku="">×</a>
+                                    <a href="shop-product-right.html">
+                                        <img src="images/shop/12.jpg" alt="img">Flying Ninja
+                                    </a>
+
+                                    <span class="quantity">1 X
+												<span class="woocommerce-Price-amount amount">
+													<span class="woocommerce-Price-currencySymbol">$</span>
+													17.99
+												</span>
+											</span>
+                                </li>
+                                <li class="woocommerce-mini-cart-item mini_cart_item">
+                                    <a href="#" class="remove" aria-label="Remove this item" data-product_id="76"
+                                       data-product_sku="">×</a>
+                                    <a href="shop-product-right.html">
+                                        <img src="images/shop/03.jpg" alt="img">Patient Ninja
+                                    </a>
+
+                                    <span class="quantity">3 X
+												<span class="woocommerce-Price-amount amount">
+													<span class="woocommerce-Price-currencySymbol">$</span>
+													49.99
+												</span>
+											</span>
+                                </li>
+                            </ul>
+
+                            <p class="woocommerce-mini-cart__total total">
+                                Subtotal:
+                                <span class="woocommerce-Price-amount amount">
+											<span class="woocommerce-Price-currencySymbol">$</span>
+											220.00
+										</span>
+                            </p>
+
+                            <p class="woocommerce-mini-cart__buttons buttons">
+                                <a href="shop-cart.html" class="button wc-forward">View cart</a>
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="widget woocommerce widget_top_rated_products">
+                        <h3 class="widget-title">Viewed Products</h3>
+                        <ul class="product_list_widget">
+                            <li>
+                                <a href="shop-product-right.html">
+                                    <img src="images/shop/16.jpg" alt="img">
+                                    <span class="product-title">Video Lesson №1</span>
+                                </a>
+                                <div class="star-rating">
+											<span style="width:60%">Rated
+												<strong class="rating">3.00 </strong>
+												out of 5
+											</span>
+                                </div>
+                                <span class="woocommerce-Price-amount amount">
+											<span class="woocommerce-Price-currencySymbol">$</span>
+											25.99
+										</span>
+                            </li>
+
+                            <li>
+                                <a href="shop-product-right.html">
+                                    <img src="images/shop/17.jpg" alt="img">
+                                    <span class="product-title">Video Lesson №2</span>
+                                </a>
+                                <div class="star-rating">
+											<span style="width:80%">Rated
+												<strong class="rating">4.00</strong>
+												out of 5
+											</span>
+                                </div>
+                                <span class="woocommerce-Price-amount amount">
+											<span class="woocommerce-Price-currencySymbol">$</span>
+											99.99
+										</span>
+                            </li>
+
+                            <li>
+                                <a href="shop-product-right.html">
+                                    <img src="images/shop/19.jpg" alt="img">
+                                    <span class="product-title">Video Lesson №3</span>
+                                </a>
+                                <div class="star-rating">
+											<span style="width:100%">Rated
+												<strong class="rating">5.00</strong>
+												out of 5
+											</span>
+                                </div>
+                                <span class="woocommerce-Price-amount amount">
+											<span class="woocommerce-Price-currencySymbol">$</span>
+											120.00
+										</span>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="widget woocommerce widget_layered_nav">
+                        <h3 class="widget-title">Colors Filter</h3>
+
+                        <select class="dropdown_layered_nav_color">
+                            <option value="">Any color</option>
+                            <option value="black">Black</option>
+                            <option value="blue">Blue</option>
+                            <option value="green">Green</option>
+                        </select>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}
