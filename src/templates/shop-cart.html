@@ -52,7 +52,7 @@
                             </thead>
                             <tbody>
 
-                            {% for image in images %}
+                            {% for product_cart in products %}
 
 
                                 <tr class="cart_item">
@@ -61,11 +61,12 @@
                                         <a href="#" class="remove" aria-label="Remove this item" data-product_id="73"
                                            data-product_sku="">×</a>
                                     </td>
-
                                     <td class="product-thumbnail">
-                                        <a href="shop-product-right.html">
-                                            <img width="180" height="180" src="{% thumbnail image.image 900x900 %}" class="" alt="img">
-                                        </a>
+                                        {% for image in product_cart.product.images.all %}
+                                            <a href="shop-product-right.html">
+                                                <img width="180" height="180" src="{% thumbnail image.image 900x900 %}" class="" alt="img">
+                                            </a>
+                                        {% endfor %}
                                     </td>
 
                                     <td class="product-name" data-title="Product">

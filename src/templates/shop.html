@@ -71,9 +71,8 @@
 												</span>
                                     </div>
                                 </a>
-                                <a rel="nofollow" href="shop-cart.html"
-                                   class="button product_type_simple add_to_cart_button">Add to
-                                    cart</a>
+                                <a rel="nofollow" href="#" id="add-to-cart" data-product_id="{{ product.id }}"
+                                   class="button product_type_simple add_to_cart_button">Add to cart</a>
                             </li>
                             {% endfor %}
 
@@ -333,4 +332,24 @@
         </div>
     </section>
 
+{% endblock %}
+
+{% block scripts %}
+    <script>
+
+    $( document ).ready(() => {
+        $('#add-to-cart').click((e) => {
+            e.preventDefault();
+            let p_id = $(e.target).data('product_id');
+            $.post("/add-to-cart/",
+                {
+                    product_id: p_id,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                }
+            ).then((data) => {
+                console.log(data)
+             })
+        });
+    });
+    </script>
 {% endblock %}

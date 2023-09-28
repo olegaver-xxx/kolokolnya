@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from .models import Product, Cart
+from django.http import JsonResponse
+from .models import Product, Cart, CartProduct
 from django.views.generic import DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
@@ -39,10 +40,21 @@ class AddCartView(View, LoginRequiredMixin):
 
 class CartView(ListView):
     template_name = 'shop-cart.html'
-    model = Cart
-    context_object_name = 'cart'
+    model = CartProduct
+    context_object_name = 'products'
 
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data()
-        ctx['images'] = self.object_list.images_cart.all()
-        return ctx
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(cart__user=self.request.user)
+        return qs
+
+    # def get_context_data(self, **kwargs):
+    #     ctx = super().get_context_data()
+    #     ctx['products'] = self.object_list.all()
+    #     return ctx
+
+
+def add_to_cart(request):
+    product_id = request.POST.get('product_id')
+    print(f"Add product {product_id} to {request.user}", flush=True)
+    return JsonResponse({'status': 'ok', 'count': 2})
