@@ -26,8 +26,8 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('shop/', ProductListView.as_view(), name = 'shop'),
-    path('cart/', CartView.as_view(), name = 'cart'),
+    path('shop/', ProductListView.as_view(), name='shop'),
+    path('cart/', CartView.as_view(), name='cart'),
     path('', HomeView.as_view(), name='home'),
     path('blog/', BlogView.as_view(), name='blog'),
     path('blog/<int:pk>', ArticleView.as_view(), name='article'),
@@ -37,7 +37,9 @@ urlpatterns = [
     path('login/', UserLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('change_password/', auth_views.PasswordChangeView.as_view(), name='change_password'),
-    path('add-to-cart/', add_to_cart, name='add_to_cart')
+    path('add-to-cart/', add_to_cart, name='add_to_cart'),
+    # path('increase-cart-item/<int:product_id>/', increase_cart_item, name='increase-cart-item'),
+    # path('decrease-cart-item/<int:product_id>/', decrease_cart_item, name='decrease-cart-item'),
 ]
 
 if settings.DEBUG:

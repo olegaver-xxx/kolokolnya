@@ -37,7 +37,7 @@
                         "Premium quality" removed. <a href="#">Undo?</a>
                     </div>
 
-                    <form class="woocommerce-cart-form" action="https://html.modernwebtemplates.com/" method="post">
+                    <form class="woocommerce-cart-form" action="/cart" method="post">
 
                         <table class="shop_table shop_table_responsive cart">
                             <thead>
@@ -64,7 +64,8 @@
                                     <td class="product-thumbnail">
                                         {% for image in product_cart.product.images.all %}
                                             <a href="shop-product-right.html">
-                                                <img width="180" height="180" src="{% thumbnail image.image 900x900 %}" class="" alt="img">
+                                                <img width="180" height="180" src="{% thumbnail image.image 900x900 %}"
+                                                     class="" alt="img">
                                             </a>
                                         {% endfor %}
                                     </td>
@@ -78,17 +79,52 @@
 													<span>$</span>12.00
 												</span>
                                     </td>
-
                                     <td class="product-quantity" data-title="Quantity">
                                         <div class="quantity">
-                                            <input type="button" value="+" class="plus">
-                                            <i class="fa fa-angle-up" aria-hidden="true"></i>
-                                            <input type="number" class="input-text qty text" step="1" min="1" max="1000"
-                                                   name="quantity" value="1" title="Qty" size="4">
-                                            <input type="button" value="-" class="minus">
-                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                            {% csrf_token %}
+
+                                            <button class="decrease">-</button>
+                                            <input type="number" class="quantity" value="{{ product_cart.quantity }}"
+                                                   data-product-id="{{ item.product.id }}">
+                                            <button class="increase">+</button>
+                                            {#                                            <input formmethod="post" formaction="{% url 'increase-cart-item' product_cart.product.id %}" type="button" value="+" class="plus">#}
+                                            {#                                                {{ product_cart.quantity }}#}
+                                            {#                                            <i class="fa fa-angle-up" aria-hidden="true"></i>#}
+
+                                            {#                                            <input type="number" class="input-text qty text" step="1" min="1" max="1000"#}
+                                            {#                                                   name="quantity" value="1" title="Qty" size="4">#}
+                                            {#                                            #}
+                                            {#                                            <input type="button" value="-" class="minus">#}
+                                            {##}
+                                            {#                                            <i class="fa fa-angle-down" aria-hidden="true"></i>#}
                                         </div>
                                     </td>
+                                    {#                                    <td class="product-quantity" data-title="Quantity">#}
+                                    {##}
+                                    {#                                        <div class="quantity">#}
+                                    {##}
+                                    {#                                            <form action="{% url 'increase-cart-item' product_cart.product.id %}"#}
+                                    {#                                                  method="post">#}
+                                    {##}
+                                    {#                                                {% csrf_token %}#}
+                                    {##}
+                                    {#                                                <input type="button" value="+" class="plus">#}
+                                    {##}
+                                    {#                                            </form>#}
+                                    {##}
+                                    {#                                            <form action="{% url 'decrease-cart-item' product_cart.product.id %}"#}
+                                    {#                                                  method="post">#}
+                                    {##}
+                                    {#                                                {% csrf_token %}#}
+                                    {##}
+                                    {#                                                <input type="button" value="-" class="minus">#}
+                                    {##}
+                                    {#                                            </form>#}
+                                    {##}
+                                    {#                                            <i class="fa#}
+                                    {#                                            fa-angle-down" aria-hidden="true"></i>#}
+                                    {#                                        </div>#}
+                                    {#                                    </td>#}
 
                                     <td class="product-subtotal" data-title="Total">
 												<span class="amount">
@@ -323,4 +359,37 @@
         </div>
     </section>
 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.decrease, .increase').click(function () {
+                var $button = $(this);
+                var oldValue = $button.parent().find('input').val();
+
+                if ($button.text() == "+") {
+                    var newVal = parseFloat(oldValue) + 1;
+                } else {
+                    if (oldValue > 1) {
+                        var newVal = parseFloat(oldValue) - 1;
+                    } else {
+                        var newVal = 1;
+                    }
+                }
+
+                var productId = $button.parent().find('input').data('product-id');
+                $button.parent().find('input').val(newVal);
+
+                $.post('/cart/update/', {product_id: productId, quantity: newVal}, function (response) {
+                    if (response.result == 'ok') {
+                        {#$.redirect('cart/')#}
+
+
+                    } else {
+                        // Произошла ошибка
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

@@ -1,3 +1,4 @@
+from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
 from apps.users.models import User
 from django.db import models
@@ -15,20 +16,16 @@ class Product(models.Model):
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
-
-    def __str__(self):
-        return str(self.user)
+    products = models.ManyToManyField(Product, through='CartProduct')
 
 
 class CartProduct(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
-
-    def __str__(self):
-        return f"{self.cart.user} -> {self.product}"
 
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
+    gallery = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
+    # gallery_cart = models.ForeignKey(CartProduct, related_name='images_cart', on_delete=models.CASCADE)
     image = ThumbnailerImageField(upload_to='products/', blank=True, null=True)
