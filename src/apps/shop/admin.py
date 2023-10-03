@@ -17,4 +17,6 @@ class CartAdmin(admin.ModelAdmin):
     fields = 'user', 'active'
 
 
-admin.site.register(CartProduct)
+@admin.register(CartProduct)
+class CartProductAdmin(admin.ModelAdmin):
+    list_display = 'cart', 'product', 'quantity'

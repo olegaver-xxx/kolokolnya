@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
+
+{% block head %}
+    <style>
+    .remove-btn {
+        font-size: 2em;
+    }
+    </style>
+{% endblock %}
+
 {% block content %}
 
 
@@ -37,8 +46,8 @@
                         "Premium quality" removed. <a href="#">Undo?</a>
                     </div>
 
-                    <form class="woocommerce-cart-form" action="/cart" method="post">
-
+                    <form class="woocommerce-cart-form" action="{% url 'update_cart' %}" method="post">
+                        {% csrf_token %}
                         <table class="shop_table shop_table_responsive cart">
                             <thead>
                             <tr>
@@ -58,8 +67,12 @@
                                 <tr class="cart_item">
 
                                     <td class="product-remove">
-                                        <a href="#" class="remove" aria-label="Remove this item" data-product_id="73"
-                                           data-product_sku="">×</a>
+                                        <a href="{% url 'remove_cart_item' item_id=product_cart.id %}"
+                                           class="remove-btn"
+{#                                           aria-label="Remove this item" #}
+{#                                           data-product_id="73"#}
+{#                                           data-product_sku=""#}
+                                        >×</a>
                                     </td>
                                     <td class="product-thumbnail">
                                         {% for image in product_cart.product.images.all %}
@@ -81,23 +94,33 @@
                                     </td>
                                     <td class="product-quantity" data-title="Quantity">
                                         <div class="quantity">
-                                            {% csrf_token %}
-
-                                            <button class="decrease">-</button>
-                                            <input type="number" class="quantity" value="{{ product_cart.quantity }}"
-                                                   data-product-id="{{ item.product.id }}">
-                                            <button class="increase">+</button>
+                                            <input type="button" value="+" class="plus">
+                                                <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                            <input type="number" class="input-text qty text" step="1" min="1" max="1000"
+                                                   name="quantity-{{ product_cart.id }}" value="{{ product_cart.quantity }}" title="Qty" size="4">
+                                            <input type="button" value="-" class="minus">
+                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                        </div>
+{#                                        <div class="quantity">#}
+{#                                            <div class="row">#}
+{#                                                <input type="button" value="+" class="plus">#}
+{#                                            <button class="btn btn-xs btn-primary btn-count">-</button>#}
+{#                                            <button class="btn btn-xs btn-primary btn-count">+</button>#}
+{##}
+{#                                            <input type="number" class="quantity" value="{{ product_cart.quantity }}"#}
+{#                                                   data-product-id="{{ item.product.id }}">#}
+{#                                            </div>#}
                                             {#                                            <input formmethod="post" formaction="{% url 'increase-cart-item' product_cart.product.id %}" type="button" value="+" class="plus">#}
                                             {#                                                {{ product_cart.quantity }}#}
                                             {#                                            <i class="fa fa-angle-up" aria-hidden="true"></i>#}
-
+{##}
                                             {#                                            <input type="number" class="input-text qty text" step="1" min="1" max="1000"#}
                                             {#                                                   name="quantity" value="1" title="Qty" size="4">#}
                                             {#                                            #}
                                             {#                                            <input type="button" value="-" class="minus">#}
                                             {##}
                                             {#                                            <i class="fa fa-angle-down" aria-hidden="true"></i>#}
-                                        </div>
+{#                                        </div>#}
                                     </td>
                                     {#                                    <td class="product-quantity" data-title="Quantity">#}
                                     {##}
@@ -146,8 +169,10 @@
                                                 value="Apply coupon">
                                             Apply coupon
                                         </button>
-                                        <button type="submit" class="btn btn-maincolor" name="update_cart"
-                                                value="Update cart" disabled>Update cart
+                                        <button type="submit" class="btn btn-maincolor1" value="Update cart"
+{#                                                 disabled#}
+                                        >
+                                            Update cart
                                         </button>
                                     </div>
 
@@ -362,34 +387,34 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('.decrease, .increase').click(function () {
-                var $button = $(this);
-                var oldValue = $button.parent().find('input').val();
-
-                if ($button.text() == "+") {
-                    var newVal = parseFloat(oldValue) + 1;
-                } else {
-                    if (oldValue > 1) {
-                        var newVal = parseFloat(oldValue) - 1;
-                    } else {
-                        var newVal = 1;
-                    }
-                }
-
-                var productId = $button.parent().find('input').data('product-id');
-                $button.parent().find('input').val(newVal);
-
-                $.post('/cart/update/', {product_id: productId, quantity: newVal}, function (response) {
-                    if (response.result == 'ok') {
+        {#$(document).ready(function () {#}
+        {#    $('.decrease, .increase').click(function () {#}
+        {#        var $button = $(this);#}
+        {#        var oldValue = $button.parent().find('input').val();#}
+        {##}
+        {#        if ($button.text() == "+") {#}
+        {#            var newVal = parseFloat(oldValue) + 1;#}
+        {#        } else {#}
+        {#            if (oldValue > 1) {#}
+        {#                var newVal = parseFloat(oldValue) - 1;#}
+        {#            } else {#}
+        {#                var newVal = 1;#}
+        {#            }#}
+        {#        }#}
+        {##}
+        {#        var productId = $button.parent().find('input').data('product-id');#}
+        {#        $button.parent().find('input').val(newVal);#}
+        {##}
+        {#        $.post('/cart/update/', {product_id: productId, quantity: newVal}, function (response) {#}
+        {#            if (response.result == 'ok') {#}
                         {#$.redirect('cart/')#}
-
-
-                    } else {
-                        // Произошла ошибка
-                    }
-                });
-            });
-        });
+        {##}
+        {##}
+        {#            } else {#}
+        {#                // Произошла ошибка#}
+        {#            }#}
+        {#        });#}
+        {#    });#}
+        {# });#}
     </script>
 {% endblock %}

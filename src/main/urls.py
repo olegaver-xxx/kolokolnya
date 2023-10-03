@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from apps.users.views import UserLoginView
 from apps.Blog.views import BlogView, HomeView, ArticleView
-from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, add_to_cart
+from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, RemoveCartItemView
 from main import settings
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
@@ -37,9 +37,9 @@ urlpatterns = [
     path('login/', UserLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('change_password/', auth_views.PasswordChangeView.as_view(), name='change_password'),
-    path('add-to-cart/', add_to_cart, name='add_to_cart'),
-    # path('increase-cart-item/<int:product_id>/', increase_cart_item, name='increase-cart-item'),
-    # path('decrease-cart-item/<int:product_id>/', decrease_cart_item, name='decrease-cart-item'),
+    path('add-to-cart/', AddCartView.as_view(), name='add_to_cart'),
+    path('update-cart/', UpdateCartView.as_view(), name='update_cart'),
+    path('remove-cart-item/<int:item_id>', RemoveCartItemView.as_view(), name='remove_cart_item'),
 ]
 
 if settings.DEBUG:
