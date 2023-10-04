@@ -170,8 +170,9 @@
 
                                                 <li>
                                                     <a href="{% url 'logout' %}">Logout</a>
+                                                </li>
 
-                                                    {% else %}
+                                            {% else %}
 
                                                 <li>
                                                     <a href="{% url 'login' %}">Login</a>
@@ -180,38 +181,31 @@
                                         </ul>
                                     </li>
 
-
-                                    <!-- eof features -->
-
-                                    <!-- eof shop -->
-                                    <!-- contacts -->
                                     <li>
                                         <a href="{% url 'shop' %}">Shop</a>
-                                    </li>
-                                    {% if user.is_authenticated %}
-                                        <li>
-                                            <a href="contact.html">Contact 1</a>
-                                        </li>
-                                        </li>
-                                        <a href="{% url 'cart' %}">Cart</a>
-                                        </li>
-                                    {% endif %}
+                                        <ul>
+                                            <li>
+                                                    <a href="{% url 'cart' %}">Cart</a>
+                                            </li>
+                                            {% if user.is_admin %}
 
-                                    <li>
-                                        <a href="contact2.html">Contact 2</a>
+                                            <li>
+                                                <a href="add.html">Add</a>
+                                            </li>
+                                            {% endif %}
+
+                                            <li>
+                                                <a href="contact3.html">Contact 3</a>
+                                            </li>
+                                            <li>
+                                                <a href="contact4.html">Contact 4</a>
+                                            </li>
+                                        </ul>
                                     </li>
+                                    <!-- eof contacts -->
                                     <li>
-                                        <a href="contact3.html">Contact 3</a>
+                                        <a href="booking.html">Booking</a>
                                     </li>
-                                    <li>
-                                        <a href="contact4.html">Contact 4</a>
-                                    </li>
-                                </ul>
-                                </li>
-                                <!-- eof contacts -->
-                                <li>
-                                    <a href="booking.html">Booking</a>
-                                </li>
                                 </ul>
 
 

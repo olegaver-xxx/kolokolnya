@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+ <h1>Добавление товара</h1>
+    <br><br><br>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ gallery_form.as_p }}
+        {% for form in image_forms %}
+            {% crispy form %}
+        {% endfor %}
+        <input type="submit" value="Добавить">
+    </form>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}

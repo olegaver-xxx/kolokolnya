@@ -2,8 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
 from django.http import JsonResponse
-from .models import Product, Cart, CartProduct
-from django.views.generic import DetailView, ListView, TemplateView
+
+from .forms import ProductForm, ImageForm
+from .models import Product, Cart, CartProduct, ProductImage
+from django.views.generic import DetailView, ListView, TemplateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
 from . import services as shop_services
@@ -16,7 +18,7 @@ class ProductListView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         ctx = super().get_context_data()
-        ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user)]
+        ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user.id)]
         return ctx
 
 
@@ -65,3 +67,24 @@ class RemoveCartItemView(LoginRequiredMixin, View):
     def get(self, request, item_id):
         shop_services.delete_cart_item(item_id, request.user)
         return redirect(reverse('cart'))
+
+
+def create_gallery(request):
+    if request.method == 'POST':
+        gallery_form = ProductForm(request.POST)
+        image_forms = [ImageForm(request.POST, request.FILES, prefix=str(x)) for x in range(4)] # создаем 3 формы для изображений
+        if gallery_form.is_valid() and all([form.is_valid() for form in image_forms]):
+            gallery = gallery_form.save() # сохраняем галерею
+            for form in image_forms:
+                image = form.save(commit=False) # сохраняем изображение без коммита (еще не привязано к галерее)
+                image.gallery = gallery # привязываем изображение к созданной галерее
+                image.save() # сохраняем изображение с привязкой к галерее
+            return redirect('gallery_list') # перенаправляем на список галерей
+    else:
+        gallery_form = ProductForm()
+        image_forms = [ImageForm(prefix=str(x)) for x in range(4)] # создаем 3 пустые формы для изображений
+    context = {
+        'gallery_form': gallery_form,
+        'image_forms': image_forms,
+    }
+    return render(request, 'add_item.html', context)

@@ -34,3 +34,5 @@ class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
     # gallery_cart = models.ForeignKey(CartProduct, related_name='images_cart', on_delete=models.CASCADE)
     image = ThumbnailerImageField(upload_to='products/', blank=True, null=True)
+
+
