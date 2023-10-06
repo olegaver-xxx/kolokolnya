@@ -19,6 +19,7 @@ class ProductListView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         ctx = super().get_context_data()
         ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user.id)]
+        ctx['images'] = ProductImage.objects.all()
         return ctx
 
 
