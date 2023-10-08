@@ -6,6 +6,7 @@ from django.urls import reverse
 
 def register_user(email, password):
     # TODO
+    print('CREATE USER', email, password)
     if not password or not email:
         return False
     return True
@@ -14,7 +15,7 @@ def register_user(email, password):
 def send_activation_email(email, password):
     encoded_jwt = jwt.encode({"user_email": email, 'password': base64.encodebytes(password.encode()).decode()}, settings.SECRET_KEY, algorithm="HS256")
     activate_url = reverse('activate')
-    url = f"https://{settings.DOMAIN_NAME}/{activate_url}?token_{encoded_jwt}"
+    url = f"{'https' if settings.SECURE_CONNECTION else 'http'}://{settings.DOMAIN_NAME}{activate_url}?token={encoded_jwt}"
     send_mail(
         "[SiteName] Activate account",
         f"<a href='{url}'>Click Here To Activate</a>",

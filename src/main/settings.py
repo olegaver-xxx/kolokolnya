@@ -5,9 +5,11 @@ import os, sys
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = (BASE_DIR/'../data').resolve()
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
-SECRET_KEY = 'django-insecure-icc=bj0fcnpo6x%02h6-+_40=zgk84l*5n%bha=6dq#q45^1vr'
+SECRET_KEY = os.getenv('SECRET') or 'example'
 DEBUG = True
 
+DOMAIN_NAME = os.getenv('DOMAIN_NAME') or 'localhost:8000'
+SECURE_CONNECTION = os.getenv('SECURE_CONNECTION', False)
 ALLOWED_HOSTS = ["*"]
 
 
