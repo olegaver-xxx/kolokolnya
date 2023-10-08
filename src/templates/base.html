@@ -177,6 +177,9 @@
                                                 <li>
                                                     <a href="{% url 'login' %}">Login</a>
                                                 </li>
+                                                <li>
+                                                    <a href="{% url 'register' %}">Register</a>
+                                                </li>
                                             {% endif %}
                                         </ul>
                                     </li>
@@ -187,10 +190,10 @@
                                             <li>
                                                     <a href="{% url 'cart' %}">Cart</a>
                                             </li>
-                                            {% if user.is_admin %}
+                                            {% if user.is_superuser %}
 
                                             <li>
-                                                <a href="add.html">Add</a>
+                                                <a href="{% url 'add' %}">Add</a>
                                             </li>
                                             {% endif %}
 
