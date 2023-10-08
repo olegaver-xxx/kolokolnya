@@ -15,11 +15,11 @@ class ProductListView(ListView):
     model = Product
     template_name = 'shop.html'
     context_object_name = 'products'
+    queryset = Product.objects.all().prefetch_related('images')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         ctx = super().get_context_data()
-        ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user.id)]
-        ctx['images'] = ProductImage.objects.all()
+        ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user)]
         return ctx
 
 
