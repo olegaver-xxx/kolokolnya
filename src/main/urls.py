@@ -1,7 +1,7 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from apps.users.views import UserLoginView, RegisterView
-from apps.Blog.views import BlogView, HomeView, ArticleView
+from apps.blog.views import BlogView, HomeView, ArticleView
 from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, RemoveCartItemView, create_gallery
 from main import settings
 from django.contrib.auth.views import LogoutView

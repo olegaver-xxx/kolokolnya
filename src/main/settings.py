@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.shop',
-    'apps.Blog',
+    'apps.blog',
     'apps.users',
     'easy_thumbnails',
     'bootstrap5',
@@ -72,10 +72,10 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 THUMBNAIL_ALIASES = {
     "": {
-        "apps.Blog": {'size': (420, 236), 'crop': True},
+        "apps.blog": {'size': (420, 236), 'crop': True},
     },
     "q": {
-        "apps.Blog": {'size': (1080, 720), 'crop': True},
+        "apps.blog": {'size': (1080, 720), 'crop': True},
     },
 
 }
@@ -125,7 +125,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 LOGOUT_REDIRECT_URL = '/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-AUTH_USER_MODEL = 'users.User'
+# AUTH_USER_MODEL = 'users.User'
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 STATIC_ROOT = DATA_DIR/'static'
