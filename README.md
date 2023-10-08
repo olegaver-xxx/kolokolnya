@@ -38,11 +38,11 @@ Blog app
 - [ ] Share
 
 Users app
-- [ ] Custom user model
-- [ ] Forms
+- [x] Custom user model
+- [x] Forms
 - [ ] Register
 - [ ] Activations
-- [ ] Login
+- [x] Login
 - [ ] Social auth
 - [ ] Permissions
 - [ ] Profile 
