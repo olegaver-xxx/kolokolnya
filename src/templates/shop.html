@@ -47,12 +47,12 @@
                             </select>
                         </form>
                         <ul class="products">
-                            {% for image in images %}
+                            {% for product in products %}
                                 <li class="product">
-                                    <a href="{% url 'cart' %}">
+                                    <a href="{% url 'detail' pk=product.id %}">
 
                                         <div class="img-wrap">
-                                            <img src="{% thumbnail image.image 300x400 %}" alt="img">
+                                            <img src="{% thumbnail product.images.first.image 300x400 %}" alt="img">
                                             {#                                                                            </div>{% thumbnail product.images 200x300 %} #}
                                         </div>
                                         <div class="product-wrap">
@@ -60,10 +60,10 @@
 													<span style="width:60%">Rated
                                                         <strong class="rating">3.00</strong> out of 5</span>
                                             </div>
-                                            <h2>{{ image.product.name }}</h2>
+                                            <h2>{{ product.name }}</h2>
                                             <span class="price">
 													<span>
-														<span>P</span>{{ image.product.price }}
+														<span>P</span>{{ product.price }}
 													</span>
 												</span>
                                         </div>
@@ -72,7 +72,7 @@
                                     <a rel="nofollow" href="{% url 'cart' %}"
                                        style="display: {% if product.id in cart_items %} block {% else %} none {% endif %}"
                                        class="button product_type_simple add_to_cart_button"
-                                       id="go-to-btn-{{ product.id }}">Go to cart</a>
+                                       id="go-to-btn-{{ product.id }}">Go To Cart</a>
                                     <a rel="nofollow" href="#" data-product_id="{{ product.id }}"
                                        id="add-btn-{{ product.id }}"
                                        style="display: {% if product.id not in cart_items %} block {% else %} none {% endif %}"
