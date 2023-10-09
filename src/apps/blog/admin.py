@@ -1,4 +1,6 @@
 from django.contrib import admin
+
+from .forms import ArticleForm
 from .models import ArticleModel, ImageModel
 
 

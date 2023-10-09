@@ -75,7 +75,8 @@
 
                         <div class="entry-content">
                             <p>
-                                {{ object.article_text }}
+                                {{ object.content|safe }}
+
                             </p>
 
                             {#										<p>#}

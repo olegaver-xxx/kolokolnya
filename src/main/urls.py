@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from apps.users.views import UserLoginView, RegisterView, activate_view
 from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
 from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, RemoveCartItemView, create_gallery
@@ -23,6 +23,7 @@ urlpatterns = [
     path('remove-cart-item/<int:item_id>', RemoveCartItemView.as_view(), name='remove_cart_item'),
     path('add_item/', create_gallery, name='add'),
     path('add_article/', AddArticle.as_view(), name='add_art'),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 
     # auth
     path('login/', UserLoginView.as_view(), name='login'),

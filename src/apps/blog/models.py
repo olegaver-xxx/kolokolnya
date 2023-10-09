@@ -1,10 +1,12 @@
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
+from ckeditor.fields import RichTextField
 
 
 class ArticleModel(models.Model):
     article_title = models.CharField('Название статьи', max_length=40)
-    article_text = models.TextField('Текст статьи')
+    # article_text = models.TextField('Текст статьи')
+    content = RichTextField('Текст статьи')
     published = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
