@@ -1,0 +1,45 @@
+Generic
+- Contacts page
+- Logging
+- Timezone
+- Deploy
+- Testing
+- Mailing
+
+Shop app
++ Models
++ Forms
++ Services 
+- Template List
+- Template Details
+- Order history
+- Manage products pages
+- Filter
+- Search
+- Pagination
+- Order
+- Sorting
+- Email notification
+- Эквайринг
+- 
+
+Blog app
++ Models
++ Forms
+- Manage pages 
+- Services
+- List Posts
+- Details Post
+- Search
+- Filter
+- Share
+
+Users app
++ Custom user model
++ Forms
+- Register
+- Activations
++ Login
+- Social auth
++ Permissions
+- Profile 
