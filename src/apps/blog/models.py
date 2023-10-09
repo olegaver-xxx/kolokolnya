@@ -12,6 +12,10 @@ class ArticleModel(models.Model):
     def __str__(self):
         return self.article_title
 
+    class Meta:
+        verbose_name = 'Статья'
+        verbose_name_plural = 'Статьи'
+
 
 class ImageModel(models.Model):
     article = models.ForeignKey(ArticleModel, related_name='images', on_delete=models.CASCADE)
