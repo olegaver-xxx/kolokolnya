@@ -32,5 +32,5 @@ class ImageForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             'image',
-            Submit('submit', 'Submit', css_class='btn btn-outline-maincolor mt-30')
+            # Submit('submit', 'Submit', css_class='btn btn-outline-maincolor mt-30')
         )

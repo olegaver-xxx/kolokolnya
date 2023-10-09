@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView, CreateView
 from .models import ArticleModel, ImageModel
+from .forms import ArticleForm
 
 
 class BlogView(ListView):
@@ -10,15 +11,12 @@ class BlogView(ListView):
     context_object_name = 'blog'
 
 
-# class CreateArticleView(PermissionRequiredMixin, CreateView):
-#     permission_required = ['blog.add_articlemodel']
-#     template_name = ''
-#
-#     def get(self, request):
-#         ...
-#
-#     def post(self, request, *args, **kwargs):
-#         pass
+class AddArticle(CreateView):
+    model = ArticleModel
+    form_class = ArticleForm
+    template_name = 'add_article.html'
+    context_object_name = 'add_article'
+
 
 
 class ArticleView(DetailView):
