@@ -4,8 +4,8 @@ from easy_thumbnails.fields import ThumbnailerImageField
 
 class ArticleModel(models.Model):
     article_title = models.CharField('Название статьи', max_length=40)
-    article_text = models.TextField('Текст статьи', max_length=2000)
-    published = models.DateTimeField()
+    article_text = models.TextField('Текст статьи')
+    published = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.article_title
@@ -14,7 +14,7 @@ class ArticleModel(models.Model):
 class ImageModel(models.Model):
     article = models.ForeignKey(ArticleModel, related_name='images', on_delete=models.CASCADE)
     image = ThumbnailerImageField(upload_to='gallery/', blank=True, null=True)
-    index = models.PositiveIntegerField()
+    index = models.PositiveIntegerField(default=0, blank=True)
 
 
 

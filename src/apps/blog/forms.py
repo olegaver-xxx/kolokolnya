@@ -5,20 +5,16 @@ from crispy_forms.layout import Layout, Submit
 
 
 class ArticleForm(forms.ModelForm):
+
     class Meta:
         model = ArticleModel
         fields = ['article_title', 'article_text']
 
 
 class ArticleImageForm(forms.ModelForm):
+    article = forms.ModelChoiceField(queryset=ArticleModel.objects.all(), widget=forms.HiddenInput)
+    index = forms.IntegerField(widget=forms.HiddenInput)
+
     class Meta:
         model = ImageModel
-        fields = ['image']
-
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            self.helper = FormHelper()
-            self.helper.layout = Layout(
-                'image',
-                Submit('submit', 'Submit', css_class='btn btn-outline-maincolor mt-30')
-            )
+        fields = ['article', 'image', 'index']

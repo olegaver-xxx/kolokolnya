@@ -2,7 +2,9 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView, CreateView
 from .models import ArticleModel, ImageModel
-from .forms import ArticleForm
+from .forms import ArticleForm, ArticleImageForm
+
+from django.urls import reverse
 
 
 class BlogView(ListView):
@@ -16,7 +18,30 @@ class AddArticle(CreateView):
     form_class = ArticleForm
     template_name = 'add_article.html'
     context_object_name = 'add_article'
+    prefix = 'article'
+    success_url = '/blog/'
 
+    def get_success_url(self):
+        return reverse('article', kwargs={'pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['form_article'] = self.get_form()
+        ctx['form_images'] = [ArticleImageForm(prefix=f'images-{i}', initial={'index': i}) for i in range(5)]
+        return ctx
+
+    def form_valid(self, form):
+        res = super().form_valid(form)
+        for i in range(5):
+            form_image = ArticleImageForm(
+                {f'images-{i}-article': self.object.id, f'images-{i}-index': i},
+                self.request.FILES,
+                prefix=f'images-{i}',
+                )
+            if form_image.is_valid():
+                if form_image.cleaned_data['image']:
+                    form_image.save()
+        return res
 
 
 class ArticleView(DetailView):
@@ -26,7 +51,7 @@ class ArticleView(DetailView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
-        ctx['images'] = self.object.images.all().order_by('index')
+        ctx['images'] = self.object.images.all().order_by('index', 'id')
         return ctx
 
 
