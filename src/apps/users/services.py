@@ -2,6 +2,7 @@ import jwt, base64
 from django.conf import settings
 from django.core.mail import send_mail
 from django.urls import reverse
+from .models import User, Profile
 
 
 def register_user(email, password):
@@ -29,3 +30,4 @@ def activate_user(token):
     data = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
     password = base64.decodebytes(data['password'].encode()).decode()
     register_user(data['user_email'], password)
+

@@ -109,7 +109,7 @@ LOGOUT_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'users.User'
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
-STATIC_ROOT = DATA_DIR/'static'
+# STATIC_ROOT = BASE_DIR/'static'
 MEDIA_ROOT = DATA_DIR/'media'
 STATICFILES_DIRS = [
     BASE_DIR/'static'
@@ -118,7 +118,6 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
-
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 # CKEDITOR_CONFIGS = {
 #     'awesome_ckeditor': {
@@ -136,11 +135,11 @@ JAZZMIN_SETTINGS = {
     'site_brand': os.getenv('SITE_TITLE') or 'Колокольня',
 
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
-    "site_logo": os.getenv('SITE_LOGO') or '/images/logo.png',
+    "site_logo": os.getenv('SITE_LOGO') or 'images/logo.png',
     "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "Welcome to the Kololo",
+    "welcome_sign": "Welcome to the Kolololnya",
 
     # Copyright on the footer
     "copyright": "Oleg",

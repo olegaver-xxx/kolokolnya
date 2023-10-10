@@ -37,7 +37,7 @@ class AddArticle(CreateView):
                 {f'images-{i}-article': self.object.id, f'images-{i}-index': i},
                 self.request.FILES,
                 prefix=f'images-{i}',
-                )
+            )
             if form_image.is_valid():
                 if form_image.cleaned_data['image']:
                     form_image.save()
@@ -55,9 +55,10 @@ class ArticleView(DetailView):
         return ctx
 
 
-class HomeView(ListView):
-    model = ArticleModel
+class HomeView(TemplateView):
     template_name = 'home.html'
-    context_object_name = 'home'
 
-
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data()
+        ctx['email'] = self.request.user.email
+        return ctx

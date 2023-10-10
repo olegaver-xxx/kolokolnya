@@ -7,6 +7,10 @@ class ProductImageInline(admin.TabularInline):
     extra = 1
 
 
+class CartProductInline(admin.TabularInline):
+    model = CartProduct
+
+
 @admin.register(Product)
 class ProductModelAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
@@ -14,9 +18,11 @@ class ProductModelAdmin(admin.ModelAdmin):
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
+    inlines = [CartProductInline]
     fields = 'user', 'active'
 
 
-@admin.register(CartProduct)
-class CartProductAdmin(admin.ModelAdmin):
-    list_display = 'cart', 'product', 'quantity'
+# @admin.register(CartProduct)
+# class CartProductAdmin(admin.ModelAdmin):
+#     list_display = 'cart', 'product', 'quantity'
+#

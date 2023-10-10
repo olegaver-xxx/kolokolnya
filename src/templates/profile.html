@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <section class="page_title ds s-py-5">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 text-center">
+                    <h1 class="bold">Account - Dashboard</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#">Shop</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Account - Dashboard
+                        </li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </div>
+
+
+    <section class="ls s-py-80 s-py-md-120 s-py-xl-160">
+        <div class="container">
+            <div class="row">
+
+                <main class="col-lg-12">
+
+                    <article>
+                        <header class="entry-header mb-20">
+                            <h1 class="entry-title pull-left">My account</h1>
+                            <span class="edit-link">
+										<a class="post-edit-link" href="{% url 'edit' %}">Edit
+											<span class="screen-reader-text"> "My account"</span>
+										</a>
+									</span>
+                        </header><!-- .entry-header -->
+                        <div class="entry-content">
+                            <div class="woocommerce">
+                                <nav class="woocommerce-MyAccount-navigation">
+                                    <ul class="mt-0">
+                                        <li class="is-active">
+                                            <a href="shop-account-dashboard.html">Dashboard</a>
+                                        </li>
+                                        <li>
+                                            <a href="shop-account-orders.html">Orders</a>
+                                        </li>
+                                        <li>
+                                            <a href="shop-account-downloads.html">Downloads</a>
+                                        </li>
+                                        <li>
+                                            <a href="shop-account-addresses.html">Addresses</a>
+                                        </li>
+                                        <li>
+                                            <a href="shop-account-details.html">Account details</a>
+                                        </li>
+                                        <li>
+                                            <a href="shop-account-login.html">Logout</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+
+
+                                <div class="woocommerce-MyAccount-content">
+
+                                    <p>
+                                        <h4>Основная информация</h4>
+                                        <h6>Имя: {{ user.full_name }}</h6>
+                                        <h6>Email: {{ user.email }}</h6>
+                                        {% if user.is_superuser or group.Admins %}
+                                            <h6> Вы Администратор</h6>
+                                        {% endif %}
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div><!-- .entry-content -->
+                    </article>
+
+                </main>
+
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

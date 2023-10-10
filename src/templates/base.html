@@ -105,9 +105,9 @@
                         <div class="col-12 col-md-4 col-xl-4">
                             <div class="media">
                                 <div class="media-body align-items-end">
-                                    <span class="small-text">our emailaddress</span>
-                                    <p><a href="https://html.modernwebtemplates.com/cdn-cgi/l/email-protection"
-                                          class="__cf_email__" data-cfemail="c6aba9b3a8b2afb586a9a0a0afa5a3e8a5a9ab">[email&#160;protected]</a>
+                                    <span class="small-text">...</span>
+                                    <p>
+                                        <a href={% url 'profile' %}>{{ user.email }}</a>
                                     </p>
                                 </div>
                                 <span class="icon-styled ">
@@ -187,19 +187,17 @@
                                     <li>
                                         <a href="{% url 'shop' %}">Shop</a>
                                         <ul>
-                                            <li>
-                                                    <a href="{% url 'cart' %}">Cart</a>
-                                            </li>
-                                            {% if user.is_superuser %}
+                                            {% if user.is_authenticated %}
 
-                                            <li>
-                                                <a href="{% url 'add' %}">Add</a>
-                                            </li>
+                                                <li>
+                                                    <a href="{% url 'cart' %}">Cart</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="{% url 'profile' %}">Profile</a>
+                                                </li>
                                             {% endif %}
 
-                                            <li>
-                                                <a href="contact3.html">Contact 3</a>
-                                            </li>
                                             <li>
                                                 <a href="contact4.html">Contact 4</a>
                                             </li>

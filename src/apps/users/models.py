@@ -30,3 +30,12 @@ class User(AbstractUser):
         from django.urls import reverse
         return reverse('users', kwargs={'pk': self.pk})
 
+    def save(self, *args, **kwargs):
+        is_new = self.pk is None
+        super().save(*args, **kwargs)
+        if is_new:
+            Profile.objects.create(user=self, email=self.email)
+
+
+class Profile(models.Model):
+    user = models.ForeignKey(User, related_name='profile', on_delete=models.CASCADE)

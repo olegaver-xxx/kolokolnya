@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from apps.users.views import UserLoginView, RegisterView, activate_view
 from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
+from apps.users.views import ProfileView, update_user
 from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, RemoveCartItemView, create_gallery
 from main import settings
 from django.contrib.auth.views import LogoutView
@@ -11,6 +12,8 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('shop/', ProductListView.as_view(), name='shop'),
+    path('profile/', ProfileView.as_view(), name='profile'),
+    path('profile/edit', update_user, name='edit'),
     path('cart/', CartView.as_view(), name='cart'),
     path('', HomeView.as_view(), name='home'),
     path('blog/', BlogView.as_view(), name='blog'),
@@ -21,8 +24,8 @@ urlpatterns = [
     path('add-to-cart/', AddCartView.as_view(), name='add_to_cart'),
     path('update-cart/', UpdateCartView.as_view(), name='update_cart'),
     path('remove-cart-item/<int:item_id>', RemoveCartItemView.as_view(), name='remove_cart_item'),
-    path('add_item/', create_gallery, name='add'),
-    path('add_article/', AddArticle.as_view(), name='add_art'),
+    # path('add_item/', create_gallery, name='add'),
+    # path('add_article/', AddArticle.as_view(), name='add_art'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
     # auth

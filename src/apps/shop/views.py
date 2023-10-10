@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
 from django.http import JsonResponse
-
+from django.core.paginator import Paginator, EmptyPage
 from .forms import ProductForm, ImageForm
 from .models import Product, Cart, CartProduct, ProductImage
 from django.views.generic import DetailView, ListView, TemplateView, CreateView
@@ -16,10 +16,12 @@ class ProductListView(ListView):
     template_name = 'shop.html'
     context_object_name = 'products'
     queryset = Product.objects.all().prefetch_related('images')
+    paginate_by = 10
 
     def get_context_data(self, *, object_list=None, **kwargs):
         ctx = super().get_context_data()
         ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user)]
+
         return ctx
 
 
