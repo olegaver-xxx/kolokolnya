@@ -9,6 +9,11 @@ from django.views.generic import DetailView, ListView, TemplateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
 from . import services as shop_services
+from yookassa import Configuration
+from .serializer import ProductSerializer
+
+Configuration.account_id = 266415
+Configuration.secret_key = 'test_O2RjdQ4_RePoGfTKkCPlbD5rMmzg2nRNNkxTPQ9LCKI'
 
 
 class ProductListView(ListView):
@@ -55,6 +60,10 @@ class CartView(ListView):
         return qs
 
 
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     ctx = super().get_context_data()
+    #     ctx['total'] = self.model.product.price*self.model.quantity
+    #     return ctx
 
 
 
@@ -119,4 +128,11 @@ class SearchView(ListView):
 #     return render(request, 'search_results.html', {'products': results})
 
 
+class ContactView(TemplateView):
+    template_name = 'contact.html'
 
+
+def product_list(request):
+    products = Product.objects.all()
+    serializer = ProductSerializer(products, many=True)
+    return JsonResponse(serializer.data, safe=False)

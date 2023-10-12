@@ -3,7 +3,7 @@ from django.urls import path, re_path, include
 from apps.users.views import UserLoginView, RegisterView, activate_view
 from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
 from apps.users.views import ProfileView, update_user
-from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, RemoveCartItemView, create_gallery, SearchView
+from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, RemoveCartItemView, create_gallery, SearchView, product_list, ContactView
 from main import settings
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
@@ -12,6 +12,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('shop/', ProductListView.as_view(), name='shop'),
+    path('contact/', ContactView.as_view(), name='contact'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('profile/edit', update_user, name='edit'),
     path('cart/', CartView.as_view(), name='cart'),
@@ -28,7 +29,7 @@ urlpatterns = [
     # path('add_item/', create_gallery, name='add'),
     # path('add_article/', AddArticle.as_view(), name='add_art'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-
+    path('json/', product_list, name="json"),
     # auth
     path('login/', UserLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),

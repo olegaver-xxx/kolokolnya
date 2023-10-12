@@ -7,7 +7,8 @@ from django.db import models
 class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=1000)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
 
 
     def __str__(self):
@@ -34,18 +35,16 @@ class CartProduct(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
+    # total = Product.price*quantity
 
     def __str__(self):
         return f"{self.cart.user} / {self.product}"
 
-    def get(self):
-        total = self.quantity*self.product.price
-        return total
+    def total_price(self):
+        return self.product.price * self.quantity
 
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
     # gallery_cart = models.ForeignKey(CartProduct, related_name='images_cart', on_delete=models.CASCADE)
     image = ThumbnailerImageField(upload_to='products/', blank=True, null=True)
-
-
