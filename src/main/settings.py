@@ -10,6 +10,7 @@ DEBUG = True
 
 DOMAIN_NAME = os.getenv('DOMAIN_NAME') or 'localhost:8000'
 SECURE_CONNECTION = os.getenv('SECURE_CONNECTION', False)
+PROTOCOL = 'https://' if SECURE_CONNECTION else 'http://'
 ALLOWED_HOSTS = ["*"]
 
 
@@ -247,3 +248,7 @@ JAZZMIN_SETTINGS = {
     "language_chooser": False,
 
 }
+
+YOOKASSA_API_KEY = os.getenv('YOOKASSA_API_KEY')
+YOOKASSA_SHOP_ID = int(os.getenv('YOOKASSA_SHOP_ID'))
+# from yookassa import Configuration
