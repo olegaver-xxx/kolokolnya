@@ -47,12 +47,12 @@
                             </select>
                         </form>
                         <ul class="products">
-                            {% for product in products %}
+                            {% for results in search %}
                                 <li class="product">
-                                    <a href="{% url 'detail' pk=product.id %}">
+                                    <a href="{% url 'detail' pk=results.id %}">
 
                                         <div class="img-wrap">
-                                            <img src="{% thumbnail product.images.first.image 300x400 %}" alt="img">
+                                            <img src="{% thumbnail results.images.first.image 300x400 %}" alt="img">
                                             {#                                                                            </div>{% thumbnail product.images 200x300 %} #}
                                         </div>
                                         <div class="product-wrap">
@@ -60,24 +60,26 @@
 													<span style="width:60%">Rated
                                                         <strong class="rating">3.00</strong> out of 5</span>
                                             </div>
-                                            <h2>{{ product.name }}</h2>
+                                            <h2>{{ results.name }}</h2>
                                             <span class="price">
 													<span>
-														<span>P</span>{{ product.price }}
+														<span>P</span>{{ results.price }}
 													</span>
 												</span>
                                         </div>
                                     </a>
 
                                     <a rel="nofollow" href="{% url 'cart' %}"
-                                       style="display: {% if product.id in cart_items %} block {% else %} none {% endif %}"
+                                       style="display: {% if results.id in cart_items %} block {% else %} none {% endif %}"
                                        class="button product_type_simple add_to_cart_button"
-                                       id="go-to-btn-{{ product.id }}">Go To Cart</a>
-                                    <a rel="nofollow" href="#" data-product_id="{{ product.id }}"
-                                       id="add-btn-{{ product.id }}"
-                                       style="display: {% if product.id not in cart_items %} block {% else %} none {% endif %}"
+                                       id="go-to-btn-{{ results.id }}">Go To Cart</a>
+                                    <a rel="nofollow" href="#" data-product_id="{{ results.id }}"
+                                       id="add-btn-{{ results.id }}"
+                                       style="display: {% if results.id not in cart_items %} block {% else %} none {% endif %}"
                                        class="button product_type_simple add_to_cart_button add-to-cart">Add to cart</a>
                                 </li>
+                                {% empty %}
+                                По вашему запрому ничего не нашлось
                             {% endfor %}
 
                         </ul>
@@ -337,7 +339,6 @@
     </section>
 
 {% endblock %}
-
 {% block scripts %}
     <script>
 

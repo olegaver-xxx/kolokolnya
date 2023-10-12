@@ -84,12 +84,12 @@
                                     </td>
 
                                     <td class="product-name" data-title="Product">
-                                        <a href="shop-product-right.html">Premium Quality</a>
+                                        <a href="shop-product-right.html">{{ product_cart.product.name }}</a>
                                     </td>
 
                                     <td class="product-price" data-title="Price">
 												<span class="amount">
-													<span>$</span>12.00
+													<span>P</span>{{ product_cart.product.price }}
 												</span>
                                     </td>
                                     <td class="product-quantity" data-title="Quantity">
@@ -151,7 +151,7 @@
 
                                     <td class="product-subtotal" data-title="Total">
 												<span class="amount">
-													<span>$</span>12.00
+													<span>P</span>{{ product_cart.total }}
 												</span>
                                     </td>
                                 </tr>

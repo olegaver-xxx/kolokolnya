@@ -9,6 +9,7 @@ class Product(models.Model):
     description = models.TextField(max_length=1000)
     price = models.FloatField()
 
+
     def __str__(self):
         return self.name
 
@@ -36,6 +37,10 @@ class CartProduct(models.Model):
 
     def __str__(self):
         return f"{self.cart.user} / {self.product}"
+
+    def get(self):
+        total = self.quantity*self.product.price
+        return total
 
 
 class ProductImage(models.Model):

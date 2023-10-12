@@ -55,6 +55,11 @@ class CartView(ListView):
         return qs
 
 
+
+
+
+
+
 class UpdateCartView(LoginRequiredMixin, View):
 
     def post(self, product_id):
@@ -91,3 +96,27 @@ def create_gallery(request):
         'image_forms': image_forms,
     }
     return render(request, 'add_item.html', context)
+
+
+class SearchView(ListView):
+    template_name = 'search_results.html'
+    context_object_name = 'search'
+
+    def get_queryset(self):
+        qs = self.request.GET.get('q')
+        results = Product.objects.filter(name__icontains=qs)
+        return results
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        ctx = super().get_context_data()
+        ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user)]
+        return ctx
+
+
+# def search(request):
+#     query = request.GET.get('q')
+#     results = Product.objects.filter(name__icontains=query)
+#     return render(request, 'search_results.html', {'products': results})
+
+
+
