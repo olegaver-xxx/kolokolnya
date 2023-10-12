@@ -1,5 +1,9 @@
+from django.db.models import F
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
+
 from apps.shop.models import Product, Cart, CartProduct
+from main import settings
 
 
 def add_product_to_cart(product_id, user, count=1):
@@ -51,3 +55,35 @@ def get_cart_products(user):
 def get_cart_item_ids(user):
     return CartProduct.objects.filter(cart__user=user).values_list('id', flat=True)
 
+
+def get_payment_success_callback_url():
+    path = reverse('payment-success')
+    return f'{settings.PROTOCOL}://{settings.DOMAIN_NAME}{path}'
+
+
+def create_order(user):
+    from yookassa import Payment
+    from yookassa.domain.models.currency import Currency
+    from yookassa.domain.models.receipt import Receipt
+    from yookassa.domain.common.confirmation_type import ConfirmationType
+    from yookassa.domain.request.payment_request_builder import PaymentRequestBuilder
+    from django.utils import timezone
+
+    cart = get_user_cart(user)
+    total_price = cart.get_total_price()
+    cart.status = Cart.STATUS.PENDING
+    cart.computed_sum = total_price
+    cart.order_at = timezone.now()
+
+    builder = PaymentRequestBuilder()
+    builder.set_amount({"value": int(total_price), "currency": Currency.RUB})
+    builder.set_confirmation({"type": ConfirmationType.REDIRECT, "return_url": get_payment_success_callback_url()})
+    builder.set_capture(False)
+    builder.set_description(f"Заказ {cart.id}")
+    builder.set_metadata({"orderNumber": str(cart.id)})
+    # builder.set_receipt(Receipt(...))
+    request = builder.build()
+    res = Payment.create(request)
+    cart.payment_id = res.id
+    cart.save()
+    return res.id

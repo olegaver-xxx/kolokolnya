@@ -10,10 +10,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views.decorators.csrf import csrf_exempt
 from . import services as shop_services
 from yookassa import Configuration
-from .serializer import ProductSerializer
-
-Configuration.account_id = 266415
-Configuration.secret_key = 'test_O2RjdQ4_RePoGfTKkCPlbD5rMmzg2nRNNkxTPQ9LCKI'
 
 
 class ProductListView(ListView):
