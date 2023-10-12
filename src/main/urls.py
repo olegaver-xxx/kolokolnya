@@ -35,6 +35,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path("register/", RegisterView.as_view(), name="register"),
     re_path("activate/.*", activate_view, name="activate"),
+    path('payment-success/', ..., name='payment-success'),
 
 ]
 
