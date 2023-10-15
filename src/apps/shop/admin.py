@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductImage, Cart, CartProduct
+from .models import Product, ProductImage, Cart, CartProduct, Tag
 
 
 class ProductImageInline(admin.TabularInline):
@@ -21,6 +21,8 @@ class CartAdmin(admin.ModelAdmin):
     inlines = [CartProductInline]
     fields = 'user', 'active'
 
+
+admin.site.register(Tag)
 
 # @admin.register(CartProduct)
 # class CartProductAdmin(admin.ModelAdmin):

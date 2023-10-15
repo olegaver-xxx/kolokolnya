@@ -9,6 +9,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=1000)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    tags = models.ManyToManyField('Tag', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -16,6 +17,13 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
+
+
+class Tag(models.Model):
+    tag = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.tag
 
 
 class Cart(models.Model):
@@ -26,7 +34,7 @@ class Cart(models.Model):
         CANCELED = 'canceled'
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    # created_at = models.DateTimeField(auto_now_add=True)
     order_at = models.DateTimeField(blank=True, null=True)
     payment_at = models.DateTimeField(blank=True, null=True)
     status = models.CharField(max_length=255, default=STATUS.COLLECTING, choices=(

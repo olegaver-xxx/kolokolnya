@@ -4,7 +4,7 @@ from django.views import View
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage
 from .forms import ProductForm, ImageForm
-from .models import Product, Cart, CartProduct, ProductImage
+from .models import Product, Cart, CartProduct, ProductImage, Tag
 from django.views.generic import DetailView, ListView, TemplateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
@@ -19,11 +19,34 @@ class ProductListView(ListView):
     queryset = Product.objects.all().prefetch_related('images')
     paginate_by = 10
 
+    def filter_products(self):
+        tags = Tag.objects.all()
+        filtered_products = Product.objects.all()
+        selected = self.request.GET.getlist('tag')
+        if selected:
+            filtered_products = filtered_products.filter(tags__tag=selected)
+        return filtered_products, selected, tags
+
     def get_context_data(self, *, object_list=None, **kwargs):
         ctx = super().get_context_data()
         ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user)]
-
+        filtered_products, selected, tags = self.filter_products()
+        ctx['selected'] = selected
+        ctx['filtered'] = filtered_products
+        ctx['tags'] = tags
         return ctx
+
+
+# class TagsFilteringView(ListView):
+#     template_name = 'tags_search.html'
+#     model = Product
+#     context_object_name = 'tags_filter'
+#
+#     def get_queryset(self):
+#         tags = Tag.objects.all()
+#         selected = self.request.GET.getlist('tag')
+#         results = Product.objects.filter(tags__tag__in=selected)
+#         return results
 
 
 class ProductDetailView(DetailView):
@@ -49,6 +72,7 @@ class CartView(ListView):
     template_name = 'shop-cart.html'
     model = CartProduct
     context_object_name = 'products'
+
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -128,7 +152,3 @@ class ContactView(TemplateView):
     template_name = 'contact.html'
 
 
-def product_list(request):
-    products = Product.objects.all()
-    serializer = ProductSerializer(products, many=True)
-    return JsonResponse(serializer.data, safe=False)

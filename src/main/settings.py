@@ -110,11 +110,10 @@ LOGOUT_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'users.User'
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
-# STATIC_ROOT = BASE_DIR/'static'
+STATIC_ROOT = BASE_DIR/'static'
 MEDIA_ROOT = DATA_DIR/'media'
-STATICFILES_DIRS = [
-    BASE_DIR/'static'
-]
+# STATICFILES_DIRS = BASE_DIR/'static'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -250,5 +249,5 @@ JAZZMIN_SETTINGS = {
 }
 
 YOOKASSA_API_KEY = os.getenv('YOOKASSA_API_KEY')
-YOOKASSA_SHOP_ID = int(os.getenv('YOOKASSA_SHOP_ID'))
+YOOKASSA_SHOP_ID = os.getenv('YOOKASSA_SHOP_ID')
 # from yookassa import Configuration
