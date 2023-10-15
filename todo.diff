@@ -43,3 +43,18 @@ Users app
 - Social auth
 + Permissions
 + Profile
+
+
+> MAIN MENU
+HOME
+SHOP
+BLOG
+
+> USER MENU AUTH
+USER@EMAIL>COM
+  PROFILE
+  CART
+  LOGOUT
+
+> USER MENU NO AUTH
+LOGIN
