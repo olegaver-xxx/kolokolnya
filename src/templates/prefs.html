@@ -1,0 +1,56 @@
+{% extends 'admin/base.html' %}
+{% load i18n static jazzmin %}
+
+{% block content_title %} {% trans 'Preferences' %} {% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="{% url 'admin:index' %}"><i
+                class="fa fa-tachometer-alt"></i> {% trans 'Home' %}</a></li>
+        <li class="breadcrumb-item">{% trans 'Preferences' %}</li>
+    </ol>
+{% endblock %}
+
+
+{% block page_content %}
+        <div class="content border-bottom mb-2">
+            <div class="container-fluid">
+                <div class="row" id="jazzy-tabs">
+                    <div class="col-12 col-sm-12">
+                            <div class="tab-pane">
+                                <div class="card ">
+                                    <div class="px-5 py-4 card-body">
+                                        <div  class="field-set mb-5">
+                                        <h5 class="title-block">Site Preferences</h5>
+                                        <div class="form-group">
+                                            <form method="post">
+                                            {% csrf_token %}
+                                            {% for name, pref in prefs.items %}
+                                            <div class="row">
+                                                <label class="col-sm-1 pb-3 text-right text-muted" for="field-{{ name }}">
+                                                    {{ pref.label }}
+                                                </label>
+                                                <div class=" col-sm-11">
+                                                    {% if pref.type == 'str' %}
+                                                        <input type="text" class="vTextField" value="{{ pref.value }}" id="field-{{ name }}" name="{{ name }}">
+                                                    {% elif pref.type == 'bool' %}
+                                                        <input type="checkbox" id="field-{{ name}}" name="{{ name }}" {% if pref.value %} checked {% endif %}>
+                                                    {% endif %}
+
+{#                                                    <div class="help-block">field</div>#}
+{#                                                    <div class="help-block red" >errors field</div>#}
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                            <button class="btn btn-block btn-success">Save Preferences</button>
+                                            </form>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

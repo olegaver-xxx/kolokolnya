@@ -4,13 +4,14 @@ from apps.users.views import UserLoginView, RegisterView, activate_view
 from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
 from apps.users.views import ProfileView, update_user
 from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, RemoveCartItemView, create_gallery, SearchView, ContactView
-    # , TagsFilteringView
+from apps.utils.views import PreferencesView
 from main import settings
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
+    path('admin/prefs/', PreferencesView.as_view(), name='admin_prefs'),
     path('admin/', admin.site.urls),
     path('shop/', ProductListView.as_view(), name='shop'),
     path('contact/', ContactView.as_view(), name='contact'),

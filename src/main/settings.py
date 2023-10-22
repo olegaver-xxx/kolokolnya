@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'apps.shop',
     'apps.blog',
     'apps.users',
+    'apps.utils',
     'easy_thumbnails',
     'bootstrap5',
     'crispy_forms',
@@ -57,6 +58,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.utils.context_processor.get_site_prefs',
             ],
         },
     },
@@ -162,6 +164,7 @@ JAZZMIN_SETTINGS = {
 
         # Url that gets reversed (Permissions can be added)
         {"name": "View Site",  "url": "home", "permissions": []},
+        {"name": "Preferences",  "url": "admin_prefs", "permissions": []},
 
     ],
 
