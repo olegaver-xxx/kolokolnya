@@ -6,15 +6,13 @@
     <title>Title</title>
 </head>
 <body>
-{% for blogs in blog %}
+{% for post in articles %}
 
     <div class="row tm-mb-90">
         <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
 {#            <img src="{{ blogs.article_image.url | thumbnail_url:'q' }}" alt="Image" class="img-fluid">#}
-            <a href="{% url 'article' pk=blogs.pk %}"><h2>{{ blogs.article_title }}</h2></a>
-            <img src="{% thumbnail blogs.article_image 420x236 %}" alt="Image" class="img-fluid">
-
-
+            <a href="{% url 'article' pk=post.pk %}"><h2>{{ post.article_title }}</h2></a>
+            <img src="{% thumbnail post.article_image 420x236 %}" alt="Image" class="img-fluid">
         </div>
     </div>
 

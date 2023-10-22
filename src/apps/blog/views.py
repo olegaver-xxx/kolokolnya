@@ -10,7 +10,7 @@ from django.urls import reverse
 class BlogView(ListView):
     model = ArticleModel
     template_name = 'blog-full.html'
-    context_object_name = 'blog'
+    context_object_name = 'articles'
 
     # def get_queryset(self):
     #     qs = super().get_queryset()

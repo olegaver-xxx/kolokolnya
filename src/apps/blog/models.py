@@ -5,7 +5,6 @@ from ckeditor.fields import RichTextField
 
 class ArticleModel(models.Model):
     article_title = models.CharField('Название статьи', max_length=40)
-    # article_text = models.TextField('Текст статьи')
     content = RichTextField('Текст статьи')
     published = models.DateTimeField(auto_now_add=True)
 
@@ -15,6 +14,10 @@ class ArticleModel(models.Model):
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
+
+    @property
+    def preview_image(self):
+        return self.images.order_by('index').first()
 
 
 class ImageModel(models.Model):

@@ -3,28 +3,28 @@
 {% load thumbnail %}
 {% load bootstrap5 %}
 <style>
-  .dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  }
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    }
 
-  .dropdown-menu a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
+    .dropdown-menu a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
 
-  .dropdown:hover .dropdown-menu {
-    display: block;
-  }
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
 
-  .active {
-    color: red;
-  }
+    .active {
+        color: red;
+    }
 </style>
 
 
@@ -47,45 +47,19 @@
                     <img src="{% static 'images/logo.png' %}" alt="img">
                 </a>
             </div>
+
+
             <div class="col-12 col-md-4 col-xl-4">
                 <div class="media">
-
-                      <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-                      <div class="container">
-                        <a class="navbar-brand" href="#"></a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                          <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="{% url 'profile' %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  {{ email }}
-                              </a>
-                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{% url 'profile' %}">PROFILE 1</a></li>
-                                <li><a class="dropdown-item" href="{% url 'cart' %}">CART</a></li>
-                                <li><a class="dropdown-item" href="{% url 'logout' %}">LOGOUT</a></li>
-
-                              </ul>
-                            </li>
-                          </ul>
+                    <div class="media">
+                        <div class="media-body align-items-end">
+                            <span class="small-text">Contact Email</span>
+                            <p>shop@gmail.com</p>
                         </div>
-                      </div>
-                    </nav>
-
-
-
-
-{#                    <div class="media-body align-items-end">#}
-{#                        <span class="small-text">Your email</span>#}
-{#                        <a href="{% url 'profile' %}"><p> {{ email }} </p></a>#}
-{#                    </div>#}
-
-                    <span class="icon-styled ">
-                                <a href="{% url 'profile' %}"><img src="{% static 'images/profile_logo.png' %}"
-                                                                   width="47" height="80" alt="PROFILE"></a>
-                    </span>
+                        <span class="icon-styled ">
+                            <i class="fa color-main2 fa-pencil"></i>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
