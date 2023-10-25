@@ -34,7 +34,7 @@ class User(AbstractUser):
         is_new = self.pk is None
         super().save(*args, **kwargs)
         if is_new:
-            Profile.objects.create(user=self, email=self.email)
+            Profile.objects.create(user=self)
 
 
 class Profile(models.Model):
