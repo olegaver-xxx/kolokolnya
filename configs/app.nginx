@@ -6,10 +6,10 @@ server {
     client_body_buffer_size 100m;
 
     location /static/ {
-        alias /data/static/;  # fix path
+        alias /data/app/static/;  # fix path
     }
     location /media/ {
-        alias /data/media/; # fix path
+        alias /data/app/media/; # fix path
     }
 
     location / {
