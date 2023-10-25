@@ -6,3 +6,7 @@ src/db.sqlite3
 /mountis/
 /roadmap.diff
 _tmp/
+local_settings.py
+.env
+docker-compose.override.yml
+debug*

@@ -1,3 +1,28 @@
+# Kolokolnya project
+
+Todo
+
+# how to deploy
+
+1. Install [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04)
+and git
+
+```shell
+apt install git nano -y
+```
+
+2. Clone repo and go to in
+
+3. Create and edit `.env` file
+```shell
+cp .env-example .env
+```
+
+4. Run make
+```shell
+make
+```
+
 
 
 # TODO

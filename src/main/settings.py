@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = (BASE_DIR/'../data').resolve()
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 SECRET_KEY = os.getenv('SECRET') or 'example'
-DEBUG = True
+DEBUG = bool(os.getenv('DEBUG'))
 
 DOMAIN_NAME = os.getenv('DOMAIN_NAME') or 'localhost:8000'
 SECURE_CONNECTION = os.getenv('SECURE_CONNECTION', False)
@@ -75,28 +75,41 @@ THUMBNAIL_ALIASES = {
     },
 
 }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if os.getenv('POSTGRES_HOST'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.getenv('POSTGRES_DB') or 'kolo_db',
+            'USER': os.getenv('POSTGRES_USER') or 'admin',
+            'PASSWORD': os.getenv('POSTGRES_PASSWORD') or 'admin',
+            'HOST': os.getenv('POSTGRES_HOST') or 'localhost',
+            'PORT': int(os.getenv('POSTGRES_PORT', 0)) or 5432,
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': DATA_DIR / 'db.sqlite3',
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    # },
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
+if DEBUG:
+    AUTH_PASSWORD_VALIDATORS = []
 
 # Internationalization
 
