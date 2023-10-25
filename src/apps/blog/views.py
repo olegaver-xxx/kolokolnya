@@ -64,10 +64,10 @@ class ArticleView(DetailView):
 class HomeView(TemplateView):
     template_name = 'home.html'
 
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data()
-        ctx['email'] = self.request.user.email
-        return ctx
+    # def get_context_data(self, **kwargs):
+    #     ctx = super().get_context_data()
+    #     ctx['email'] = self.request.user.email
+    #     return ctx
 
 
 def header(render, request):

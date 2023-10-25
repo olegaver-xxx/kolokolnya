@@ -17,13 +17,13 @@
 											<a href="">{{ user }}</a>
 											<ul>
 												<li>
-													<a href="#">Корзина</a>
+													<a href="{% url 'cart' %}">Корзина</a>
 												</li>
 												<li>
 													<a href="#">Заказы</a>
 												</li>
 												<li>
-													<a href="#">Выйти</a>
+													<a href="{% url 'logout' %}">Выйти</a>
 												</li>
 											</ul>
 										</li>

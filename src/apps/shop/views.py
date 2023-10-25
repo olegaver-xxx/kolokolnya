@@ -4,7 +4,7 @@ from django.views import View
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage
 from .forms import ProductForm, ImageForm
-from .models import Product, Cart, CartProduct, ProductImage, Tag
+from .models import Product, Cart, CartProduct, ProductImage, Tag, Order
 from django.views.generic import DetailView, ListView, TemplateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
@@ -152,3 +152,13 @@ class ContactView(TemplateView):
     template_name = 'contact.html'
 
 
+class OrderListView(ListView):
+    model = Order
+    template_name = 'orders_history.html'
+    paginate_by = 10
+    context_object_name = 'orders'
+
+
+class OrderDetailView(DetailView):
+    model = Product
+    template_name = ...

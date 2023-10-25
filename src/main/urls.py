@@ -3,7 +3,7 @@ from django.urls import path, re_path, include
 from apps.users.views import UserLoginView, RegisterView, activate_view
 from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
 from apps.users.views import ProfileView, update_user
-from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, RemoveCartItemView, create_gallery, SearchView, ContactView
+from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, RemoveCartItemView, create_gallery, SearchView, ContactView, OrderListView
 from apps.utils.views import PreferencesView
 from main import settings
 from django.contrib.auth.views import LogoutView
@@ -17,6 +17,7 @@ urlpatterns = [
     path('contact/', ContactView.as_view(), name='contact'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('profile/edit', update_user, name='edit'),
+    path('profile/history', OrderListView.as_view(), name='history'),
     path('cart/', CartView.as_view(), name='cart'),
     path('search/', SearchView.as_view(), name='search_results'),
     path('', HomeView.as_view(), name='home'),

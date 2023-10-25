@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
 
+{% block page-title %}
+CART
+{% endblock %}
+
+
 {% block head %}
     <style>
     .remove-btn {
@@ -12,39 +17,13 @@
 {% block content %}
 
 
-    <section class="page_title ds s-py-5">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-md-12 text-center">
-                    <h1 class="bold">Shopping Cart</h1>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="#">Shop</a>
-                        </li>
-                        <li class="breadcrumb-item active">
-                            Shopping Cart
-                        </li>
-                    </ol>
-                </div>
-
-            </div>
-        </div>
-    </section>
-    </div>
-
 
     <section class="ls s-py-80 s-py-md-120 s-py-xl-160">
         <div class="container">
             <div class="row">
 
                 <main class="col-lg-12">
-{#                    <div class="woocommerce-message">#}
-{#                        "Premium quality" removed. <a href="#">Undo?</a>#}
-{#                    </div>#}
+
 
                     <form class="woocommerce-cart-form" action="{% url 'update_cart' %}" method="post">
                         {% csrf_token %}
@@ -93,61 +72,15 @@
 												</span>
                                     </td>
                                     <td class="product-quantity" data-title="Quantity">
-{#                                        <div class="quantity">#}
                                             <input type="button" value="+" class="plus">
                                                 <i class="fa fa-angle-up" aria-hidden="true"></i>
                                             <input type="number" class="input-text qty text" step="1" min="1" max="1000"
                                                    name="quantity-{{ product_cart.id }}" value="{{ product_cart.quantity }}" title="Qty" size="4">
                                             <input type="button" value="-" class="minus">
                                             <i class="fa fa-angle-down" aria-hidden="true"></i>
-{#                                        </div>#}
-{#                                        <div class="quantity">#}
-{#                                            <div class="row">#}
-{#                                                <input type="button" value="+" class="plus">#}
-{#                                            <button class="btn btn-xs btn-primary btn-count">-</button>#}
-{#                                            <button class="btn btn-xs btn-primary btn-count">+</button>#}
-{##}
-{#                                            <input type="number" class="quantity" value="{{ product_cart.quantity }}"#}
-{#                                                   data-product-id="{{ item.product.id }}">#}
-{#                                            </div>#}
-                                            {#                                            <input formmethod="post" formaction="{% url 'increase-cart-item' product_cart.product.id %}" type="button" value="+" class="plus">#}
-                                            {#                                                {{ product_cart.quantity }}#}
-                                            {#                                            <i class="fa fa-angle-up" aria-hidden="true"></i>#}
-{##}
-                                            {#                                            <input type="number" class="input-text qty text" step="1" min="1" max="1000"#}
-                                            {#                                                   name="quantity" value="1" title="Qty" size="4">#}
-                                            {#                                            #}
-                                            {#                                            <input type="button" value="-" class="minus">#}
-                                            {##}
-                                            {#                                            <i class="fa fa-angle-down" aria-hidden="true"></i>#}
-{#                                        </div>#}
+
                                     </td>
-                                    {#                                    <td class="product-quantity" data-title="Quantity">#}
-                                    {##}
-                                    {#                                        <div class="quantity">#}
-                                    {##}
-                                    {#                                            <form action="{% url 'increase-cart-item' product_cart.product.id %}"#}
-                                    {#                                                  method="post">#}
-                                    {##}
-                                    {#                                                {% csrf_token %}#}
-                                    {##}
-                                    {#                                                <input type="button" value="+" class="plus">#}
-                                    {##}
-                                    {#                                            </form>#}
-                                    {##}
-                                    {#                                            <form action="{% url 'decrease-cart-item' product_cart.product.id %}"#}
-                                    {#                                                  method="post">#}
-                                    {##}
-                                    {#                                                {% csrf_token %}#}
-                                    {##}
-                                    {#                                                <input type="button" value="-" class="minus">#}
-                                    {##}
-                                    {#                                            </form>#}
-                                    {##}
-                                    {#                                            <i class="fa#}
-                                    {#                                            fa-angle-down" aria-hidden="true"></i>#}
-                                    {#                                        </div>#}
-                                    {#                                    </td>#}
+
 
                                     <td class="product-subtotal" data-title="Total">
 												<span class="amount">
@@ -162,15 +95,9 @@
                                 <td colspan="6" class="actions">
 
                                     <div class="coupon">
-{#                                        <label for="coupon_code">Coupon:</label>#}
-{#                                        <input type="text" name="coupon_code" class="input-text form-control"#}
-{#                                               id="coupon_code" value="" placeholder="Coupon code">#}
-{#                                        <button type="submit" class="btn btn-maincolor" name="apply_coupon"#}
-{#                                                value="Apply coupon">#}
-{#                                            Apply coupon#}
-{#                                        </button>#}
+
                                         <button type="submit" class="btn btn-maincolor1" value="Update cart"
-{#                                                 disabled#}
+
                                         >
                                             Обновить корзину
                                         </button>
@@ -183,198 +110,13 @@
                         </table>
                     </form>
 
-                    <div class="cart-collaterals mb--5">
-
-                        <div class="cross-sells">
-
-                            <h2>You may be interested in…</h2>
-
-                            <ul class="products">
-
-                                <li class="product type-product">
-                                    <a href="shop-product-right.html">
-                                        <img src="images/shop/04.jpg" class="" alt="img">
-                                        <div class="star-rating">
-													<span style="width:80%">Rated <strong class="rating">4.00
-                        </strong> out of 5</span>
-                                        </div>
-                                        <h2>Woo Ninja 2</h2>
-                                        <span class="price">
-													<span class="amount">
-														<span>$</span>34.00
-													</span>
-												</span>
-                                    </a>
-                                    <a rel="nofollow" href="shop-cart.html" data-quantity="1" data-product_id="47"
-                                       data-product_sku=""
-                                       class="button product_type_simple add_to_cart_button ajax_add_to_cart">Add
-                                        to cart</a>
-                                </li>
-
-                                <li class="product">
-                                    <a href="shop-product-right.html">
-												<span class="img-wrap">
-													<img src="images/shop/09.jpg" alt="img">
-												</span>
-                                        <div class="product-wrap">
-                                            <div class="star-rating">
-														<span style="width:40%">Rated <strong
-                                                                class="rating">3.00</strong> out of 5</span>
-                                            </div>
-                                            <h2>Flying Ninja</h2>
-                                            <span class="price">
-														<span>
-															<span>$</span>14.99
-														</span>
-													</span>
-                                        </div>
-
-                                    </a>
-                                    <a rel="nofollow" href="shop-cart.html"
-                                       class="button product_type_simple add_to_cart_button">Add to
-                                        cart</a>
-                                </li>
-
-                                <li class="product">
-                                    <a href="shop-product-right.html">
-                                        <div class="img-wrap">
-                                            <img src="images/shop/03.jpg" alt="img">
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="star-rating">
-														<span style="width:80%">Rated <strong
-                                                                class="rating">4.00</strong> out of 5</span>
-                                            </div>
-                                            <h2>Patient Ninja</h2>
-                                            <span class="price">
-														<span>
-															<span>$</span>75.99
-														</span>
-													</span>
-                                        </div>
-
-                                    </a>
-                                    <a rel="nofollow" href="shop-cart.html"
-                                       class="button product_type_simple add_to_cart_button">Add to
-                                        cart</a>
-                                </li>
-
-                                <li class="product">
-                                    <a href="shop-product-right.html">
-                                        <div class="img-wrap">
-                                            <img src="images/shop/25.jpg" alt="img">
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="star-rating">
-														<span style="width:60%">Rated <strong
-                                                                class="rating">3.00</strong> out of 5</span>
-                                            </div>
-                                            <h2>Flying Ninja</h2>
-                                            <span class="price">
-														<span>
-															<span>$</span>30.99
-														</span>
-													</span>
-                                        </div>
-                                    </a>
-                                    <a rel="nofollow" href="shop-cart.html"
-                                       class="button product_type_simple add_to_cart_button">Add to
-                                        cart</a>
-                                </li>
-
-                                <li class="product">
-                                    <a href="shop-product-right.html">
-                                        <div class="img-wrap">
-                                            <img src="images/shop/09_back.jpg" alt="img">
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="star-rating">
-														<span style="width:80%">Rated <strong
-                                                                class="rating">4.00</strong> out of 5</span>
-                                            </div>
-                                            <h2>Ninja Silhouette</h2>
-                                            <span class="price">
-														<span>
-															<span>$</span>16.99
-														</span>
-													</span>
-                                        </div>
-                                    </a>
-                                    <a rel="nofollow" href="shop-cart.html"
-                                       class="button product_type_simple add_to_cart_button">Add to
-                                        cart</a>
-                                </li>
-
-                                <li class="product">
-                                    <a href="shop-product-right.html">
-                                        <div class="img-wrap">
-                                            <img src="images/shop/24.jpg" alt="img">
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="star-rating">
-														<span style="width:93.4%">Rated <strong
-                                                                class="rating">4.67</strong> out of 5</span>
-                                            </div>
-                                            <h2>Patient Ninja</h2>
-                                            <span class="price">
-														<span>
-															<span>$</span>155.99
-														</span>
-													</span>
-                                        </div>
-                                    </a>
-                                    <a rel="nofollow" href="shop-cart.html"
-                                       class="button product_type_simple add_to_cart_button">Add to
-                                        cart</a>
-                                </li>
-
-
-                            </ul>
-
-                        </div>
-
-                        <div class="cart_totals ">
-
-
-                            <h2>Итог</h2>
-
-                            <table class="shop_table shop_table_responsive d-table">
-
-                                <tbody>
-                                <tr class="cart-subtotal">
-                                    <th>Подитог</th>
-                                    <td data-title="Subtotal">
-													<span class="amount">
-														<span>$</span>45.00
-													</span>
-                                    </td>
-                                </tr>
-
-
-                                <tr class="order-total">
-                                    <th>Итог</th>
-                                    <td data-title="Total">
-                                        <strong>
-                        <span class="amount">
-                            <span>$</span>45.00
-                        </span>
-                                        </strong>
-                                    </td>
-                                </tr>
-
-
-                                </tbody>
-                            </table>
 
                             <div class="wc-proceed-to-checkout">
 
-                                <a href="shop-checkout.html" class="checkout-button button alt wc-forward">
+                                <a href="#" class="checkout-button button alt wc-forward">
                                     Сделать заказ</a>
                             </div>
 
-
-                        </div>
-                    </div>
 
 
                 </main>
