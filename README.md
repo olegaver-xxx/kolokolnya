@@ -25,6 +25,9 @@ make
 ```
 5. Configure Nginx using `config/app.nginx` file
 
+### How to add ssl cert
+
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04
 
 # TODO
 
