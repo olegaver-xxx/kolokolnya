@@ -14,7 +14,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt update && \
     apt install python3-pip -y && \
     pip install -U pip && \
-    pip install poetry -y
+    pip install poetry
 
 WORKDIR $APP_PATH
 COPY pyproject.toml $APP_PATH/
