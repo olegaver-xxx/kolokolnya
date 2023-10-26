@@ -11,7 +11,7 @@ DEBUG = bool(os.getenv('DEBUG'))
 DOMAIN_NAME = os.getenv('DOMAIN_NAME') or 'localhost:8000'
 SECURE_CONNECTION = os.getenv('SECURE_CONNECTION', False)
 PROTOCOL = 'https://' if SECURE_CONNECTION else 'http://'
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["localhost"]
 
 
 INSTALLED_APPS = [

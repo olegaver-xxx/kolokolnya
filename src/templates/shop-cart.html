@@ -2,15 +2,15 @@
 {% load thumbnail %}
 
 {% block page-title %}
-CART
+    CART
 {% endblock %}
 
 
 {% block head %}
     <style>
-    .remove-btn {
-        font-size: 2em;
-    }
+        .remove-btn {
+            font-size: 2em;
+        }
     </style>
 {% endblock %}
 
@@ -48,9 +48,9 @@ CART
                                     <td class="product-remove">
                                         <a href="{% url 'remove_cart_item' item_id=product_cart.id %}"
                                            class="remove-btn"
-{#                                           aria-label="Remove this item" #}
-{#                                           data-product_id="73"#}
-{#                                           data-product_sku=""#}
+                                                {#                                           aria-label="Remove this item" #}
+                                                {#                                           data-product_id="73"#}
+                                                {#                                           data-product_sku=""#}
                                         >×</a>
                                     </td>
                                     <td class="product-thumbnail">
@@ -72,12 +72,13 @@ CART
 												</span>
                                     </td>
                                     <td class="product-quantity" data-title="Quantity">
-                                            <input type="button" value="+" class="plus">
-                                                <i class="fa fa-angle-up" aria-hidden="true"></i>
-                                            <input type="number" class="input-text qty text" step="1" min="1" max="1000"
-                                                   name="quantity-{{ product_cart.id }}" value="{{ product_cart.quantity }}" title="Qty" size="4">
-                                            <input type="button" value="-" class="minus">
-                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                        <input type="button" value="+" class="plus">
+                                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                        <input type="number" class="input-text qty text" step="1" min="1" max="1000"
+                                               name="quantity-{{ product_cart.id }}" value="{{ product_cart.quantity }}"
+                                               title="Qty" size="4">
+                                        <input type="button" value="-" class="minus">
+                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
 
                                     </td>
 
@@ -111,12 +112,17 @@ CART
                     </form>
 
 
-                            <div class="wc-proceed-to-checkout">
+                    <div class="wc-proceed-to-checkout">
 
-                                <a href="#" class="checkout-button button alt wc-forward">
-                                    Сделать заказ</a>
-                            </div>
+                        {#                                <a href="" class="checkout-button button alt wc-forward">#}
+                        {#                                    Сделать заказ</a>#}
 
+                        <form method="post" action="{{ pay }}">
+                            {% csrf_token %}
+                            <button type="submit">Вызвать функцию</button>
+                        </form>
+
+                    </div>
 
 
                 </main>
@@ -149,7 +155,7 @@ CART
         {##}
         {#        $.post('/cart/update/', {product_id: productId, quantity: newVal}, function (response) {#}
         {#            if (response.result == 'ok') {#}
-                        {#$.redirect('cart/')#}
+        {#$.redirect('cart/')#}
         {##}
         {##}
         {#            } else {#}

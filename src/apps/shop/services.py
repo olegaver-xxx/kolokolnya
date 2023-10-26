@@ -1,7 +1,7 @@
 from django.db.models import F
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-
+from django.http import HttpResponseRedirect
 from apps.shop.models import Product, Cart, CartProduct
 from main import settings
 
@@ -86,4 +86,4 @@ def create_order(user):
     res = Payment.create(request)
     cart.payment_id = res.id
     cart.save()
-    return res.id
+    return HttpResponseRedirect(res.confiramtion.confiramtion_url), res.id
