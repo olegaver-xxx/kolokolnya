@@ -11,10 +11,10 @@ ENV PYTHONUNBUFFERED=1 \
 ENV TZ=Europe/Moscow
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-#RUN #apt update && \
-#    apt install python3-pip -y && \
-#    pip install -U pip && \
-#    pip install poetry -y
+RUN apt update && \
+    apt install python3-pip -y && \
+    pip install -U pip && \
+    pip install poetry -y
 
 WORKDIR $APP_PATH
 COPY pyproject.toml $APP_PATH/
