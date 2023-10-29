@@ -22,18 +22,7 @@
                         <img src="{% thumbnail product.images.first.image 300x400 %}" alt="img">
                         {#                                                                            </div>{% thumbnail product.images 200x300 %} #}
                     </div>
-                    <div class="product-wrap">
-                        <div class="star-rating">
-													<span style="width:60%">Rated
-                                                        <strong class="rating">3.00</strong> out of 5</span>
-                        </div>
-                        <h2>{{ product.name }}</h2>
-                        <span class="price">
-													<span>
-														<span>P</span>{{ product.price }}
-													</span>
-												</span>
-                    </div>
+
                 </a>
 
                 <a rel="nofollow" href="{% url 'cart' %}"
