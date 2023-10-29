@@ -139,7 +139,7 @@
                                 <div class="single_variation_wrap">
                                     <div>
 
-                                        <a style="display: {% if product.id in cart_items %} block {% else %} none">
+                                        <a style="display: {% if product.id in cart_items %} block {% else %} none {% endif %}">
                                             <td class="product-quantity" data-title="Quantity">
                                                 <input type="button" value="+" class="plus">
                                                 <i class="fa fa-angle-up" aria-hidden="true"></i>

@@ -76,6 +76,11 @@ class CartView(ListView):
     model = CartProduct
     context_object_name = 'products'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        ctx = super().get_context_data()
+        ctx['product_cart'] = CartProduct.product.objects.all()
+        return ctx
+
     def get_queryset(self):
         qs = super().get_queryset()
         qs = qs.filter(cart__user=self.request.user.id, cart__status=Cart.STATUS.COLLECTING)
