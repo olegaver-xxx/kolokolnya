@@ -12,6 +12,8 @@ PREFS = {
     'enable_blog': dict(label='Enable Blog', value=True, type=bool),
     'header_image': dict(label='Header Image', value='images/hiero.png', type=str, choices=list_images),
     'site_name': dict(label='Site Name', value='Kolokolnya', type=str),
+    'yookassa_apikey': dict(label='Yookassa API Key', value='', type=str),
+    'yookassa_secretkey': dict(label='Yookassa Secret Key', value='', type=str),
 }
 
 

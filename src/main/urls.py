@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path, re_path, include
+from django.views.generic import TemplateView
+
 from apps.users.views import UserLoginView, RegisterView, activate_view
 from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
 from apps.users.views import ProfileView, update_user
@@ -38,7 +40,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path("register/", RegisterView.as_view(), name="register"),
     re_path("activate/.*", activate_view, name="activate"),
-    # path('payment-success/', ..., name='payment-success'),
+    path('payment-success/', TemplateView.as_view(template_name='payment-success.html'), name='payment-success'),
+    path('payment-event/', TemplateView.as_view(template_name='payment-success.html'), name='payment-event'),
 
 ]
 

@@ -1,7 +1,9 @@
+import json
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.core.paginator import Paginator, EmptyPage
 from .forms import ProductForm, ImageForm
 from .models import Product, Cart, CartProduct, ProductImage, Tag, Order
@@ -73,10 +75,9 @@ class CartView(ListView):
     model = CartProduct
     context_object_name = 'products'
 
-    def post(self, request, **kwargs):
-        ctx = self.get_context_data()
-        ctx['pay'] = shop_services.create_order(user=self.request.user)
-        return self.render_to_response(ctx)
+    # def post(self, request, **kwargs):
+    #     payment_url, order_id = shop_services.create_order(user=self.request.user)
+    #     return HttpResponseRedirect(payment_url)
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -92,7 +93,14 @@ class UpdateCartView(LoginRequiredMixin, View):
                 item_id = int(key.split('-')[-1])
                 count = self.request.POST[key]
                 shop_services.update_product_to_cart(item_id, self.request.user, count)
-        return redirect(reverse('cart'))
+        print(self.request.POST)
+        if 'pay' in self.request.POST:
+            print('PAY')
+            payment_url, order_id = shop_services.create_order(user=self.request.user)
+            return HttpResponseRedirect(payment_url)
+        else:
+            print('UPDATE')
+            return redirect(reverse('cart'))
 
 
 class RemoveCartItemView(LoginRequiredMixin, View):
@@ -157,3 +165,17 @@ class OrderListView(ListView):
 class OrderDetailView(DetailView):
     model = Product
     template_name = ...
+
+
+def payment_event(request):
+    from yookassa.domain.notification import WebhookNotification
+    event_json = json.loads(request.body)
+    print(event_json)
+    # try:
+    #     notification_object = WebhookNotification(event_json)
+    # except Exception:
+    # # обработка ошибок
+    #
+    # # Получите объекта платежа
+    # payment = notification_object.object
+    return HttpResponse(status=200)

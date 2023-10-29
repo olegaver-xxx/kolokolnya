@@ -97,4 +97,4 @@ def create_order(user):
     res = Payment.create(request)
     cart.payment_id = res.id
     cart.save()
-    return HttpResponseRedirect(res.confiramtion.confiramtion_url), res.id
+    return res.confiramtion.confiramtion_url, res.id

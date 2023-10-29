@@ -25,7 +25,7 @@
                 <main class="col-lg-12">
 
 
-                    <form class="woocommerce-cart-form" action="{% url 'update_cart' %}" method="post">
+                    <form class="woocommerce-cart-form" action="{% url 'update_cart' %}" method="post" id="cart-form">
                         {% csrf_token %}
                         <table class="shop_table shop_table_responsive cart">
                             <thead>
@@ -97,10 +97,10 @@
 
                                     <div class="coupon">
 
-                                        <button type="submit" class="btn btn-maincolor1" value="Update cart"
-
+                                        <button type="submit" class="btn btn-maincolor" value="Update cart"
+                                                name="update"
                                         >
-                                            Обновить корзину
+                                            Сохранить корзину
                                         </button>
                                     </div>
 
@@ -117,10 +117,10 @@
                         {#                                <a href="" class="checkout-button button alt wc-forward">#}
                         {#                                    Сделать заказ</a>#}
 
-                        <form method="post" action="{{ pay }}">
-                            {% csrf_token %}
-                            <button type="submit">Вызвать функцию</button>
-                        </form>
+{#                        <form method="post">#}
+{#                            {% csrf_token %}#}
+                            <button type="submit" form="cart-form" name="pay">Оплатить</button>
+{#                        </form>#}
 
                     </div>
 
