@@ -1,4 +1,3 @@
-from .models import Preferences
 from copy import deepcopy
 
 
@@ -12,10 +11,12 @@ PREFS = {
     'disable_shop': dict(label='Disable Shop', value=False, type=bool),
     'enable_blog': dict(label='Enable Blog', value=True, type=bool),
     'header_image': dict(label='Header Image', value='images/hiero.png', type=str, choices=list_images),
+    'site_name': dict(label='Site Name', value='Kolokolnya', type=str),
 }
 
 
 def get_prefs_model():
+    from .models import Preferences
     return Preferences.objects.get_or_create()[0]
 
 
@@ -62,3 +63,11 @@ def get_prefs_form():
         values['value'] = prefs.get(field)
         values['type'] = values['type'].__name__
     return fields
+
+
+def get_text_block_content(block_name):
+    from .models import TextBlockModel
+    try:
+        return TextBlockModel.objects.get(name=block_name).text
+    except TextBlockModel.DoesNotExist:
+        return ''
