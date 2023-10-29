@@ -59,6 +59,7 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
         ctx['images'] = self.object.images.all()
+        ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user)]
         return ctx
 
 
