@@ -5,7 +5,8 @@ from django.views.generic import TemplateView
 from apps.users.views import UserLoginView, RegisterView, activate_view
 from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
 from apps.users.views import ProfileView, update_user
-from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, RemoveCartItemView, create_gallery, SearchView, ContactView, OrderListView
+from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, \
+    RemoveCartItemView, create_gallery, SearchView, ContactView, OrderListView, payment_event
 from apps.utils.views import PreferencesView
 from django.conf import settings
 from django.contrib.auth.views import LogoutView
@@ -41,8 +42,7 @@ urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
     re_path("activate/.*", activate_view, name="activate"),
     path('payment-success/', TemplateView.as_view(template_name='payment-success.html'), name='payment-success'),
-    path('payment-event/', TemplateView.as_view(template_name='payment-success.html'), name='payment-event'),
-
+    path('payment-event/', payment_event, name='payment-event'),
 ]
 
 if settings.DEBUG:
