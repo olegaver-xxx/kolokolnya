@@ -22,7 +22,7 @@ def update_product_to_cart(item_id: int, user, count: int):
 
 def get_user_cart(user) -> Cart:
     if user.is_authenticated:
-        return Cart.objects.filter(user=user).first() or create_user_cart(user)
+        return Cart.objects.filter(user=user, status=Cart.STATUS.COLLECTING).first() or create_user_cart(user)
 
 
 def create_user_cart(user):
@@ -71,14 +71,17 @@ def get_payment_success_callback_url():
 
 
 def create_order(user):
-    from apps.utils.yookassa import init
-    init()
-    from yookassa import Payment
+    from apps.utils.yookassa import get_credentials
+    from yookassa import Configuration, Payment
     from yookassa.domain.models.currency import Currency
     from yookassa.domain.models.receipt import Receipt
     from yookassa.domain.common.confirmation_type import ConfirmationType
     from yookassa.domain.request.payment_request_builder import PaymentRequestBuilder
     from django.utils import timezone
+
+    shop_id, api_key = get_credentials()
+    Configuration.account_id = str(shop_id)
+    Configuration.secret_key = api_key
 
     if not user.is_authenticated:
         raise Http404
