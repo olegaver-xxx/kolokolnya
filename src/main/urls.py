@@ -1,31 +1,45 @@
-"""
-URL configuration for kolokolnya project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path
-# from apps.shop.views import ShopView
-from apps.Blog.views import BlogView, HomeView, ArticleView
+from django.urls import path, re_path, include
+from apps.users.views import UserLoginView, RegisterView, activate_view
+from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
+from apps.users.views import ProfileView, update_user
+from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, RemoveCartItemView, create_gallery, SearchView, ContactView, OrderListView
+from apps.utils.views import PreferencesView
 from main import settings
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
+    path('admin/prefs/', PreferencesView.as_view(), name='admin_prefs'),
     path('admin/', admin.site.urls),
-    path('', HomeView.as_view()),
+    path('shop/', ProductListView.as_view(), name='shop'),
+    path('contact/', ContactView.as_view(), name='contact'),
+    path('profile/', ProfileView.as_view(), name='profile'),
+    path('profile/edit', update_user, name='edit'),
+    path('profile/history', OrderListView.as_view(), name='history'),
+    path('cart/', CartView.as_view(), name='cart'),
+    path('search/', SearchView.as_view(), name='search_results'),
+    path('', HomeView.as_view(), name='home'),
     path('blog/', BlogView.as_view(), name='blog'),
     path('blog/<int:pk>', ArticleView.as_view(), name='article'),
+    path('detail/<int:pk>', ProductDetailView.as_view(), name='detail'),
+    path('add_to_cart/<int:product_id>/', AddCartView.as_view(), name='add_to_cart'),
+    path('change_password/', auth_views.PasswordChangeView.as_view(), name='change_password'),
+    path('add-to-cart/', AddCartView.as_view(), name='add_to_cart'),
+    # path('tags-resluts/', TagsFilteringView.as_view(), name='tags'),
+    path('update-cart/', UpdateCartView.as_view(), name='update_cart'),
+    path('remove-cart-item/<int:item_id>', RemoveCartItemView.as_view(), name='remove_cart_item'),
+    # path('add_item/', create_gallery, name='add'),
+    # path('add_article/', AddArticle.as_view(), name='add_art'),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    # auth
+    path('login/', UserLoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path("register/", RegisterView.as_view(), name="register"),
+    re_path("activate/.*", activate_view, name="activate"),
+    # path('payment-success/', ..., name='payment-success'),
+
 ]
 
 if settings.DEBUG:

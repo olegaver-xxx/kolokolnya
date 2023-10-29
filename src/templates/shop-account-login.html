@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+
+				<section class="page_title ds s-py-5">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-md-12 text-center">
+								<h1 class="bold">Account - Login</h1>
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item">
+										<a href="index.html">Home</a>
+									</li>
+									<li class="breadcrumb-item">
+										<a href="#">Shop</a>
+									</li>
+									<li class="breadcrumb-item active">
+										Account - Login
+									</li>
+								</ol>
+							</div>
+
+						</div>
+					</div>
+				</section>
+			</div>
+
+
+			<section class="ls s-py-80 s-py-md-120 s-py-xl-160">
+				<div class="container">
+					<div class="row">
+
+						<main class="col-lg-12">
+							<article>
+								<!-- .entry-header -->
+								<div class="entry-content">
+									<div class="woocommerce">
+
+										<!--
+			<div class="woocommerce-message">Are you sure you want to log out? <a
+				href="shop-account-login.html">Confirm and log out</a>
+			</div>
+			-->
+
+										<form class="woocomerce-form woocommerce-form-login login" method="post">
+											<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide text-center">
+
+												<input type="text" placeholder="Username or email address*" class="w-100 form-control woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" value="">
+											</p>
+											<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide text-center">
+
+												<input class="w-100 form-control woocommerce-Input woocommerce-Input--text input-text" placeholder="Password*" type="password" name="password" id="password">
+											</p>
+											<p class=" d-flex justify-content-start align-items-center">
+												<label class="d-flex align-items-center woocommerce-form__label woocommerce-form__label-for-checkbox inline">
+													<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever">
+													<span>Remember me</span>
+												</label>
+											</p>
+											<p class="form-row justify-content-start align-items-start">
+												<button type="submit" class="woocommerce-Button button mt-0" name="login" value="Login">Login</button>
+
+											</p>
+											<p class="woocommerce-LostPassword lost_password text-left">
+												<a href="shop-account-password-reset.html">Lost your password?</a>
+											</p>
+
+										</form>
+									</div>
+								</div>
+								<!-- .entry-content -->
+							</article>
+
+
+						</main>
+
+					</div>
+
+				</div>
+			</section>
+
+			{% endblock %}

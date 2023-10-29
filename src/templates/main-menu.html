@@ -1,0 +1,39 @@
+<nav class="top-nav">
+									<ul class="nav sf-menu">
+
+
+										<li>
+											<a href="{% url 'home' %}">ГЛАВНАЯ</a>
+										</li>
+										<li>
+											<a href="{% url 'shop' %}">МАГАЗИН</a>
+
+										</li>
+										<li>
+											<a href="{% url 'blog' %}">БЛОГ</a>
+										</li>
+                                        {% if user.is_authenticated %}
+                                        <li >
+											<a href="">{{ user }}</a>
+											<ul>
+												<li>
+													<a href="{% url 'cart' %}">Корзина</a>
+												</li>
+												<li>
+													<a href="#">Заказы</a>
+												</li>
+												<li>
+													<a href="{% url 'logout' %}">Выйти</a>
+												</li>
+											</ul>
+										</li>
+                                        {% else %}
+                                            <li>
+                                                <a href="{% url 'login' %}">ВОЙТИ</a>
+                                            </li>
+                                        {% endif %}
+
+									</ul>
+
+
+								</nav>

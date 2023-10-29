@@ -21841,7 +21841,7 @@ section .section-heading .back {
 }
 
 .about-section .image_cover {
-	background-image: url("../images/parallax/about_section_bg_right.jpg");
+	background-image: url("../images/about_section_bg_right.jpg");
 	background-position-x: 30%;
 	background-position-y: 100%;
 	background-repeat: no-repeat;
@@ -21925,7 +21925,7 @@ section .section-heading .back {
 }
 
 .call-section {
-	background-image: url("../images/parallax/consultation_bg.html");
+	background-image: url("../images/consultation_bg.html");
 }
 
 .call-section .wrap {

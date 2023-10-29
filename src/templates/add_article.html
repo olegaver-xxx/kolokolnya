@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+	<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock %}
+
+
+{% block content %}
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+ <h4>Добавление статьи</h4>
+    <br><br><br>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <hr>
+                {{ form_article.as_p }}
+                <hr>
+                {% for form_image in form_images %}
+                    {{ form_image.as_p }}
+                {% endfor %}
+
+        {#        {% for form in image_forms %}#}
+        {#            {% crispy form %}#}
+        {#        {% endfor %}#}
+                <input type="submit" value="Добавить">
+            </form>
+
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "kolokolnya"
+version = "0.1.0"
+description = ""
+authors = ["paulwinex <paulwinex@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.6"
+easy-thumbnails = "^2.8.5"
+django-bootstrap-v5 = "^1.0.11"
+django-jazzmin = "^2.6.0"
+django-crispy-forms = "^2.0"
+crispy-bootstrap5 = "^0.7"
+pyjwt = "^2.8.0"
+django-ckeditor = "^6.7.0"
+yookassa = "^2.4.0"
+gunicorn = "^21.2.0"
+psycopg2-binary = "^2.9.9"
+
+
+[tool.poetry.group.dev.dependencies]
+django-debug-toolbar = "^4.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

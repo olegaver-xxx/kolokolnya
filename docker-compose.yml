@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+  app:
+    image: kolo:latest
+    user: "${UID}:${GID}"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ${APP_NAME}-app
+    env_file: .env
+    volumes:
+      - ${DATA_DIR}/app:/data
+    environment:
+      - POSTGRES_HOST=${APP_NAME}-db
+    ports:
+      - ${APP_PORT}:8000
+    depends_on:
+      - database
+    networks:
+      - backend
+
+
+  database:
+    container_name: ${APP_NAME}-db
+    image: postgres:15.4
+    user: "${UID}:${GID}"
+    env_file:
+      - .env
+    volumes:
+      - ${DATA_DIR}/postgres:/var/lib/postgresql/data/
+    networks:
+      - backend
+
+
+networks:
+  backend:

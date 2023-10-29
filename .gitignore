@@ -3,3 +3,10 @@ data/
 src/venv
 src/db.sqlite3
 .idea
+/mountis/
+/roadmap.diff
+_tmp/
+local_settings.py
+.env
+docker-compose.override.yml
+debug*

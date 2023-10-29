@@ -12,32 +12,36 @@
     </style>
 {% endblock %}
 
+{% block page-title %}
+BLOG
+{% endblock %}
+
 {% block content %}
 
 
-    <section class="page_title ds s-py-5">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-md-12 text-center">
-                    <h1 class="bold">Without Sidebar</h1>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="#">Tips & Tricks</a>
-                        </li>
-                        <li class="breadcrumb-item active">
-                            Without Sidebar
-                        </li>
-                    </ol>
-                </div>
-
-            </div>
-        </div>
-    </section>
-    </div>
+{#    <section class="page_title ds s-py-5">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{##}
+{#                <div class="col-md-12 text-center">#}
+{#                    <h1 class="bold">Without Sidebar</h1>#}
+{#                    <ol class="breadcrumb">#}
+{#                        <li class="breadcrumb-item">#}
+{#                            <a href="index.html">Home</a>#}
+{#                        </li>#}
+{#                        <li class="breadcrumb-item">#}
+{#                            <a href="#">Tips & Tricks</a>#}
+{#                        </li>#}
+{#                        <li class="breadcrumb-item active">#}
+{#                            Without Sidebar#}
+{#                        </li>#}
+{#                    </ol>#}
+{#                </div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+{#    </div>#}
 
     <section class="ls s-py-80 s-py-md-120 s-py-xl-160">
         <div class="container">
@@ -46,7 +50,7 @@
 
                 <main class="offset-lg-1 col-lg-10">
 
-                    {% for blogs in blog %}
+                    {% for post in articles %}
 
 
 
@@ -54,22 +58,23 @@
 {#                            <i class="fa fa-thumb-tack" aria-hidden="true"></i>#}
                             <div class="item-wrap">
                                 <div class="item-media cover-image">
-                                    <img src="{% thumbnail blogs.article_image 420x236 %}" alt="img">
+                                    <img src="{% thumbnail post.preview_image.image 420x236 %}" alt="img">
+{#                                    <img src="{{ post.images.first.image.url }}" alt="img">#}
                                     <div class="media-links">
-                                        <a class="abs-link" title="" href="{% url 'article' pk=blogs.pk %}"></a>
+                                        <a class="abs-link" title="" href="{% url 'article' pk=post.pk %}"></a>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="item-content">
                                 <h5>
-                                    <a href="{% url 'article' pk=blogs.pk %}">{{ blogs.article_title }}</a>
+                                    <a href="{% url 'article' pk=post.pk %}">{{ post.article_title }}</a>
                                 </h5>
 
-                                <p class="truncate"> {{ blogs.article_text }}</p>
+                                <p class="truncate"> {{ post.article_text }}</p>
                                 <p class="item-meta flex-wrap d-flex ">
-                                    <a href="{% url 'article' pk=blogs.pk %}"><i
-                                            class="fa fa-calendar color-main3"></i>{{ blogs.published }}
+                                    <a href="{% url 'article' pk=post.pk %}"><i
+                                            class="fa fa-calendar color-main3"></i>{{ post.published }}
                                     </a>
                                     {#                                <a href="blog-full.html"><i class="fa fa-tags color-main3"></i>travel</a>#}
                                     {#                                <a href="blog-single-full.html"><i class="fa fa-user color-main3"></i>Floyd Powers</a>#}

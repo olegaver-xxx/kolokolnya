@@ -1,8 +1,31 @@
 from django.contrib import admin
-from apps.shop.models import ItemModel
-from apps.Blog.models import ArticleModel
+from .models import Product, ProductImage, Cart, CartProduct, Tag, Order
 
 
-admin.site.register(ItemModel)
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
 
-# Register your models here.
+
+class CartProductInline(admin.TabularInline):
+    model = CartProduct
+
+
+@admin.register(Product)
+class ProductModelAdmin(admin.ModelAdmin):
+    inlines = [ProductImageInline]
+
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    inlines = [CartProductInline]
+    fields = 'user', 'active'
+
+
+admin.site.register(Tag)
+admin.site.register(Order)
+
+# @admin.register(CartProduct)
+# class CartProductAdmin(admin.ModelAdmin):
+#     list_display = 'cart', 'product', 'quantity'
+#

@@ -1,7 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'base-index.html' %}
 {% load thumbnail %}
+{% load static %}
 
-{% block content %}
+{#{% block content %}#}
+{##}
+{#{% endblock %}#}
+
+{% block content1 %}
 
         <section class="page_slider">
             <div class="flexslider vertical home_slider">
@@ -18,7 +23,7 @@
                             <source src="images/Travel_Stock_Footage_Reel-HD_4K_Royalty-free.mp4" data-time="74"
                                     type="video/mp4">
                         </video>
-                        <img src="images/slide01.jpg" alt="img">
+                        <img src="{% static 'images/slide01.jpg' %}" alt="img">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">

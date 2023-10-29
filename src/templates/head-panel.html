@@ -1,0 +1,109 @@
+{% load static %}
+{% load easy_thumbnails_tags %}
+{% load thumbnail %}
+{% load bootstrap5 %}
+<style>
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .dropdown-menu a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+    .active {
+        color: red;
+    }
+</style>
+
+
+<section class="page_topline ds s-py-10 c-my-10">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-4 col-xl-4">
+                <div class="media">
+									<span class="icon-styled ">
+										<i class="fa color-main2 fa-phone"></i>
+									</span>
+                    <div class="media-body">
+                        <span class="small-text">Booking your trip</span>
+                        <p>{{ CONTACT_PHONE }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center hidden-below-md">
+                <a href="./" class="logo">
+                    <img src="{% static 'images/logo.png' %}" alt="img">
+                </a>
+            </div>
+
+
+            <div class="col-12 col-md-4 col-xl-4">
+                <div class="media">
+                    <div class="media">
+                        <div class="media-body align-items-end">
+                            <span class="small-text">Contact Email</span>
+                            <p>{{ CONTACT_EMAIL }}</p>
+                        </div>
+                        <span class="icon-styled ">
+                            <i class="fa color-main2 fa-pencil"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<header class="page_header ls justify-nav-center">
+    <div class="container">
+        <div class="row align-items-lg-end align-items-center">
+            <div class="col-10 col-md-4 hidden-above-md d-flex">
+                <a href="./" class="logo">
+                    <img src="{% static 'images/logo.png' %}" alt="img">
+                </a>
+
+                <div class="media-wrap">
+                    <div class="media">
+										<span class="icon-styled ">
+											<i class="fa color-main2 fa-phone"></i>
+										</span>
+                        <div class="media-body">
+                            <span class="small-text">Booking your trip</span>
+                            <p>3 (800) 234 3695</p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-body align-items-end">
+                            <span class="small-text">our emailaddress</span>
+                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                  data-cfemail="315c5e445f455842715e57575852541f525e5c">[email&#160;protected]</a></p>
+                        </div>
+                        <span class="icon-styled ">
+											<i class="fa color-main2 fa-pencil"></i>
+										</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-1">
+                <!-- main nav start -->
+                {% include 'main-menu.html' %}
+            </div>
+
+        </div>
+    </div>
+    <!-- header toggler -->
+    <span class="toggle_menu"><span></span></span>
+</header>
