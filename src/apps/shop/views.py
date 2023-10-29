@@ -77,7 +77,7 @@ class CartView(ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        qs = qs.filter(cart__user=self.request.user.id)
+        qs = qs.filter(cart__user=self.request.user.id, cart_status=Cart.STATUS.COLLECTING)
         return qs
 
 
