@@ -71,6 +71,8 @@ def get_payment_success_callback_url():
 
 
 def create_order(user):
+    from apps.utils.yookassa import init
+    init()
     from yookassa import Payment
     from yookassa.domain.models.currency import Currency
     from yookassa.domain.models.receipt import Receipt

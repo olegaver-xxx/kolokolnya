@@ -5,5 +5,3 @@ class UtilsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'apps.utils'
 
-    def ready(self):
-        from . import yookassa
