@@ -85,7 +85,6 @@ def create_order(user):
     shop_id, api_key = get_credentials()
     Configuration.account_id = str(shop_id)
     Configuration.secret_key = api_key
-    print('YK', Configuration.account_id, Configuration.secret_key)
 
     cart = get_user_cart(user)
     total_price = cart.get_total_price()
@@ -104,4 +103,4 @@ def create_order(user):
     res = Payment.create(request)
     cart.payment_id = res.id
     cart.save()
-    return res.confiramtion.confiramtion_url, res.id
+    return res.confirmation.confirmation_url, res.id

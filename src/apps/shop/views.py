@@ -75,10 +75,6 @@ class CartView(ListView):
     model = CartProduct
     context_object_name = 'products'
 
-    # def post(self, request, **kwargs):
-    #     payment_url, order_id = shop_services.create_order(user=self.request.user)
-    #     return HttpResponseRedirect(payment_url)
-
     def get_queryset(self):
         qs = super().get_queryset()
         qs = qs.filter(cart__user=self.request.user.id)
@@ -93,13 +89,10 @@ class UpdateCartView(LoginRequiredMixin, View):
                 item_id = int(key.split('-')[-1])
                 count = self.request.POST[key]
                 shop_services.update_product_to_cart(item_id, self.request.user, count)
-        print(self.request.POST)
         if 'pay' in self.request.POST:
-            print('PAY')
             payment_url, order_id = shop_services.create_order(user=self.request.user)
             return HttpResponseRedirect(payment_url)
         else:
-            print('UPDATE')
             return redirect(reverse('cart'))
 
 
