@@ -176,3 +176,27 @@
     </section>
 
 {% endblock %}
+
+{% block scripts %}
+    <script>
+
+        $(document).ready(() => {
+            $('.add-to-cart').each((i, element) => {
+                $(element).click((e) => {
+                    e.preventDefault();
+                    let p_id = $(e.target).data('product_id');
+                    $("#go-to-btn-" + p_id).show()
+                    $("#add-btn-" + p_id).hide()
+                    $.post("/add-to-cart/",
+                        {
+                            product_id: p_id,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                        }
+                    ).then((data) => {
+                        console.log(data)
+                    })
+                });
+            });
+        });
+    </script>
+{% endblock %}
