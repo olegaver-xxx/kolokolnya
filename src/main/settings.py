@@ -12,7 +12,7 @@ DOMAIN_NAME = os.getenv('DOMAIN_NAME') or 'localhost:8000'
 SECURE_CONNECTION = os.getenv('SECURE_CONNECTION', False)
 PROTOCOL = 'https://' if SECURE_CONNECTION else 'http://'
 ALLOWED_HOSTS = ["*"]
-
+CSRF_TRUSTED_ORIGINS = [f'https://{DOMAIN_NAME}']
 
 INSTALLED_APPS = [
     'jazzmin',
