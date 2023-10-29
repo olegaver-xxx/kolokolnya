@@ -26,7 +26,6 @@ class AddArticle(CreateView):
     prefix = 'article'
     success_url = '/blog/'
 
-
     def get_success_url(self):
         return reverse('article', kwargs={'pk': self.object.pk})
 
