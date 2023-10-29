@@ -138,14 +138,21 @@
 
                                 <div class="single_variation_wrap">
                                     <div>
-                                        <div class="quantity">
-                                            <input type="button" value="+" class="plus">
-                                            <i class="fa fa-angle-up" aria-hidden="true"></i>
-                                            <input type="number" class="input-text qty text" step="1" min="1" max="1000"
-                                                   name="quantity" value="1" title="Qty" size="4">
-                                            <input type="button" value="-" class="minus">
-                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                        </div>
+
+                                        <a style="display: {% if product.id in cart_items %} block {% else %} none">
+                                            <td class="product-quantity" data-title="Quantity">
+                                                <input type="button" value="+" class="plus">
+                                                <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                                <input type="number" class="input-text qty text" step="1" min="1"
+                                                       max="1000"
+                                                       name="quantity-{{ product_cart.id }}"
+                                                       value="{{ product_cart.quantity }}"
+                                                       title="Qty" size="4">
+                                                <input type="button" value="-" class="minus">
+                                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                        </a>
+
+                                    </td>
 {#                                                                                <button type="submit" class="single_add_to_cart_button button alt">Add to cart#}
 {#                                                                                </button>#}
 {#                                        <form method="post" class = "single_add_to_cart_button button alt" action="{% url 'add_to_cart' product.id %}">#}
