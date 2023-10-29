@@ -16,7 +16,7 @@ static:
 	docker exec ${APP_NAME}-app ./manage.py collectstatic --noinput
 
 build:
-	docker-compose build
+	docker compose build
 
 up:
-	docker-compose up -d
+	docker compose up -d
