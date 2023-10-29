@@ -24,6 +24,7 @@ services:
   database:
     container_name: ${APP_NAME}-db
     image: postgres:15.4
+    user: "${UID}:${GID}"
     env_file:
       - .env
     volumes:
