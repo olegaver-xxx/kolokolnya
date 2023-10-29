@@ -1,7 +1,7 @@
 from django.db.models import F
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from apps.shop.models import Product, Cart, CartProduct
 from main import settings
 
@@ -21,11 +21,18 @@ def update_product_to_cart(item_id: int, user, count: int):
 
 
 def get_user_cart(user) -> Cart:
-    return Cart.objects.get_or_create(user=user)[0]
+    if user.is_authenticated:
+        return Cart.objects.filter(user=user).first() or create_user_cart(user)
 
 
-def get_cart_item(product_id, user) -> CartProduct:
+def create_user_cart(user):
+    return Cart.objects.create(user=user)
+
+
+def get_cart_item(product_id, user) -> CartProduct | None:
     cart = get_user_cart(user)
+    if not cart:
+        return None
     product = get_object_or_404(Product, pk=product_id)
     cart_item, _ = CartProduct.objects.get_or_create(cart=cart, product=product)
     return cart_item
@@ -49,6 +56,8 @@ def delete_cart_item(item_id, user):
 
 def get_cart_products(user):
     cart = get_user_cart(user)
+    if not cart:
+        return []
     return cart.cartproduct_set.all().prefetch_related('product')
 
 
@@ -69,6 +78,8 @@ def create_order(user):
     from yookassa.domain.request.payment_request_builder import PaymentRequestBuilder
     from django.utils import timezone
 
+    if not user.is_authenticated:
+        raise Http404
     cart = get_user_cart(user)
     total_price = cart.get_total_price()
     cart.status = Cart.STATUS.PENDING

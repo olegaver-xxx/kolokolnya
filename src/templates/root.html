@@ -38,13 +38,14 @@
 {% endblock %}
 
 <body>
-    {% block scripts %}
-
-    {% endblock %}
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="{% static 'js/compressed.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
+
+    {% block scripts %}
+    {% endblock %}
+
 
 </body>
 

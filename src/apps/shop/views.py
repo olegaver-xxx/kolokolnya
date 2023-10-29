@@ -73,24 +73,15 @@ class CartView(ListView):
     model = CartProduct
     context_object_name = 'products'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        ctx = super().get_context_data()
+    def post(self, request, **kwargs):
+        ctx = self.get_context_data()
         ctx['pay'] = shop_services.create_order(user=self.request.user)
-        return ctx
+        return self.render_to_response(ctx)
 
     def get_queryset(self):
         qs = super().get_queryset()
         qs = qs.filter(cart__user=self.request.user.id)
         return qs
-
-
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     ctx = super().get_context_data()
-    #     ctx['total'] = self.model.product.price*self.model.quantity
-    #     return ctx
-
-
-
 
 
 class UpdateCartView(LoginRequiredMixin, View):
