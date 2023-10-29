@@ -79,12 +79,14 @@ def create_order(user):
     from yookassa.domain.request.payment_request_builder import PaymentRequestBuilder
     from django.utils import timezone
 
+    if not user.is_authenticated:
+        raise Http404
+
     shop_id, api_key = get_credentials()
     Configuration.account_id = str(shop_id)
     Configuration.secret_key = api_key
+    print('YK', Configuration.account_id, Configuration.secret_key)
 
-    if not user.is_authenticated:
-        raise Http404
     cart = get_user_cart(user)
     total_price = cart.get_total_price()
     cart.status = Cart.STATUS.PENDING
