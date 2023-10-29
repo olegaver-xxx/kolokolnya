@@ -167,6 +167,7 @@ class OrderDetailView(DetailView):
     template_name = ...
 
 
+@csrf_exempt
 def payment_event(request):
     from yookassa.domain.notification import WebhookNotification
     event_json = json.loads(request.body)
