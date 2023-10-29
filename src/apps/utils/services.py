@@ -72,4 +72,4 @@ def get_text_block_content(block_name):
     try:
         return TextBlockModel.objects.get(name=block_name).text
     except TextBlockModel.DoesNotExist:
-        return ''
+        return
