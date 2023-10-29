@@ -32,7 +32,7 @@
                                                 </label>
                                                 <div class=" col-sm-11">
                                                     {% if pref.type == 'str' %}
-                                                        <input type="text" class="vTextField" value="{{ pref.value }}" id="field-{{ name }}" name="{{ name }}">
+                                                        <input type="text" class="vTextField" value=" {% if pref.value %}{{ pref.value }}{% endif %}" id="field-{{ name }}" name="{{ name }}">
                                                     {% elif pref.type == 'bool' %}
                                                         <input type="checkbox" id="field-{{ name}}" name="{{ name }}" {% if pref.value %} checked {% endif %}>
                                                     {% endif %}

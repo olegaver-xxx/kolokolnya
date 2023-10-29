@@ -5,7 +5,7 @@ from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
 from apps.users.views import ProfileView, update_user
 from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, RemoveCartItemView, create_gallery, SearchView, ContactView, OrderListView
 from apps.utils.views import PreferencesView
-from main import settings
+from django.conf import settings
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
 
