@@ -1,83 +1,94 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
+
+
+{% include 'sort.html' %}
 {% block content %}
+{% include 'sort.html' %}
 
+<ul class="products">
+    {% for product in products %}
+        <li class="product">
+            <a href="{% url 'detail' pk=product.id %}">
 
-
-
-    <section class="ls s-py-80 s-py-md-120 s-py-xl-160 c-gutter-60">
-        <div class="container">
-            <div class="row">
-
-                <main class="col-lg-7 col-xl-9">
-                    <div class="columns-3 column-base">
-
-                        {% include 'sort.html' %}
-                        <ul class="products">
-                            {% for results in search %}
-                                <li class="product">
-                                    <a href="{% url 'detail' pk=results.id %}">
-
-                                        <div class="img-wrap">
-                                            <img src="{% thumbnail results.images.first.image 300x400 %}" alt="img">
-                                            {#                                                                            </div>{% thumbnail product.images 200x300 %} #}
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="star-rating">
+                <div class="img-wrap">
+                    <img src="{% thumbnail product.images.first.image 300x400 %}" alt="img">
+                    {#                                                                            </div>{% thumbnail product.images 200x300 %} #}
+                </div>
+                <div class="product-wrap">
+                    <div class="star-rating">
 													<span style="width:60%">Rated
                                                         <strong class="rating">3.00</strong> out of 5</span>
-                                            </div>
-                                            <h2>{{ results.name }}</h2>
-                                            <span class="price">
+                    </div>
+                    <h2>{{ product.name }}</h2>
+                    <span class="price">
 													<span>
-														<span>P</span>{{ results.price }}
+														<span>P</span>{{ product.price }}
 													</span>
 												</span>
-                                        </div>
-                                    </a>
+                </div>
+            </a>
 
-                                    <a rel="nofollow" href="{% url 'cart' %}"
-                                       style="display: {% if results.id in cart_items %} block {% else %} none {% endif %}"
-                                       class="button product_type_simple add_to_cart_button"
-                                       id="go-to-btn-{{ results.id }}">Go To Cart</a>
-                                    <a rel="nofollow" href="#" data-product_id="{{ results.id }}"
-                                       id="add-btn-{{ results.id }}"
-                                       style="display: {% if results.id not in cart_items %} block {% else %} none {% endif %}"
-                                       class="button product_type_simple add_to_cart_button add-to-cart">Add to cart</a>
-                                </li>
-                                {% empty %}
-                                По вашему запрому ничего не нашлось(
-                            {% endfor %}
+            <a rel="nofollow" href="{% url 'cart' %}"
+               style="display: {% if product.id in cart_items %} block {% else %} none {% endif %}"
+               class="button product_type_simple add_to_cart_button"
+               id="go-to-btn-{{ product.id }}">Go To Cart</a>
+            <a rel="nofollow" href="#" data-product_id="{{ product.id }}"
+               id="add-btn-{{ product.id }}"
+               style="display: {% if product.id not in cart_items %} block {% else %} none {% endif %}"
+               class="button product_type_simple add_to_cart_button add-to-cart">Add to cart</a>
+        </li>
+    {% endfor %}
+    <aside class="col-lg-5 col-xl-3 mb-0">
+        <div class="widget widget_product_search">
 
-                        </ul>
-                    </div>
-                    <!-- columns 2 -->
+            <h3 class="widget-title">Search</h3>
 
-                    {% include 'pagination.html' %}
+            <form role="search" class="woocommerce-product-search"
+                  action="{% url 'search_results' %}">
 
-                </main>
+                <label class="screen-reader-text" for="woocommerce-product-search-field-widget">
+                    Search for:
+                </label>
 
-                <aside class="col-lg-5 col-xl-3 mb-0">
-                    <div class="widget widget_product_search">
-
-                        <h3 class="widget-title">Search</h3>
-
-                        <form role="search" class="woocommerce-product-search"
-                              action="{% url 'search_results' %}">
-
-                            <label class="screen-reader-text" for="woocommerce-product-search-field-widget">
-                                Search for:
-                            </label>
-
-                            <input type="search" id="woocommerce-product-search-field-widget" class="search-field"
-                                   placeholder="Search here..." name="q">
-                            <input type="submit" value="Search">
-                        </form>
-                    </div>
-                </aside>
-            </div>
+                <input type="search" id="woocommerce-product-search-field-widget"
+                       class="search-field"
+                       placeholder="Search here..." name="q">
+                <input type="submit" value="Search">
+            </form>
         </div>
-    </section>
+    </aside>
+    {% include 'pagination.html' %}
+
+</ul>
+{% empty %}
+По вашему запрому ничего не нашлось(
+{% endfor %}
+
+
+<!-- columns 2 -->
+
+{% include 'pagination.html' %}
+
+
+<aside class="col-lg-5 col-xl-3 mb-0">
+    <div class="widget widget_product_search">
+
+        <h3 class="widget-title">Search</h3>
+
+        <form role="search" class="woocommerce-product-search"
+              action="{% url 'search_results' %}">
+
+            <label class="screen-reader-text" for="woocommerce-product-search-field-widget">
+                Search for:
+            </label>
+
+            <input type="search" id="woocommerce-product-search-field-widget" class="search-field"
+                   placeholder="Search here..." name="q">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+</aside>
 
 {% endblock %}
 {% block scripts %}
