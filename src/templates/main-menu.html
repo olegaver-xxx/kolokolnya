@@ -14,7 +14,9 @@
 										</li>
                                         {% if user.is_authenticated %}
                                         <li >
-											<a href="">{{ user }}</a>
+											<a href="">{{ user }}
+                                            <i class="fa fa fa-caret-down"></i>
+                                            </a>
 											<ul>
 												<li>
 													<a href="{% url 'cart' %}">Корзина</a>
