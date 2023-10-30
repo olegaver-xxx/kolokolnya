@@ -12,18 +12,7 @@
                 <main class="col-lg-7 col-xl-9">
                     <div class="columns-3 column-base">
 
-                        <p class="woocommerce-result-count">
-                            Showing 10 - 19 of 30 results</p>
-                        <form class="woocommerce-ordering" method="get">
-                            <select name="orderby" class="orderby">
-                                <option value="menu_order" selected="selected">Default sorting</option>
-                                <option value="popularity">Sort by popularity</option>
-                                <option value="rating">Sort by average rating</option>
-                                <option value="date">Sort by newness</option>
-                                <option value="price">Sort by price: low to high</option>
-                                <option value="price-desc">Sort by price: high to low</option>
-                            </select>
-                        </form>
+                        {% include 'sort.html' %}
                         <ul class="products">
                             {% for results in search %}
                                 <li class="product">
