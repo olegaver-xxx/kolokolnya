@@ -125,7 +125,7 @@ def create_gallery(request):
 
 
 class SearchView(ListView):
-    template_name = 'search_results.html'
+    template_name = 'search-test.html'
     context_object_name = 'search'
 
     def get_queryset(self):
