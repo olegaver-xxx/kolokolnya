@@ -1,6 +1,6 @@
-{#<p class="woocommerce-result-count">#}
-{#									Showing 10 - 19 of 30 results</p>#}
-{#<form class="woocommerce-ordering" method="get">#}
+<p class="woocommerce-result-count">
+									Showing 10 - 19 of 30 results</p>
+<form class="woocommerce-ordering" method="get">
 {#    <select name="orderby" class="orderby">#}
 {#        <option value="menu_order" selected="selected">Default sorting</option>#}
 {#        <option value="popularity">Sort by popularity</option>#}
@@ -9,5 +9,24 @@
 {#        <option value="price">Sort by price: low to high</option>#}
 {#        <option value="price-desc">Sort by price: high to low</option>#}
 {#    </select>#}
-{#</form>#}
-{##}
+
+          <aside class="col-lg-5 col-xl-3 mb-0">
+        <div class="widget widget_product_search">
+
+            <h3 class="widget-title">Search</h3>
+
+            <form role="search" class="woocommerce-product-search"
+                  action="{% url 'search_results' %}">
+
+                <label class="screen-reader-text" for="woocommerce-product-search-field-widget">
+                    Search for:
+                </label>
+
+                <input type="search" id="woocommerce-product-search-field-widget" class="search-field"
+                       placeholder="Search here..." name="q">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+    </aside>
+</form>
+

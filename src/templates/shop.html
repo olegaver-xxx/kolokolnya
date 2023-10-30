@@ -11,8 +11,8 @@
 {% endblock %}
 
 {% block content %}
-{#    {% include 'sort.html' %}#}
-    <br><br><br>
+    {% include 'sort.html' %}
+
     <ul class="products">
         {% for product in products %}
             <li class="product">
@@ -46,24 +46,8 @@
                    class="button product_type_simple add_to_cart_button add-to-cart">Add to cart</a>
             </li>
         {% endfor %}
-          <aside class="col-lg-5 col-xl-3 mb-0">
-        <div class="widget widget_product_search">
 
-            <h3 class="widget-title">Search</h3>
 
-            <form role="search" class="woocommerce-product-search"
-                  action="{% url 'search_results' %}">
-
-                <label class="screen-reader-text" for="woocommerce-product-search-field-widget">
-                    Search for:
-                </label>
-
-                <input type="search" id="woocommerce-product-search-field-widget" class="search-field"
-                       placeholder="Search here..." name="q">
-                <input type="submit" value="Search">
-            </form>
-        </div>
-    </aside>
         {% include 'pagination.html' %}
 
     </ul>
