@@ -6,7 +6,7 @@
     {% include 'sort.html' %}
 
     <ul class="products">
-        {% for product in search %}
+        {% for product in results %}
             <li class="product">
                 <a href="{% url 'detail' pk=product.id %}">
 
