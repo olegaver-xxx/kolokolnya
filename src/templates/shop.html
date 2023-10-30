@@ -3,32 +3,16 @@
 {% load thumbnail %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/shop.css' %}" class="color-switcher-link">
+		<link rel="stylesheet" href="{% static 'css/shop.css' %}" class="color-switcher-link">
 {% endblock %}
 
 {% block page-title %}
-    Интернет магазин
+	Интернет магазин
 {% endblock %}
 
 {% block content %}
+{% include 'sort.html' %}
 
-    {% include 'sort.html' %}
-    <div class="widget widget_product_search">
-
-        <h3 class="widget-title">Search</h3>
-
-        <form role="search" class="woocommerce-product-search"
-              action="{% url 'search_results' %}">
-
-            <label class="screen-reader-text" for="woocommerce-product-search-field-widget">
-                Search for:
-            </label>
-
-            <input type="search" id="woocommerce-product-search-field-widget" class="search-field"
-                   placeholder="Search here..." name="q">
-            <input type="submit" value="Search">
-        </form>
-    </div>
     <ul class="products">
         {% for product in products %}
             <li class="product">
@@ -70,29 +54,6 @@
 
 {% block content1 %}
 
-    <section class="page_title ds s-py-5">
-        <div class="container">
-            <div class="row">
-
-                {#                <div class="col-md-12 text-center">#}
-                {#                    <h1 class="bold">Shop with Right Sidebar</h1>#}
-                {#                    <ol class="breadcrumb">#}
-                {#                        <li class="breadcrumb-item">#}
-                {#                            <a href="index.html">Home</a>#}
-                {#                        </li>#}
-                {#                        <li class="breadcrumb-item">#}
-                {#                            <a href="#">Shop</a>#}
-                {#                        </li>#}
-                {#                        <li class="breadcrumb-item active">#}
-                {#                            Shop with Right Sidebar#}
-                {#                        </li>#}
-                {#                    </ol>#}
-                {#                </div>#}
-
-            </div>
-        </div>
-    </section>
-    </div>
 
 
     <section class="ls s-py-80 s-py-md-120 s-py-xl-160 c-gutter-60">
