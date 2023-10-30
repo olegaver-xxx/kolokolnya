@@ -8,4 +8,7 @@ register = template.Library()
 
 @register.simple_tag
 def text_block(block_name, *args):
-    return mark_safe(get_text_block_content(block_name))
+    text = get_text_block_content(block_name)
+    if text is None:
+        text = f'<span style="color:red;background-color: black;">[missing block "{block_name}"]</span>'
+    return mark_safe(text)
