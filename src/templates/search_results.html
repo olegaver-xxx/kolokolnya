@@ -2,6 +2,7 @@
 {% load thumbnail %}
 {% block content %}
 
+                        {% include 'sort.html' %}
 
 
 
@@ -12,7 +13,6 @@
                 <main class="col-lg-7 col-xl-9">
                     <div class="columns-3 column-base">
 
-                        {% include 'sort.html' %}
                         <ul class="products">
                             {% for results in search %}
                                 <li class="product">
