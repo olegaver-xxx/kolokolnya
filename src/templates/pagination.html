@@ -14,14 +14,14 @@
                 {% if page_obj.number == page_number %}
                     <span class="page-numbers current">{{ page_number }} </span>
                 {% else %}
-                    <a href="?page={{ page_number }}" class="btn btn-outline-primary">
+                    <a href="?page={{ page_number }}{% if q %}&q={{ q }}{% endif %}" class="btn btn-outline-primary">
                         {{ page_number }}
                     </a>
                 {% endif %}
             {% endfor %}
             {% if page_obj.has_next %}
                 <li>
-                    <a class="next page-numbers" href="?page={{ page_obj.next_page_number }}">
+                    <a class="next page-numbers" href="?page={{ page_obj.next_page_number }}{% if q %}&q={{ q }}{% endif %}">
                         <i class="fa fa-chevron-right"></i>
                     </a>
                 </li>

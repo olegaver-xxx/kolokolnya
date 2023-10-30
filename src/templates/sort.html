@@ -1,14 +1,15 @@
-<p class="woocommerce-result-count">
-									Showing 10 - 19 of 30 results</p>
-<form class="woocommerce-ordering" method="get">
-{#    <select name="orderby" class="orderby">#}
-{#        <option value="menu_order" selected="selected">Default sorting</option>#}
-{#        <option value="popularity">Sort by popularity</option>#}
-{#        <option value="rating">Sort by average rating</option>#}
-{#        <option value="date">Sort by newness</option>#}
-{#        <option value="price">Sort by price: low to high</option>#}
-{#        <option value="price-desc">Sort by price: high to low</option>#}
-{#    </select>#}
+  <div class="row pb-3">
+    <div class="col-md-6">
+      <span class="woocommerce-result-count"></span>
+    </div>
+    <div class="col-md-6">
+    <form role="search" class="woocommerce-product-search form-inline float-right" action="{% url 'shop' %}">
+        <input type="search" id="woocommerce-product-search-field-widget" class="search-field pr-3"
+               value="{{ q }}"
+                       placeholder="Найти..." name="q">
+        <button class="btn btn-xs btn-primary">Найти</button>
+    </form>
+    </div>
+  </div>
 
-</form>
 

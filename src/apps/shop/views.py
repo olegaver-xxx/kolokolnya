@@ -19,7 +19,7 @@ class ProductListView(ListView):
     template_name = 'shop.html'
     context_object_name = 'products'
     queryset = Product.objects.all().prefetch_related('images')
-    paginate_by = 10
+    paginate_by = 3
 
     def filter_products(self):
         tags = Tag.objects.all()
@@ -29,13 +29,21 @@ class ProductListView(ListView):
             filtered_products = filtered_products.filter(tags__tag=selected)
         return filtered_products, selected, tags
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get('q')
+        if query:
+            qs = qs.filter(name__icontains=query)
+        return qs
+
     def get_context_data(self, *, object_list=None, **kwargs):
-        ctx = super().get_context_data()
+        ctx = super().get_context_data(object_list=object_list, **kwargs)
         ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user)]
         filtered_products, selected, tags = self.filter_products()
         ctx['selected'] = selected
         ctx['filtered'] = filtered_products
         ctx['tags'] = tags
+        ctx['q'] = self.request.GET.get('q', '')
         return ctx
 
 
@@ -124,19 +132,19 @@ def create_gallery(request):
     return render(request, 'add_item.html', context)
 
 
-class SearchView(ListView):
-    template_name = 'search-test.html'
-    context_object_name = 'search'
-
-    def get_queryset(self):
-        qs = self.request.GET.get('q')
-        results = Product.objects.filter(name__icontains=qs)
-        return results
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        ctx = super().get_context_data()
-        ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user)]
-        return ctx
+# class SearchView(ListView):
+#     template_name = 'search-test.html'
+#     context_object_name = 'search'
+#
+#     def get_queryset(self):
+#         qs = self.request.GET.get('q')
+#         results = Product.objects.filter(name__icontains=qs)
+#         return results
+#
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         ctx = super().get_context_data()
+#         ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user)]
+#         return ctx
 
 
 # def search(request):
