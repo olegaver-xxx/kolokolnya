@@ -67,11 +67,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'main.wsgi.application'
 
 THUMBNAIL_ALIASES = {
-    "": {
-        "apps.blog": {'size': (420, 236), 'crop': True},
-    },
-    "q": {
-        "apps.blog": {'size': (1080, 720), 'crop': True},
+    "shop": {
+        "apps.shop": {'size': (420, 236), 'crop': True},
     },
 
 }
