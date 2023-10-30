@@ -38,7 +38,9 @@
                style="display: {% if product.id not in cart_items %} block {% else %} none {% endif %}"
                class="button product_type_simple add_to_cart_button add-to-cart">Add to cart</a>
         </li>
-    {% endfor %}
+        {% empty %}
+        По вашему запрому ничего не нашлось(
+        {% endfor %}
     <aside class="col-lg-5 col-xl-3 mb-0">
         <div class="widget widget_product_search">
 
@@ -61,9 +63,7 @@
     {% include 'pagination.html' %}
 
 </ul>
-{% empty %}
-По вашему запрому ничего не нашлось(
-{% endfor %}
+
 
 
 <!-- columns 2 -->
