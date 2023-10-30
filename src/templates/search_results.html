@@ -2,7 +2,6 @@
 {% load thumbnail %}
 {% block content %}
 
-                        {% include 'sort.html' %}
 
 
 
@@ -13,6 +12,18 @@
                 <main class="col-lg-7 col-xl-9">
                     <div class="columns-3 column-base">
 
+                        <p class="woocommerce-result-count">
+                            Showing 10 - 19 of 30 results</p>
+                        <form class="woocommerce-ordering" method="get">
+                            <select name="orderby" class="orderby">
+                                <option value="menu_order" selected="selected">Default sorting</option>
+                                <option value="popularity">Sort by popularity</option>
+                                <option value="rating">Sort by average rating</option>
+                                <option value="date">Sort by newness</option>
+                                <option value="price">Sort by price: low to high</option>
+                                <option value="price-desc">Sort by price: high to low</option>
+                            </select>
+                        </form>
                         <ul class="products">
                             {% for results in search %}
                                 <li class="product">
@@ -53,7 +64,29 @@
                     </div>
                     <!-- columns 2 -->
 
-                    {% include 'pagination.html' %}
+                    <nav class="woocommerce-pagination mt-30">
+                        <ul class="page-numbers">
+                            <li>
+                                <a class="prev page-numbers" href="shop-right.html">
+                                    <i class="fa fa-chevron-left"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <span class="page-numbers current">1</span>
+                            </li>
+                            <li>
+                                <a class="page-numbers" href="shop-right.html">...</a>
+                            </li>
+                            <li>
+                                <a class="page-numbers" href="shop-right.html">13</a>
+                            </li>
+                            <li>
+                                <a class="next page-numbers" href="shop-right.html">
+                                    <i class="fa fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
 
                 </main>
 
@@ -74,7 +107,7 @@
                             <input type="submit" value="Search">
                         </form>
                     </div>
-                </aside>
+
 
 
 {% endblock %}
