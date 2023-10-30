@@ -22,9 +22,6 @@
         display: block;
     }
 
-    .active {
-        color: red;
-    }
 </style>
 
 
@@ -37,8 +34,8 @@
 										<i class="fa color-main2 fa-phone"></i>
 									</span>
                     <div class="media-body">
-                        <span class="small-text">Booking your trip</span>
-                        <p>{{ CONTACT_PHONE }}</p>
+                        <span class="small-text">Позвоните нам</span>
+                        <p><a href="tel:{{ CONTACT_PHONE }}">{{ CONTACT_PHONE }}</a></p>
                     </div>
                 </div>
             </div>
@@ -53,8 +50,8 @@
                 <div class="media">
                     <div class="media">
                         <div class="media-body align-items-end">
-                            <span class="small-text">Contact Email</span>
-                            <p>{{ CONTACT_EMAIL }}</p>
+                            <span class="small-text">Напишите нам</span>
+                            <p><a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></p>
                         </div>
                         <span class="icon-styled ">
                             <i class="fa color-main2 fa-pencil"></i>
@@ -80,15 +77,14 @@
 											<i class="fa color-main2 fa-phone"></i>
 										</span>
                         <div class="media-body">
-                            <span class="small-text">Booking your trip</span>
-                            <p>3 (800) 234 3695</p>
+                            <span class="small-text">Позвоните нам</span>
+                        <p><a href="tel:{{ CONTACT_PHONE }}">{{ CONTACT_PHONE }}</a></p>
                         </div>
                     </div>
                     <div class="media">
                         <div class="media-body align-items-end">
-                            <span class="small-text">our emailaddress</span>
-                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                  data-cfemail="315c5e445f455842715e57575852541f525e5c">[email&#160;protected]</a></p>
+                            <span class="small-text">Напишите нам</span>
+                            <p><a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></p>
                         </div>
                         <span class="icon-styled ">
 											<i class="fa color-main2 fa-pencil"></i>
