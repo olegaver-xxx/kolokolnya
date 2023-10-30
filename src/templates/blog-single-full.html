@@ -2,13 +2,13 @@
 {% load thumbnail %}
 
 {% block page-title %}
-BLOG
+{{ object.article_title }}
 {% endblock %}
 
 {% block content %}
-    <br><br>
-     <div class="art-title"><h1>qwert</h1></div>
-
+{#     <div class="art-title pb-5">#}
+{#         <h1>{{ object.article_title }}</h1>#}
+{#     </div>#}
 
     <section class="ls s-py-80 s-py-md-120 s-py-xl-160 c-gutter-60">
         <div class="container">
@@ -43,38 +43,38 @@ BLOG
                             {#											<img src="images/gallery/03_big.jpg" alt="img">#}
                             {#										</a>#}
                         </div>
-                        <div class="post-adds">
-                            <div class="view-count-wrap">
-                                <div class="view-count-wrap-child">
-												<span class="views-count">
-													<i class="fa fa-user" aria-hidden="true"></i>
-													<span class="item-views-count">Marion Figueroa</span>
-												</span>
-                                    <span class="views-count">
-													<i class="fa fa-calendar" aria-hidden="true"></i>
-													<span class="item-views-count">22 mar, 18</span>
-												</span>
-                                    <span class="views-count">
-													<i class="fa fa-tags" aria-hidden="true"></i>
-													<span class="item-views-count">tourism, Track</span>
-												</span>
-                                </div>
-                                <div class="view-count-wrap-child">
-												<span class="views-count">
-													<i class="fa fa-eye" aria-hidden="true"></i>
-													<span class="item-views-count">325</span>
-												</span>
-                                    <span class="views-count">
-													<i class="fa fa-comments" aria-hidden="true"></i>
-													<span class="item-likes-count">125</span>
-												</span>
-                                    <span class="views-count">
-													<i class="fa fa-heart" aria-hidden="true"></i>
-													<span class="item-likes-count">300</span>
-												</span>
-                                </div>
-                            </div>
-                        </div>
+{#                        <div class="post-adds">#}
+{#                            <div class="view-count-wrap">#}
+{#                                <div class="view-count-wrap-child">#}
+{#												<span class="views-count">#}
+{#													<i class="fa fa-user" aria-hidden="true"></i>#}
+{#													<span class="item-views-count">Marion Figueroa</span>#}
+{#												</span>#}
+{#                                    <span class="views-count">#}
+{#													<i class="fa fa-calendar" aria-hidden="true"></i>#}
+{#													<span class="item-views-count">22 mar, 18</span>#}
+{#												</span>#}
+{#                                    <span class="views-count">#}
+{#													<i class="fa fa-tags" aria-hidden="true"></i>#}
+{#													<span class="item-views-count">tourism, Track</span>#}
+{#												</span>#}
+{#                                </div>#}
+{#                                <div class="view-count-wrap-child">#}
+{#												<span class="views-count">#}
+{#													<i class="fa fa-eye" aria-hidden="true"></i>#}
+{#													<span class="item-views-count">325</span>#}
+{#												</span>#}
+{#                                    <span class="views-count">#}
+{#													<i class="fa fa-comments" aria-hidden="true"></i>#}
+{#													<span class="item-likes-count">125</span>#}
+{#												</span>#}
+{#                                    <span class="views-count">#}
+{#													<i class="fa fa-heart" aria-hidden="true"></i>#}
+{#													<span class="item-likes-count">300</span>#}
+{#												</span>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
                     </div>
 
 
