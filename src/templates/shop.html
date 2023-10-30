@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block content %}
+
     {#{% include 'sort.html' %}#}
     <div class="modal" tabindex="-1" role="dialog" aria-labelledby="search_modal" id="search_modal">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -20,12 +21,13 @@
             <form method="get" class="searchform search-form" action="https://html.modernwebtemplates.com/">
                 <div class="form-group">
                     <input type="text" value="" name="search" class="form-control" placeholder="Search keyword"
-                           id="modal-search-input">
+                           id="q">
                 </div>
                 <button type="submit" class=""></button>
             </form>
         </div>
     </div>
+
     <ul class="products">
         {% for product in products %}
             <li class="product">
