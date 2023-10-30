@@ -93,7 +93,7 @@
                                     <a href="{% url 'detail' pk=product.id %}">
 
                                         <div class="img-wrap">
-                                            <img src="{% thumbnail product.images.first.image 300x400 %}" alt="img">
+                                            <img src="{% thumbnail product.images.first.image 300x400 crop="center" as thumbnail %}" alt="img">
                                             {#                                                                            </div>{% thumbnail product.images 200x300 %} #}
                                         </div>
                                         <div class="product-wrap">
