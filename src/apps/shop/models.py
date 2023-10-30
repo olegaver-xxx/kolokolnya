@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.db.models import F, Sum
 from easy_thumbnails.fields import ThumbnailerImageField
@@ -76,7 +77,8 @@ class CartProduct(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
     # gallery_cart = models.ForeignKey(CartProduct, related_name='images_cart', on_delete=models.CASCADE)
-    image = ThumbnailerImageField(upload_to='products/', blank=True, null=True)
+    image = ThumbnailerImageField(upload_to='products/', blank=True, null=True,
+                                  resize_source=settings.THUMBNAIL_ALIASES['']['orig'])
 
 
 class Order(models.Model):

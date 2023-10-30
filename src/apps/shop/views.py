@@ -19,7 +19,7 @@ class ProductListView(ListView):
     template_name = 'shop.html'
     context_object_name = 'products'
     queryset = Product.objects.all().prefetch_related('images')
-    paginate_by = 3
+    paginate_by = 10
 
     def filter_products(self):
         tags = Tag.objects.all()

@@ -67,10 +67,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'main.wsgi.application'
 
 THUMBNAIL_ALIASES = {
-    "shop": {
-        "apps.shop": {'size': (420, 236), 'crop': True},
+    "": {
+        "shop": {'size': (420, 236), 'crop': True},
+        "orig": {'size': (1200, 800), 'crop': False},
     },
-
 }
 if os.getenv('POSTGRES_HOST'):
     DATABASES = {

@@ -19,8 +19,7 @@
                 <a href="{% url 'detail' pk=product.id %}">
 
                     <div class="img-wrap">
-                        <img src="{% thumbnail product.images.first.image 300x400 %}" alt="img">
-                        {#                                                                            </div>{% thumbnail product.images 200x300 %} #}
+                        <img src="{{ product.images.first.image|thumbnail_url:"shop" }}" alt="img">
                     </div>
                     <div class="product-wrap">
                         <div class="star-rating">
