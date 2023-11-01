@@ -158,15 +158,15 @@ class ContactView(TemplateView):
 
 
 class OrderListView(ListView):
-    model = Order
+    model = Cart
     template_name = 'orders_history.html'
     paginate_by = 10
     context_object_name = 'orders'
 
-
-class OrderDetailView(DetailView):
-    model = Product
-    template_name = ...
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(cart__user=self.request.user.id, cart__status=Cart.STATUS.PENDING or Cart.STATUS.COMPLETED)
+        return qs
 
 
 @csrf_exempt
