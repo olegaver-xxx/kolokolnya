@@ -25,7 +25,7 @@ class SiteImages(models.Model):
     name = models.CharField(max_length=150, blank=True, null=True)
     image = ThumbnailerImageField(upload_to='prefs/')
 
-    if name is not None:
+    if type(name) != "NoneType":
         def __str__(self):
             return self.name
     else:
