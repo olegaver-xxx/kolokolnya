@@ -1,6 +1,7 @@
 from ckeditor.fields import RichTextField
 from django.db import models
-
+from easy_thumbnails.fields import ThumbnailerImageField
+from main.settings import DATA_DIR
 
 class Preferences(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
@@ -18,3 +19,7 @@ class TextBlockModel(models.Model):
     class Meta:
         verbose_name = 'Блок текста'
         verbose_name_plural = 'Блоки текста'
+
+
+class SiteImages(models.Model):
+    image = ThumbnailerImageField(upload_to=DATA_DIR/'prefs')

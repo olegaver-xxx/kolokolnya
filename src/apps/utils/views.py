@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.views.generic import TemplateView
-
 from apps.utils.services import get_prefs_form, set_prefs
 
 
