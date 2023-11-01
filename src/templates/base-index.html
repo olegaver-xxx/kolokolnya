@@ -45,10 +45,11 @@
 								<a href="#" class="fa fa-twitter bg-light border-icon rounded-icon" title="twitter"></a>
 								<a href="#" class="fa fa-google-plus bg-light border-icon rounded-icon" title="google"></a>
 							</span>
-							<video muted loop id="myVideo">
-								<source src="images/Travel_Stock_Footage_Reel-HD_4K_Royalty-free.mp4" data-time="74" type="video/mp4">
-							</video>
-							<img src="{% static 'images/slide01.jpg' %}" alt="img">
+{#							<video muted loop id="myVideo">#}
+{#								<source src="images/Travel_Stock_Footage_Reel-HD_4K_Royalty-free.mp4" data-time="74" type="video/mp4">#}
+{#							</video>#}
+{#							<img src="{% static 'images/slide01.jpg' %}" alt="img">#}
+							<img src="{{ SLIDER_IMAGE1 }}" alt="slider1">
 							<div class="container">
 								<div class="row">
 									<div class="col-md-12">
@@ -84,7 +85,7 @@
 								<a href="#" class="fa fa-twitter bg-light border-icon rounded-icon" title="twitter"></a>
 								<a href="#" class="fa fa-google-plus bg-light border-icon rounded-icon" title="google"></a>
 							</span>
-							<img src="images/slide02.jpg" alt="img">
+							<img src="{{ SLIDER_IMAGE2 }}" alt="slider2">
 							<div class="container">
 								<div class="row">
 									<div class="col-md-12">
@@ -118,7 +119,7 @@
 								<a href="#" class="fa fa-twitter bg-light border-icon rounded-icon" title="twitter"></a>
 								<a href="#" class="fa fa-google-plus bg-light border-icon rounded-icon" title="google"></a>
 							</span>
-							<img src="images/slide03.jpg" alt="img">
+							<img src="{{ SLIDER_IMAGE3 }}" alt="slider3">
 							<div class="container">
 								<div class="row">
 									<div class="col-md-12">

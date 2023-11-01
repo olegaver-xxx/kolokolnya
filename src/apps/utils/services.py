@@ -6,12 +6,13 @@ def list_images():
 
 
 PREFS = {
+    'site_name': dict(label='Site Name', value='Kolokolnya', type=str),
     'contact_phone': dict(label='Contact Phone', value='000000000000', type=str),
     'contact_email': dict(label='Contact Email', value='', type=str),
     'disable_shop': dict(label='Disable Shop', value=False, type=bool),
-    'enable_blog': dict(label='Enable Blog', value=True, type=bool),
-    'header_image': dict(label='Header Image', value='images/hiero.png', type=str, choices=list_images),
-    'site_name': dict(label='Site Name', value='Kolokolnya', type=str),
+    'slider_image1': dict(label='Slider Image 1', value='images/hiero.png', type=str, choices=list_images),
+    'slider_image2': dict(label='Slider Image 2', value='images/hiero.png', type=str, choices=list_images),
+    'slider_image3': dict(label='Slider Image 3', value='images/hiero.png', type=str, choices=list_images),
     'yookassa_apikey': dict(label='Yookassa API Key', value='', type=str),
     'yookassa_shop_id': dict(label='Yookassa Shop ID', value='', type=str),
 }

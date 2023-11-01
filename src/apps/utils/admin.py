@@ -2,6 +2,7 @@ import re
 
 from django.contrib import admin
 from django.utils.html import strip_tags
+from django.utils.safestring import mark_safe
 from django.utils.text import Truncator
 from .models import TextBlockModel, SiteImages
 
@@ -15,4 +16,15 @@ class TextBlockAdmin(admin.ModelAdmin):
         return text
 
 
-admin.site.register(SiteImages)
+@admin.register(SiteImages)
+class SiteImagesAdmin(admin.ModelAdmin):
+    readonly_fields = 'url', 'preview'
+    list_display = 'name', 'url'
+
+    fields = 'name', 'image', 'url', 'preview'
+
+    def url(self, obj):
+        return obj.image.url
+
+    def preview(self, obj):
+        return mark_safe(f"<img src='{obj.image.url}' width='500px'>")
