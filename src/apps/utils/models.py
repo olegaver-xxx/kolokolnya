@@ -22,4 +22,4 @@ class TextBlockModel(models.Model):
 
 
 class SiteImages(models.Model):
-    image = ThumbnailerImageField(upload_to=DATA_DIR/'prefs')
+    image = ThumbnailerImageField(upload_to='prefs/')
