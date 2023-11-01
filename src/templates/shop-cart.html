@@ -2,7 +2,7 @@
 {% load thumbnail %}
 
 {% block page-title %}
-    CART
+    Корзина
 {% endblock %}
 
 
@@ -24,7 +24,7 @@
 
                 <main class="col-lg-12">
 
-
+                {% if products.count %}
                     <form class="woocommerce-cart-form" action="{% url 'update_cart' %}" method="post" id="cart-form">
                         {% csrf_token %}
                         <table class="shop_table shop_table_responsive cart">
@@ -32,10 +32,10 @@
                             <tr>
                                 <th class="product-remove">&nbsp;</th>
                                 <th class="product-thumbnail">&nbsp;</th>
-                                <th class="product-name">Product</th>
-                                <th class="product-price">Price</th>
-                                <th class="product-quantity">Quantity</th>
-                                <th class="product-subtotal">Total</th>
+                                <th class="product-name">Название</th>
+                                <th class="product-price">Цена</th>
+                                <th class="product-quantity">Количество</th>
+                                <th class="product-subtotal">Всего</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -55,7 +55,7 @@
                                     </td>
                                     <td class="product-thumbnail">
                                         {% for image in product_cart.product.images.all %}
-                                            <a href="shop-product-right.html">
+                                            <a href="{% url 'detail' pk=product_cart.product.id %}">
                                                 <img width="180" height="180" src="{% thumbnail image.image 900x900 %}"
                                                      class="" alt="img">
                                             </a>
@@ -63,12 +63,12 @@
                                     </td>
 
                                     <td class="product-name" data-title="Product">
-                                        <a href="shop-product-right.html">{{ product_cart.product.name }}</a>
+                                        <a href="{% url 'detail' pk=product_cart.product.id %}">{{ product_cart.product.name }}</a>
                                     </td>
 
                                     <td class="product-price" data-title="Price">
 												<span class="amount">
-													<span>P</span>{{ product_cart.product.price }}
+													<span>₽ </span>{{ product_cart.product.price }}
 												</span>
                                     </td>
 {#                                                                        <td class="product-quantity" data-title="Quantity">#}
@@ -95,7 +95,7 @@
 
                                     <td class="product-subtotal" data-title="Total">
 												<span class="amount">
-													<span>P</span>{{ product_cart.total_price }}
+													<span>₽ </span>{{ product_cart.total_price }}
 												</span>
                                     </td>
                                 </tr>
@@ -122,18 +122,16 @@
                         </table>
                     </form>
 
-
                     <div class="wc-proceed-to-checkout">
-
-                        {#                                <a href="" class="checkout-button button alt wc-forward">#}
-                        {#                                    Сделать заказ</a>#}
-
-                        {#                        <form method="post">#}
-                        {#                            {% csrf_token %}#}
                         <button type="submit" form="cart-form" name="pay">Оплатить</button>
-                        {#                        </form>#}
-
                     </div>
+                {% else %}
+                    <div class="text-center pt-5 pb-5">
+                        <h4 style="text-transform: unset;">Нет товаров в корзине</h4>
+                        <a href="{% url 'shop' %}" class="btn btn-success">Вернуться в магазин <i class="fa fa-arrow-right pl-2"></i></a>
+                    </div>
+
+                {% endif %}
 
 
                 </main>
@@ -142,37 +140,4 @@
 
         </div>
     </section>
-
-
-    <script>
-        {#$(document).ready(function () {#}
-        {#    $('.decrease, .increase').click(function () {#}
-        {#        var $button = $(this);#}
-        {#        var oldValue = $button.parent().find('input').val();#}
-        {##}
-        {#        if ($button.text() == "+") {#}
-        {#            var newVal = parseFloat(oldValue) + 1;#}
-        {#        } else {#}
-        {#            if (oldValue > 1) {#}
-        {#                var newVal = parseFloat(oldValue) - 1;#}
-        {#            } else {#}
-        {#                var newVal = 1;#}
-        {#            }#}
-        {#        }#}
-        {##}
-        {#        var productId = $button.parent().find('input').data('product-id');#}
-        {#        $button.parent().find('input').val(newVal);#}
-        {##}
-        {#        $.post('/cart/update/', {product_id: productId, quantity: newVal}, function (response) {#}
-        {#            if (response.result == 'ok') {#}
-        {#$.redirect('cart/')#}
-        {##}
-        {##}
-        {#            } else {#}
-        {#                // Произошла ошибка#}
-        {#            }#}
-        {#        });#}
-        {#    });#}
-        {# });#}
-    </script>
 {% endblock %}
