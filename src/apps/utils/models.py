@@ -1,3 +1,5 @@
+import os
+
 from ckeditor.fields import RichTextField
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
@@ -25,12 +27,8 @@ class SiteImages(models.Model):
     name = models.CharField(max_length=150, blank=True, null=True)
     image = ThumbnailerImageField(upload_to='prefs/')
 
-    if type(name) != "NoneType":
-        def __str__(self):
-            return self.name
-    else:
-        def __str__(self):
-            return 'Изображение'
+    def __str__(self):
+        return self.name or os.path.basename(self.image.path)
 
     class Meta:
         verbose_name = 'Изоражение Сайта'
