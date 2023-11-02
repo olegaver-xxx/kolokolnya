@@ -129,6 +129,8 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = DATA_DIR/'static'
 
+EMAIL_FROM = "pop.korn.legko@gmail.com"
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
