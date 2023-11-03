@@ -168,6 +168,11 @@ class OrderListView(ListView):
         qs = qs.filter(user=self.request.user.id, status=Cart.STATUS.PENDING or Cart.STATUS.COMPLETED)
         return qs
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        ctx = super().get_context_data()
+        ctx['total'] = Cart.get_total_price(Cart.user.objects)
+        return ctx
+
 
 @csrf_exempt
 def payment_event(request):

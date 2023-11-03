@@ -72,18 +72,19 @@ ORDERS
 													<tr class="woocommerce-orders-table__row woocommerce-orders-table__row--status-processing order">
 														<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-number" data-title="Order">
 															<a href="shop-account-order-single.html">
-																ORDER_ID</a>
+                                                                {{ order.id }}</a>
 
 														</td>
 														<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date" data-title="Date">
-															<time datetime="2018-03-06T08:55:39+00:00">{{ order.created_at }}</time>
+															<time datetime="2018-03-06T08:55:39+00:00">{{ order.payment_at }}</time>
 
 														</td>
 														<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-status" data-title="Status">
                                                             {{ order.status }}
 														</td>
 														<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-total" data-title="Total">
-															<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{ order.computed_sum }}</span> for XXX items
+															<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{ order.computed_sum }}</span> for
+                                                            {{ total }} for XXX items
 														</td>
 														<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-actions" data-title="Actions">
 															<a href="shop-account-order-single.html" class="woocommerce-button button view">ID:
