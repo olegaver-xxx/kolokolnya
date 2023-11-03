@@ -130,7 +130,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = DATA_DIR/'static'
 
 EMAIL_FROM = "pop.korn.legko@gmail.com"
-
+EMAIL_HOST_PASSWORD = "lfhnvjk2007"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
