@@ -6,9 +6,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = (BASE_DIR/'../data').resolve()
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 SECRET_KEY = os.getenv('SECRET') or 'example'
-DEBUG = bool(os.getenv('DEBUG'))
+DEBUG = bool(os.getenv('DEBUG')) or True
 
-DOMAIN_NAME = os.getenv('DOMAIN_NAME') or 'localhost:8000'
+DOMAIN_NAME = os.getenv('DOMAIN_NAME') or 'localhost:1234'
 SECURE_CONNECTION = os.getenv('SECURE_CONNECTION', False)
 PROTOCOL = 'https://' if SECURE_CONNECTION else 'http://'
 ALLOWED_HOSTS = ["*"]
