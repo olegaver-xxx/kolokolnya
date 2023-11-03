@@ -9,7 +9,7 @@ from .models import TextBlockModel, SiteImages
 
 @admin.register(TextBlockModel)
 class TextBlockAdmin(admin.ModelAdmin):
-    list_display = 'name', 'text_preview'
+    list_display = 'description', 'name', 'text_preview'
 
     def text_preview(self, obj):
         text = Truncator(re.sub(r"&\w+;", " ", strip_tags(obj.text))).words(10, truncate='...')
