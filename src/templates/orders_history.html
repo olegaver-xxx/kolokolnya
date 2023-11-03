@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
 {% block page-title %}
-ORDERS
+Мои заказы
 {% endblock %}
-
 
 {% block content %}
 
@@ -13,54 +12,52 @@ ORDERS
 				<div class="container">
 					<div class="row">
 
-						<main class="col-lg-12">
+						<main class="col-md-12">
 							<article id="post-1708" class="post-1708 page type-page status-publish hentry">
 								<header class="entry-header mb-20">
-									<h1 class="entry-title pull-left">Orders</h1>
-									<span class="edit-link"><a class="post-edit-link" href="#">Edit<span class="screen-reader-text"> "My account"</span></a></span>
+{#									<h1 class="entry-title pull-left">Orders</h1>#}
+{#									<span class="edit-link"><a class="post-edit-link" href="#">Edit<span class="screen-reader-text"> "My account"</span></a></span>#}
 								</header><!-- .entry-header -->
 								<div class="entry-content">
 									<div class="woocommerce">
-										<nav class="woocommerce-MyAccount-navigation">
-											<ul class="mt-0">
-												<li>
-													<a href="shop-account-dashboard.html">Dashboard</a>
-												</li>
-												<li class="is-active">
-													<a href="shop-account-orders.html">Orders</a>
-												</li>
-												<li>
-													<a href="shop-account-downloads.html">Downloads</a>
-												</li>
-												<li>
-													<a href="shop-account-addresses.html">Addresses</a>
-												</li>
-												<li>
-													<a href="shop-account-details.html">Account details</a>
-												</li>
-												<li>
-													<a href="shop-account-login.html">Logout</a>
-												</li>
-											</ul>
-										</nav>
+{#										<nav class="woocommerce-MyAccount-navigation">#}
+{#											<ul class="mt-0">#}
+{#												<li>#}
+{#													<a href="shop-account-dashboard.html">Dashboard</a>#}
+{#												</li>#}
+{#												<li class="is-active">#}
+{#													<a href="shop-account-orders.html">Orders</a>#}
+{#												</li>#}
+{#												<li>#}
+{#													<a href="shop-account-downloads.html">Downloads</a>#}
+{#												</li>#}
+{#												<li>#}
+{#													<a href="shop-account-addresses.html">Addresses</a>#}
+{#												</li>#}
+{#												<li>#}
+{#													<a href="shop-account-details.html">Account details</a>#}
+{#												</li>#}
+{#												<li>#}
+{#													<a href="shop-account-login.html">Logout</a>#}
+{#												</li>#}
+{#											</ul>#}
+{#										</nav>#}
 
 
-										<div class="woocommerce-MyAccount-content">
+										<div class="woocommerce-MyAccount-content1">
+                                        {% if orders.count %}
 
-											<div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
-												<a class="woocommerce-Button button" href="shop-right.html">
-													Go shop </a>
-												No order has been made yet.
-											</div>
-
-											<table class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
+											<table class=" shop_table shop_table_responsive my_account_orders account-orders-table">
 												<thead>
 													<tr>
-														<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-number"><span class="nobr">Order</span></th>
-														<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-date"><span class="nobr">Date</span></th>
-														<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-status"><span class="nobr">Status</span></th>
-														<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-total"><span class="nobr">Total</span></th>
-														<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-actions"><span class="nobr">Actions</span></th>
+														<th class="table-id-col-width woocommerce-orders-table__header woocommerce-orders-table__header-order-number">
+                                                            <span class="nobr">#</span></th>
+														<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-date">
+                                                            <span class="nobr">Дата</span></th>
+														<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-status">
+                                                            <span class="nobr">Статус</span></th>
+														<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-total">
+                                                            <span class="nobr">Сумма</span></th>
 													</tr>
 												</thead>
 
@@ -69,34 +66,39 @@ ORDERS
 
 
 
-													<tr class="woocommerce-orders-table__row woocommerce-orders-table__row--status-processing order">
-														<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-number" data-title="Order">
-															<a href="shop-account-order-single.html">
-                                                                {{ order.id }}</a>
-
+													<tr class="">
+														<td class="table-id-col-width order" data-title="Order">
+                                                            {{ forloop.counter }}
 														</td>
-														<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date" data-title="Date">
-															<time datetime="2018-03-06T08:55:39+00:00">{{ order.payment_at }}</time>
-
+														<td class="" data-title="Date">
+															{{ order.order_at }}
 														</td>
-														<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-status" data-title="Status">
+														<td class="" data-title="Status">
                                                             {{ order.status }}
 														</td>
-														<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-total" data-title="Total">
-															<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{ order.computed_sum }}</span> for
-                                                            {{ total }} for XXX items
+														<td class="" data-title="Total">
+															<span class=" amount"><span class="">
+                                                                ₽</span> {{ order.get_total_price }}</span>
+
 														</td>
-														<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-actions" data-title="Actions">
-															<a href="shop-account-order-single.html" class="woocommerce-button button view">ID:
-                                                                {{ order.payment_id }}</a> </td>
+{#														<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-actions" data-title="Actions">#}
+{#															<a href="shop-account-order-single.html" class="woocommerce-button button view">ID:#}
+{#                                                                {{ order.payment_id }}</a> </td>#}
 													</tr>
                                                 {% endfor %}
 													
 
 												</tbody>
 											</table>
-
+                                        {% else %}
+                                            	<div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
+												<a class="woocommerce-Button button" href="{% url 'shop' %}">
+													Go shop </a>
+												No order has been made yet.
+											</div>
+                                        {% endif %}
 										</div>
+                                    {% include 'pagination.html' %}
 									</div>
 								</div><!-- .entry-content -->
 							</article>

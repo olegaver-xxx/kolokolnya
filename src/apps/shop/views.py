@@ -165,12 +165,12 @@ class OrderListView(ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        qs = qs.filter(user=self.request.user.id, status=Cart.STATUS.PENDING or Cart.STATUS.COMPLETED)
+        qs = qs.filter(user=self.request.user.id).exclude(status=Cart.STATUS.COLLECTING)
         return qs
 
     def get_context_data(self, *, object_list=None, **kwargs):
         ctx = super().get_context_data()
-        ctx['total'] = Cart.get_total_price(object_list)
+        # ctx['total'] = Cart.get_total_price(object_list)
         return ctx
 
 
