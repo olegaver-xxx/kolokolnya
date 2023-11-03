@@ -170,7 +170,7 @@ class OrderListView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         ctx = super().get_context_data()
-        ctx['total'] = Cart.get_total_price(Cart.user.objects)
+        ctx['total'] = Cart.get_total_price(Cart)
         return ctx
 
 
