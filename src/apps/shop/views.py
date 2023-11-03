@@ -165,7 +165,7 @@ class OrderListView(ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        qs = qs.filter(cart_user=self.request.user.id, cart_status=Cart.STATUS.PENDING or Cart.STATUS.COMPLETED)
+        qs = qs.filter(cart__user=self.request.user.id, status=Cart.STATUS.PENDING or Cart.STATUS.COMPLETED)
         return qs
 
 
