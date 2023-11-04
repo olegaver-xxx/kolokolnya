@@ -13,6 +13,7 @@ PREFS = {
     'slider_image1': dict(label='Slider Image 1', value='images/hiero.png', type=str, choices=list_images),
     'slider_image2': dict(label='Slider Image 2', value='images/hiero.png', type=str, choices=list_images),
     'slider_image3': dict(label='Slider Image 3', value='images/hiero.png', type=str, choices=list_images),
+    'footer_image': dict(label='Footer Image', value='images/hiero.png', type=str, choices=list_images),
     'yookassa_apikey': dict(label='Yookassa API Key', value='', type=str),
     'yookassa_shop_id': dict(label='Yookassa Shop ID', value='', type=str),
 }
