@@ -1,0 +1,349 @@
+{% extends 'root.html' %}
+{% load static text_block thumbnail %}
+{% block base %}
+
+
+    <div class="preloader">
+        <div class="preloader_image pulse"></div>
+    </div>
+
+    <!-- search modal -->
+    <div class="modal" tabindex="-1" role="dialog" aria-labelledby="search_modal" id="search_modal">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="widget widget_search">
+            <form method="get" class="searchform search-form" action="https://html.modernwebtemplates.com/">
+                <div class="form-group">
+                    <input type="text" value="" name="search" class="form-control" placeholder="Search keyword"
+                           id="modal-search-input">
+                </div>
+                <button type="submit" class=""></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Unyson messages modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="messages_modal">
+        <div class="fw-messages-wrap ls p-normal">
+            <!-- Uncomment this UL with LI to show messages in modal popup to your user: -->
+            <!--
+        <ul class="list-unstyled">
+            <li>Message To User</li>
+        </ul>
+        -->
+
+        </div>
+    </div><!-- eof .modal -->
+
+    <!-- wrappers for visual page editor and boxed version of template -->
+    <div id="canvas">
+        <div id="box_wrapper">
+            <div class="header_absolute ds home">
+                {% include 'head-panel.html' %}
+            </div>
+
+            <section class="page_slider">
+                <div class="flexslider vertical home_slider">
+                    <ul class="slides">
+                        <li class="ds s-overlay cover-image text-center">
+							<span class="social-icons animate" data-animation="fadeInUp">
+								<a href="#" class="fa fa-facebook bg-light border-icon rounded-icon"
+                                   title="facebook"></a>
+								<a href="#" class="fa fa-twitter bg-light border-icon rounded-icon" title="twitter"></a>
+								<a href="#" class="fa fa-google-plus bg-light border-icon rounded-icon"
+                                   title="google"></a>
+							</span>
+                            {#							<video muted loop id="myVideo">#}
+                            {#								<source src="images/Travel_Stock_Footage_Reel-HD_4K_Royalty-free.mp4" data-time="74" type="video/mp4">#}
+                            {#							</video>#}
+                            {#							<img src="{% static 'images/slide01.jpg' %}" alt="img">#}
+                            <img src="{{ SLIDER_IMAGE1 }}" alt="slider1">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="intro_layers_wrapper intro_text_bottom">
+                                            <div class="intro_layers">
+                                                <div class="intro-layer">
+                                                    <span class="small-text color-main3">{% text_block 'slider-subtitle-1' %}</span>
+                                                </div>
+                                                <div class="intro-layer mt-10">
+                                                    <h2>{% text_block 'slider-title-1' %}</h2>
+                                                </div>
+                                                <div class="divider-35 hidden-below-sm"></div>
+                                                <div class="intro-layer hidden-below-sm">
+                                                    {% text_block 'slider-text-1' %}
+                                                </div>
+                                                {#												<div class="divider-xl-50"></div>#}
+                                                {#												<div class="divider-30 hidden-xl"></div>#}
+                                                {#												<div class="intro-layer ">#}
+                                                {#													<button class="btn-play">#}
+                                                {#														<i class="fa fa-play"></i>#}
+                                                {#														<i class="fa fa-pause"></i>#}
+                                                {#													</button>#}
+                                                {#												</div>#}
+                                            </div> <!-- eof .intro_layers -->
+                                        </div> <!-- eof .intro_layers_wrapper -->
+                                    </div> <!-- eof .col-* -->
+                                </div><!-- eof .row -->
+                            </div><!-- eof .container-fluid -->
+                        </li>
+                        <li class="ds s-overlay cover-image text-center">
+							<span class="social-icons animate" data-animation="fadeInUp">
+								<a href="#" class="fa fa-facebook bg-light border-icon rounded-icon"
+                                   title="facebook"></a>
+								<a href="#" class="fa fa-twitter bg-light border-icon rounded-icon" title="twitter"></a>
+								<a href="#" class="fa fa-google-plus bg-light border-icon rounded-icon"
+                                   title="google"></a>
+							</span>
+                            <img src="{{ SLIDER_IMAGE2 }}" alt="slider2">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="intro_layers_wrapper intro_text_bottom">
+                                            <div class="intro_layers">
+                                                <div class="intro-layer">
+                                                    <span class="small-text color-main3">{% text_block 'slider-subtitle-1' %}</span>
+                                                </div>
+                                                <div class="intro-layer mt-10">
+                                                    <h2>{% text_block 'slider-title-1' %}</h2>
+                                                </div>
+                                                <div class="divider-35 hidden-below-sm"></div>
+                                                <div class="intro-layer hidden-below-sm">
+                                                    {% text_block 'slider-text-1' %}
+                                                </div>
+                                            </div> <!-- eof .intro_layers -->
+                                        </div> <!-- eof .intro_layers_wrapper -->
+                                    </div> <!-- eof .col-* -->
+                                </div><!-- eof .row -->
+                            </div><!-- eof .container-fluid -->
+                        </li>
+                        <li class="ds s-overlay cover-image text-center">
+							<span class="social-icons animate" data-animation="fadeInUp">
+								<a href="#" class="fa fa-facebook bg-light border-icon rounded-icon"
+                                   title="facebook"></a>
+								<a href="#" class="fa fa-twitter bg-light border-icon rounded-icon" title="twitter"></a>
+								<a href="#" class="fa fa-google-plus bg-light border-icon rounded-icon"
+                                   title="google"></a>
+							</span>
+                            <img src="{{ SLIDER_IMAGE3 }}" alt="slider3">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="intro_layers_wrapper intro_text_bottom">
+                                            <div class="intro_layers">
+                                                <div class="intro-layer">
+                                                    <span class="small-text color-main3">{% text_block 'slider-subtitle-1' %}</span>
+                                                </div>
+                                                <div class="intro-layer mt-10">
+                                                    <h2>{% text_block 'slider-title-1' %}</h2>
+                                                </div>
+                                                <div class="divider-35 hidden-below-sm"></div>
+                                                <div class="intro-layer hidden-below-sm">
+                                                    {% text_block 'slider-text-1' %}
+                                                </div>
+                                            </div> <!-- eof .intro_layers -->
+                                        </div> <!-- eof .intro_layers_wrapper -->
+                                    </div> <!-- eof .col-* -->
+                                </div><!-- eof .row -->
+                            </div><!-- eof .container-fluid -->
+                        </li>
+                    </ul>
+                </div> <!-- eof flexslider -->
+            </section>
+
+            <section id="about"
+                     class="ls s-pt-70 s-pb-65 s-pt-md-120 s-pb-md-105 s-pb-xl-85 s-pt-xl-65 about-section overflow-visible">
+                <div class="divider-80 d-none d-xl-block"></div>
+                <div class="image_cover"></div>
+                <div class="container">
+                    <div class="row d-flex justify-content-start">
+                        <div class="col-12 col-lg-7 col-xl-6 ">
+                            <p class="top-subtitle"> {% text_block 'MAIN_TEXT_UP-TITLE' %} </p>
+                            <h3 class="section-heading"> {% text_block 'MAIN_TEXT_TITLE' %} <span class="back">story</span></h3>
+                            <p>
+                                {% text_block 'MAIN_TEXT_FIRST' %}
+                            </p>
+
+                            <p class="mt--5">
+                                {% text_block 'MAIN_TEXT_SECOND' %}
+                            </p>
+
+
+
+                        </div>
+                        <div class="divider-60 d-none d-xl-block"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="gallery" class="ls ms gallery-section  c-gutter-0 c-mb-0">
+                <div class="container-fluid">
+                    <div class="row isotope-wrapper" data-filters=".gallery-filters">
+
+
+                        {#                        <div class="col-xl-6 grid-item backpacking hikes adventure_trips d-none d-xl-flex">#}
+                        {##}
+                        {#                            <div class="vertical-item stamp-wrap gallery-title ">#}
+                        {##}
+                        {#                                    <div class="item-media col-md-4">#}
+                        {#                                        <img src="{{ image.image|thumbnail_url:"gallery" }}" alt="img">#}
+                        {#                                    </div>#}
+                        {##}
+                        {##}
+                        {#                                <div class="gallery-header stamp">#}
+                        {#                                    <div class="text-left content">#}
+                        {#                                        <p class="top-subtitle">photo from our clients and their trips</p>#}
+                        {#                                        <h3 class="section-heading">From Our Large Gallery<span#}
+                        {#                                                class="back">Photos</span></h3>#}
+                        {#                                        <div class="filters gallery-filters small-text text-lg-right">#}
+                        {#                                            <a href="#" data-filter="*" class="active selected">All</a>#}
+                        {#                                            <a href="#" data-filter=".hikes">Day Hikes</a>#}
+                        {#                                            <a href="#" data-filter=".backpacking">Backpacking</a>#}
+                        {#                                            <a href="#" data-filter=".adventure_trips">Adventure Trips</a>#}
+                        {#                                        </div>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+
+                        {% for image in images %}
+
+
+                            <div class="col-xl-3 col-md-6 grid-item backpacking hikes adventure_trips">
+
+                                <div class="vertical-item gallery-title text-center ">
+                                    <div class="item-media gradientdarken-background">
+                                        <img src="{{ image.image|thumbnail_url:"gallery" }}" alt="img">
+                                        <div class="media-links">
+                                        </div>
+                                    </div>
+                                    <div class="item-content">
+                                        <h5 class="mt-4">
+                                            <a href="gallery-single.html">{{ image.description }}</a>
+                                        </h5>
+                                        <div class="links-wrap">
+                                            <a class="link-zoom photoswipe-link" title=""
+                                               href="{{ image.image|thumbnail_url:"gallery" }}"></a>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+
+
+                    </div>
+                    <div class="mt-30 hidden-above-md"></div>
+                    <div class="row">
+                        <div class="col-12 text-center d-md-none">
+                            <a class="btn btn-maincolor mb-0" href="gallery-title-4-cols-fullwidth.html">view more
+                                photos</a>
+                        </div>
+                    </div>
+                    <div class="mb-80 hidden-above-md"></div>
+                </div>
+            </section>
+
+
+            <footer class="page_footer ds s-overlay s-parallax s-pt-80 s-pb-30 s-pb-md-65 s-pt-md-120 s-pt-lg-135 s-pb-xl-110 c-mb-20 c-gutter-60">
+                <div class="container">
+                    <div class="row">
+                        <div class=" col-lg-4 text-center animate" data-animation="fadeInUp">
+                            <div class="divider-25 d-none d-xl-block"></div>
+                            <div class="widget mb-0">
+
+                                <h3 class="widget-title">Newsletter</h3>
+
+                                <p>
+                                    We promise not to spam!
+                                </p>
+
+                                <form class="signup" action="https://html.modernwebtemplates.com/">
+
+                                    <input id="mailchimp_email" name="email" type="email"
+                                           class="form-control mailchimp_email text-center" placeholder="Email Address">
+
+                                    <button type="submit" class="btn btn-outline-maincolor mt-30">
+                                        Subscribe
+                                    </button>
+                                    <div class="response"></div>
+                                </form>
+
+                            </div>
+                            <div class="divider-50"></div>
+                        </div>
+
+                        <div class=" col-lg-4 text-center animate" data-animation="fadeInUp">
+                            <div class="widget widget_icons_list">
+                                <a href="index.html" class="logo flex-column text-center pb-0">
+                                    <img src="images/logo.png" alt="logo">
+                                </a>
+                                <p>We are one of San Diego's most active social groups. Every month we create a variety
+                                    of fun & interesting events.</p>
+                                <ul class="mb-10">
+                                    <li class="icon-inline">
+                                        <div class="icon-styled icon-top color-main fs-14">
+                                            <i class="fa fa-map-marker"></i>
+                                        </div>
+                                        <p>192 Lemke Stream, San Diego, USA</p>
+                                    </li>
+                                    <li class="icon-inline">
+                                        <div class="icon-styled icon-top color-main fs-14">
+                                            <i class="fa fa-phone"></i>
+                                        </div>
+                                        <p>+8 (800) 247 2698 (operator)</p>
+                                    </li>
+                                    <li class="icon-inline">
+                                        <div class="icon-styled icon-top color-main fs-14">
+                                            <i class="fa fa-pencil"></i>
+                                        </div>
+                                        <p>
+                                            <a href="#"><span class="__cf_email__"
+                                                              data-cfemail="e28f8d978c968b91bd96908b92a2879a838f928e87cc818d8f">[email&#160;protected]</span></a>
+                                        </p>
+                                    </li>
+                                </ul>
+                                <span class="social-icons">
+									<a href="#" class="fa fa-facebook bg-light border-icon rounded-icon"
+                                       title="facebook"></a>
+									<a href="#" class="fa fa-twitter bg-light border-icon rounded-icon"
+                                       title="twitter"></a>
+									<a href="#" class="fa fa-google bg-light border-icon rounded-icon"
+                                       title="google"></a>
+								</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 animate" data-animation="fadeInUp">
+                            <div class="divider-25 d-none d-xl-block"></div>
+                            <div class="widget widget_instagram">
+                                <h3 class="widget-title">Instagram</h3>
+                                <div class="instafeed"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            <section class="page_copyright ls s-py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="divider-20 d-none d-lg-block"></div>
+                        <div class="divider-10 d-none d-md-block"></div>
+                        <div class="col-md-12 text-center">
+                            <p>&copy; Copyright <span class="copyright_year">2018</span> All Rights Reserved</p>
+                        </div>
+                        <div class="divider-20 d-none d-lg-block"></div>
+                        <div class="divider-10 d-none d-md-block"></div>
+                    </div>
+                </div>
+            </section>
+
+
+        </div><!-- eof #box_wrapper -->
+    </div><!-- eof #canvas -->
+
+
+{% endblock %}

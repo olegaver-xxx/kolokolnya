@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.text import Truncator
-from .models import TextBlockModel, SiteImages
+from .models import TextBlockModel, SiteImages, MainGallery
 
 
 @admin.register(TextBlockModel)
@@ -28,3 +28,6 @@ class SiteImagesAdmin(admin.ModelAdmin):
 
     def preview(self, obj):
         return mark_safe(f"<img src='{obj.image.url}' width='500px'>")
+
+
+admin.site.register(MainGallery)

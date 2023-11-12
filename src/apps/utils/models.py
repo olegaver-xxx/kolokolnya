@@ -35,3 +35,9 @@ class SiteImages(models.Model):
         verbose_name = 'Изоражение Сайта'
         verbose_name_plural = 'Изоражения Сайта'
 
+
+class MainGallery(models.Model):
+    index = models.PositiveIntegerField()
+    description = models.CharField(max_length=35, default='IMAGE')
+    image = ThumbnailerImageField(upload_to='main-gallery/')
+

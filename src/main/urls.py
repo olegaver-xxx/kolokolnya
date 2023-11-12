@@ -7,7 +7,7 @@ from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
 from apps.users.views import ProfileView, update_user
 from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, \
     RemoveCartItemView, create_gallery, ContactView, OrderListView, payment_event
-from apps.utils.views import PreferencesView
+from apps.utils.views import PreferencesView, MainView
 from django.conf import settings
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
@@ -42,6 +42,8 @@ urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
     re_path("activate/.*", activate_view, name="activate"),
     path('payment-success/', TemplateView.as_view(template_name='payment-success.html'), name='payment-success'),
+    # path('test_home/', TemplateView.as_view(template_name='index.html'), name='test-home'),
+    path('test_home/', MainView.as_view(), name='test-home'),
     path('payment-event/', payment_event, name='payment-event'),
 ]
 

@@ -1,6 +1,7 @@
 from django.contrib import admin
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from apps.utils.services import get_prefs_form, set_prefs
+from .models import MainGallery
 
 
 class PreferencesView(TemplateView):
@@ -17,3 +18,14 @@ class PreferencesView(TemplateView):
         data.pop('csrfmiddlewaretoken', None)
         set_prefs(data)
         return self.get(request, *args, **kwargs)
+
+
+class MainView(ListView):
+    template_name = 'index.html'
+    model = MainGallery
+    context_object_name = 'images'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = MainGallery.objects.order_by('index')
+        return qs
