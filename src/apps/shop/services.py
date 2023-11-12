@@ -6,6 +6,21 @@ from apps.shop.models import Product, Cart, CartProduct
 from main import settings
 
 
+def get_record_data():
+    return dict(
+        names_per_cost=5,
+        cost=10,
+        max_word_length=20
+    )
+
+
+def add_record(descriptions, user):
+    rec_data = get_record_data()
+    words_count = descriptions.split(' ')
+    total_cost = (words_count // rec_data['names_per_cost']) * rec_data['cost']
+    ...
+
+
 def add_product_to_cart(product_id, user, count=1):
     cart_item = get_cart_item(product_id, user)
     cart_item.quantity += count

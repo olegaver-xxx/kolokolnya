@@ -5,9 +5,9 @@ from django.urls import reverse
 from django.views import View
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.core.paginator import Paginator, EmptyPage
-from .forms import ProductForm, ImageForm
+from .forms import ProductForm, ImageForm, RecordForm
 from .models import Product, Cart, CartProduct, ProductImage, Tag, Order
-from django.views.generic import DetailView, ListView, TemplateView, CreateView
+from django.views.generic import DetailView, ListView, TemplateView, CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
 from . import services as shop_services
@@ -172,6 +172,11 @@ class OrderListView(ListView):
         ctx = super().get_context_data()
         # ctx['total'] = Cart.get_total_price(object_list)
         return ctx
+
+
+class RecordsView(FormView):
+    template_name = 'records.html'
+    form_class = RecordForm
 
 
 @csrf_exempt

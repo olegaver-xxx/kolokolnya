@@ -74,6 +74,13 @@ class CartProduct(models.Model):
         return self.product.price * self.quantity
 
 
+class Record(models.Model):
+    description = models.TextField(max_length=10000, blank=True, null=True)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    creation_date = models.DateTimeField(auto_now_add=True)
+    cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
     # gallery_cart = models.ForeignKey(CartProduct, related_name='images_cart', on_delete=models.CASCADE)

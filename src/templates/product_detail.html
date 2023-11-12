@@ -206,6 +206,7 @@
                     $.post("/add-to-cart/",
                         {
                             product_id: p_id,
+                            description: '',
                             csrfmiddlewaretoken: '{{ csrf_token }}'
                         }
                     ).then((data) => {

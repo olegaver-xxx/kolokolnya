@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block head %}
+{% endblock %}
+
+{% block page-title %}
+    ЗАПИСКИ
+{% endblock %}
+
+{% block content %}
+    <section class="ls s-py-80 s-py-md-120 s-py-xl-160">
+        <div class="container fix-top">
+
+            <div class="row c-gutter-60">
+
+                <main class="offset-lg-1 col-lg-10">
+                    <textarea id="textArea" rows="10" cols="30"></textarea>
+                    <p>Стоимость: <span id="wordCount">0</span></p>
+                    <p id="errorMessage" style="color: red;"></p>
+
+                    <button id="submit" onclick="submit()">Отправить</button>
+                    {#                    {{ form }}#}
+                </main>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.querySelector("#textArea").addEventListener("input", function () {
+            let words = this.value.replace(/[\t\n\r\.\?\!]/gm, " ").split(" ");
+            let count = words.reduce((a, b) => a + (b.trim() !== ''), 0);
+            let cost = 10; //get from db
+            let names_count = 5; // get from db
+            let total_cost = Math.ceil(count / names_count) * cost;
+            document.querySelector("#wordCount").innerText = `${total_cost}р`;
+            let errorMessage = document.querySelector("#errorMessage");
+            errorMessage.innerText = "";
+            for (let i = 0; i < words.length; i++) {
+                if (words[i].length > 15) { // get from db
+                    $("#submit").prop("disabled", true)
+                    errorMessage.innerText = "Ошибка: Слишком длинное слово";
+                    return;
+                }
+            }
+            $("#submit").prop("disabled", false);
+        });
+
+        function submit() {
+            let text = $("#textArea").val()
+            $.post("?????",
+                {
+                    description: text,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                }
+            ).then((data) => {
+                console.log(data)
+            })
+        }
+
+        {#$(document).ready(() => {#}
+        {##}
+        {# })#}
+    </script>
+{% endblock %}

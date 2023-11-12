@@ -6,7 +6,7 @@ from apps.users.views import UserLoginView, RegisterView, activate_view
 from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
 from apps.users.views import ProfileView, update_user
 from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, \
-    RemoveCartItemView, create_gallery, ContactView, OrderListView, payment_event
+    RemoveCartItemView, create_gallery, ContactView, OrderListView, payment_event, RecordsView
 from apps.utils.views import PreferencesView, MainView
 from django.conf import settings
 from django.contrib.auth.views import LogoutView
@@ -22,6 +22,7 @@ urlpatterns = [
     path('profile/edit', update_user, name='edit'),
     path('profile/history', OrderListView.as_view(), name='history'),
     path('cart/', CartView.as_view(), name='cart'),
+    path('rec/', RecordsView.as_view(), name='records'),
     # path('search/', SearchView.as_view(), name='search_results'),
     path('', HomeView.as_view(), name='home'),
     path('blog/', BlogView.as_view(), name='blog'),

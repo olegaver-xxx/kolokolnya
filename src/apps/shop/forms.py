@@ -1,19 +1,7 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 from django import forms
-from .models import Product, ProductImage
-#
-#
-# class ProductForm(forms.ModelForm):
-#     class Meta:
-#         model = Product
-#         fields = ['name', 'description', 'price']
-#
-#
-# class ImageForm(forms.ModelForm):
-#     class Meta:
-#         model = ProductImage
-#         fields = ['image']
+from .models import Product, ProductImage, Record
 
 
 class ProductForm(forms.ModelForm):
@@ -34,3 +22,9 @@ class ImageForm(forms.ModelForm):
             'image',
             # Submit('submit', 'Submit', css_class='btn btn-outline-maincolor mt-30')
         )
+
+
+class RecordForm(forms.ModelForm):
+    class Meta:
+        model = Record
+        fields = 'description',
