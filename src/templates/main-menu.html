@@ -5,15 +5,25 @@
 										<li>
 											<a href="{% url 'home' %}">ГЛАВНАЯ</a>
 										</li>
+
 										<li>
 											<a href="{% url 'shop' %}">МАГАЗИН</a>
+                                            <i class="fa fa fa-caret-down"></i>
 
+                                            <ul>
+												<li>
+													<a href="{% url 'shop' %}">Церковная Лавка</a>
+												</li>
+												<li>
+													<a href="#">Записки</a>
+												</li>
+                                            </ul>
 										</li>
-										<li>
+                                        <li>
 											<a href="{% url 'blog' %}">НОВОСТИ</a>
 										</li>
                                         {% if user.is_authenticated %}
-                                        <li >
+                                        <li>
 											<a href="">{{ user }}
                                             <i class="fa fa fa-caret-down"></i>
                                             </a>

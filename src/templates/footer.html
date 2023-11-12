@@ -1,4 +1,4 @@
-{% load static %}
+{% load static text_block %}
 <footer class="page_footer ds s-overlay s-parallax s-pt-80 s-pb-30 s-pb-md-65 s-pt-md-120 s-pt-lg-135 s-pb-xl-110 c-mb-20 c-gutter-60">
 				<div class="container">
 					<div class="row">
@@ -31,13 +31,13 @@
 								<a href="./" class="logo flex-column text-center pb-0">
 									<img src="{% static 'images/logo.png' %}" alt="logo">
 								</a>
-								<p>We are one of San Diego's most active social groups. Every month we create a variety of fun & interesting events.</p>
+								<p>{% text_block 'FOOTER_TEXT' %}</p>
 								<ul class="mb-10">
 									<li class="icon-inline">
 										<div class="icon-styled icon-top color-main fs-14">
 											<i class="fa fa-map-marker"></i>
 										</div>
-										<p>192 Lemke Stream, San Diego, USA</p>
+										<p>{{ ADDRESS }}</p>
 									</li>
 									<li class="icon-inline">
 										<div class="icon-styled icon-top color-main fs-14">

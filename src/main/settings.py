@@ -71,6 +71,7 @@ THUMBNAIL_ALIASES = {
         "shop": {'size': (420, 236), 'crop': True},
         "orig": {'size': (1200, 800), 'crop': False},
         "gallery": {'size': (700, 700), 'crop': True},
+        "gallery-zoom": {'size': (1200, 800), 'crop': False},
     },
 }
 if os.getenv('POSTGRES_HOST'):
