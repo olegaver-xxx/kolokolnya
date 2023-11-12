@@ -6,11 +6,26 @@ from apps.users.models import User
 from django.db import models
 
 
+class AttributeSet(models.Model):
+    name = models.CharField(max_length=255)
+    attr_set = models.JSONField(default=dict)
+    """
+    {
+        "size": {"title": "Размер", "type": "select", 
+            "options": {"s": "S", "m": "M", "l": "L", "xl":  "XL"}, "widget": "select", "default": "m"},
+        "color":  {"title": "Цвет", "type": "select", 
+            "options": {"black": "Черный", "white": "Белый"}, "widget": "color_picker", "default": "white"},
+    }
+    """
+
+
 class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=1000)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     tags = models.ManyToManyField('Tag', blank=True)
+    attrib_values = models.JSONField(default=dict)
+    attributes = models.ForeignKey(AttributeSet, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.name
