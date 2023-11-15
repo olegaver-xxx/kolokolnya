@@ -89,7 +89,7 @@ class AddRecordView(LoginRequiredMixin, View):
 
 
 class CartView(ListView):
-    template_name = 'test_record_cart.html'
+    template_name = 'shop-cart.html'
     model = CartProduct
     context_object_name = 'products'
 
