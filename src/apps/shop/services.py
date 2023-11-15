@@ -2,6 +2,8 @@ from django.db.models import F
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponseRedirect, Http404
+import math
+from apps.shop.forms import RecordForm
 from apps.shop.models import Product, Cart, CartProduct, Record, CartRecord
 from main import settings
 
@@ -16,17 +18,23 @@ def get_record_data():
 
 def calculate_record_price(descriptions):
     rec_data = get_record_data()
-    words_count = descriptions.split(' ')
-    total_cost = (words_count // rec_data['names_per_cost']) * rec_data['cost']
+    words_count = len(descriptions.strip().split())
+    total_cost = math.ceil(words_count / rec_data['names_per_cost']) * rec_data['cost']
     return total_cost
 
 
-def add_record_to_cart(descriptions, user):
-    rec = get_record_as_item(user)
-    rec.quantity = 1
-    rec.descriptions = descriptions
-    rec.save()
-    return rec
+def add_record_to_cart(record, user):
+    price = calculate_record_price(record.description)
+    record.cost = price
+    cart = get_user_cart(user)
+    record.cart = cart
+    record.save()
+
+
+def get_record_for_cart(user):
+    cart = get_user_cart(user)
+    records = cart.records.all()
+    return records
 
 
 def add_product_to_cart(product_id, user, count=1):
@@ -50,15 +58,6 @@ def get_user_cart(user) -> Cart:
 
 def create_user_cart(user):
     return Cart.objects.create(user=user)
-
-
-def get_record_as_item(user):
-    cart = get_user_cart(user)
-    if not cart:
-        return None
-    record = get_object_or_404(Record, description=Record.description)
-    rec_as_item, _ = CartRecord.objects.get_or_create(cart=cart, product=record)
-    return rec_as_item
 
 
 def get_cart_item(product_id, user) -> CartProduct | None:
@@ -120,6 +119,9 @@ def create_order(user):
 
     cart = get_user_cart(user)
     total_price = cart.get_total_price()
+    record = cart.records.last()
+    if record:
+        total_price += record.cost
     cart.status = Cart.STATUS.PENDING
     cart.computed_sum = total_price
     cart.order_at = timezone.now()

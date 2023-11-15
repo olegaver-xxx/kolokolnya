@@ -1,7 +1,7 @@
 import json
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.core.paginator import Paginator, EmptyPage
@@ -73,22 +73,28 @@ class ProductDetailView(DetailView):
 
 class AddCartView(LoginRequiredMixin, View):
 
-    def post(self, product_id):
+    def post(self, request, *args, **kwargs):
         product_id = self.request.POST.get('product_id')
         count = shop_services.add_product_to_cart(product_id, self.request.user)
         return JsonResponse({'status': 'ok', 'count': count})
 
 
-class AddRecordView(LoginRequiredMixin, View):
+# class AddRecordView(LoginRequiredMixin, View):
+#
+#     def post(self, request, *args, **kwargs):
+#         description = self.request.POST.get('description')
+#         # total_price = shop_services.calculate_record_price(description)
+#         try:
+#             shop_services.add_record_to_cart(description, self.request.user)
+#         except Exception as e:
+#             pass
+#         return HttpResponseRedirect(reverse('cart'))
+#         # return JsonResponse({'status': 'ok', 'price': total_price}), rec_item
 
-    def post(self, description):
-        description = self.request.POST.get('description')
-        total_price = shop_services.calculate_record_price(description)
-        rec_item = shop_services.add_record_to_cart(description, self.request.user)
-        return JsonResponse({'status': 'ok', 'price': total_price}), rec_item
 
 
-class CartView(ListView):
+
+class CartView(LoginRequiredMixin, ListView):
     template_name = 'shop-cart.html'
     model = CartProduct
     context_object_name = 'products'
@@ -100,13 +106,13 @@ class CartView(ListView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
-        ctx['records'] = shop_services.add_record_to_cart(Record.description, self.request.user)
+        ctx['records'] = shop_services.get_record_for_cart(self.request.user)
         return ctx
 
 
 class UpdateCartView(LoginRequiredMixin, View):
 
-    def post(self, product_id):
+    def post(self, request, *args, **kwargs):
         for key in self.request.POST:
             if key.startswith('quantity-'):
                 item_id = int(key.split('-')[-1])
@@ -120,7 +126,7 @@ class UpdateCartView(LoginRequiredMixin, View):
 
 
 class RemoveCartItemView(LoginRequiredMixin, View):
-    def get(self, request, item_id):
+    def get(self, request, item_id, *args, **kwargs):
         shop_services.delete_cart_item(item_id, request.user)
         return redirect(reverse('cart'))
 
@@ -171,7 +177,7 @@ class ContactView(TemplateView):
     template_name = 'contact.html'
 
 
-class OrderListView(ListView):
+class OrderListView(LoginRequiredMixin, ListView):
     model = Cart
     template_name = 'orders_history.html'
     paginate_by = 10
@@ -188,9 +194,33 @@ class OrderListView(ListView):
         return ctx
 
 
-class RecordsView(FormView):
+class RecordsView(LoginRequiredMixin, FormView):
     template_name = 'records.html'
     form_class = RecordForm
+    success_url = reverse_lazy('cart')
+
+    def get_initial(self):
+        cart = shop_services.get_user_cart(self.request.user)
+        data = {'cart': cart}
+        return data
+
+    def form_valid(self, form):
+        rec = form.save()
+        shop_services.add_record_to_cart(rec, self.request.user)
+        return super().form_valid(form)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        cart = shop_services.get_user_cart(self.request.user)
+        rec = cart.records.last()
+        if rec:
+            kwargs['instance'] = rec
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data()
+        ctx['record_info'] = shop_services.get_record_data()
+        return ctx
 
 
 @csrf_exempt

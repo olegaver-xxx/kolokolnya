@@ -101,6 +101,45 @@
                                 </tr>
 
                             {% endfor %}
+                            {% for rec in records %}
+
+                                <tr class="cart_item">
+
+                                    <td class="product-remove">
+                                    </td>
+                                    <td class="product-thumbnail">
+                                        IMG
+                                    </td>
+
+                                    <td class="product-name" data-title="Product">
+                                        <a href="{% url 'records' %}" class="btn btn-outline-info btn-xs btn-block">Изменить запись</a>
+                                    </td>
+
+                                    <td class="product-price" data-title="Price">
+												<span class="amount">
+													<span>₽ </span>{{ rec.cost }}
+												</span>
+                                    </td>
+                                    <td class="product-quantity" data-title="Quantity">
+{#                                        <div class="quantity">#}
+{#                                            <input type="button" value="+" class="plus">#}
+{#                                            <i class="fa fa-angle-up" aria-hidden="true"></i>#}
+{#                                            <input type="number" class="input-text qty text" step="1" min="1" max="1000"#}
+{#                                                   name="quantity-{{ product_cart.id }}" value="{{ product_cart.quantity }}" title="Qty" size="4">#}
+{#                                            <input type="button" value="-" class="minus">#}
+{#                                            <i class="fa fa-angle-down" aria-hidden="true"></i>#}
+{#                                        </div>#}
+                                    </td>
+
+
+                                    <td class="product-subtotal" data-title="Total">
+												<span class="amount">
+													<span>₽ </span>{{ product_cart.total_price }}
+												</span>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
 
 
                             <tr>
