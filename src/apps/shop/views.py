@@ -6,7 +6,7 @@ from django.views import View
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.core.paginator import Paginator, EmptyPage
 from .forms import ProductForm, ImageForm, RecordForm
-from .models import Product, Cart, CartProduct, ProductImage, Tag, Order
+from .models import Product, Cart, CartProduct, ProductImage, Tag, Order, Record
 from django.views.generic import DetailView, ListView, TemplateView, CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
@@ -79,8 +79,17 @@ class AddCartView(LoginRequiredMixin, View):
         return JsonResponse({'status': 'ok', 'count': count})
 
 
+class AddRecordView(LoginRequiredMixin, View):
+
+    def post(self, description):
+        description = self.request.POST.get('description')
+        total_price = shop_services.calculate_record_price(description)
+        rec_item = shop_services.add_record_to_cart(description, self.request.user)
+        return JsonResponse({'status': 'ok', 'price': total_price}), rec_item
+
+
 class CartView(ListView):
-    template_name = 'shop-cart.html'
+    template_name = 'test_record_cart.html'
     model = CartProduct
     context_object_name = 'products'
 
@@ -88,6 +97,11 @@ class CartView(ListView):
         qs = super().get_queryset()
         qs = qs.filter(cart__user=self.request.user.id, cart__status=Cart.STATUS.COLLECTING)
         return qs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data()
+        ctx['records'] = shop_services.add_record_to_cart(Record.description, self.request.user)
+        return ctx
 
 
 class UpdateCartView(LoginRequiredMixin, View):

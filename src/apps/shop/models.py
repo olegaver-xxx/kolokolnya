@@ -81,6 +81,12 @@ class Record(models.Model):
     cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
 
+class CartRecord(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    record = models.ForeignKey(Record, on_delete=models.CASCADE)
+    price = models.PositiveIntegerField()
+
+
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
     # gallery_cart = models.ForeignKey(CartProduct, related_name='images_cart', on_delete=models.CASCADE)

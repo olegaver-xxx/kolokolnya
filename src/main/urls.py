@@ -6,7 +6,7 @@ from apps.users.views import UserLoginView, RegisterView, activate_view
 from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
 from apps.users.views import ProfileView, update_user
 from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, \
-    RemoveCartItemView, create_gallery, ContactView, OrderListView, payment_event, RecordsView
+    RemoveCartItemView, create_gallery, ContactView, OrderListView, payment_event, RecordsView, AddRecordView
 from apps.utils.views import PreferencesView, MainView
 from django.conf import settings
 from django.contrib.auth.views import LogoutView
@@ -29,6 +29,7 @@ urlpatterns = [
     path('blog/<int:pk>', ArticleView.as_view(), name='article'),
     path('detail/<int:pk>', ProductDetailView.as_view(), name='detail'),
     path('add_to_cart/<int:product_id>/', AddCartView.as_view(), name='add_to_cart'),
+    path('add_record_to_cart/', AddRecordView.as_view(), name='add_record'),
     path('change_password/', auth_views.PasswordChangeView.as_view(), name='change_password'),
     path('add-to-cart/', AddCartView.as_view(), name='add_to_cart'),
     # path('tags-resluts/', TagsFilteringView.as_view(), name='tags'),
@@ -46,6 +47,7 @@ urlpatterns = [
     # path('test_home/', TemplateView.as_view(template_name='index.html'), name='test-home'),
     path('test_home/', MainView.as_view(), name='test-home'),
     path('payment-event/', payment_event, name='payment-event'),
+    path('history/', TemplateView.as_view(template_name='history.html'), name='history'),
 ]
 
 if settings.DEBUG:

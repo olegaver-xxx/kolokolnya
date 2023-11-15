@@ -19,7 +19,7 @@
                     <p>Стоимость: <span id="wordCount">0</span></p>
                     <p id="errorMessage" style="color: red;"></p>
 
-                    <button id="submit" onclick="submit()">Отправить</button>
+                    <button class="btn btn-outline-maincolor mt-30" id="submit" onclick="submit()">Отправить</button>
                     {#                    {{ form }}#}
                 </main>
             </div>
@@ -50,7 +50,7 @@
 
         function submit() {
             let text = $("#textArea").val()
-            $.post("?????",
+            $.post("/add_record_to_cart/",
                 {
                     description: text,
                     csrfmiddlewaretoken: '{{ csrf_token }}'

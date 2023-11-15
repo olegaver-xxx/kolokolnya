@@ -11,3 +11,4 @@ local_settings.py
 docker-compose.override.yml
 debug*
 /pages.txt
+/src/templates/~testrec.html

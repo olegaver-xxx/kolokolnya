@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load text_block %}
+
+{% block page-title %}
+История Монастыря/Калязина
+{% endblock %}
+
+
+{% block content %}
+
+<p><h4>{% text_block 'HISTORY_TITLE' %}</h4><br>
+<h5>{% text_block 'HISTORY_TEXT' %}</h5>
+
+{% endblock %}
