@@ -106,13 +106,19 @@
                                 <tr class="cart_item">
 
                                     <td class="product-remove">
+                                        <a href="{% url 'del_rec' rec_id=rec.id %}"
+                                           class="remove-btn"
+                                                {#                                           aria-label="Remove this item" #}
+                                                {#                                           data-product_id="73"#}
+                                                {#                                           data-product_sku=""#}
+                                        >×</a>
                                     </td>
                                     <td class="product-thumbnail">
-                                        IMG
+                                        Записка
                                     </td>
 
                                     <td class="product-name" data-title="Product">
-                                        <a href="{% url 'records' %}" class="btn btn-outline-info btn-xs btn-block">Изменить запись</a>
+                                        <a href="{% url 'records' %}" class="btn btn-outline-maincolor mt-10" style="width: 30vw;">Изменить запись</a>
                                     </td>
 
                                     <td class="product-price" data-title="Price">
@@ -129,6 +135,7 @@
 {#                                            <input type="button" value="-" class="minus">#}
 {#                                            <i class="fa fa-angle-down" aria-hidden="true"></i>#}
 {#                                        </div>#}
+                                        —
                                     </td>
 
 
@@ -147,7 +154,7 @@
 
                                     <div class="coupon">
 
-                                        <button type="submit" class="btn btn-maincolor" value="Update cart"
+                                        <button type="submit" class="btn btn-outline-maincolor" value="Update cart"
                                                 name="update"
                                         >
                                             Сохранить корзину
@@ -162,12 +169,12 @@
                     </form>
 
                     <div class="wc-proceed-to-checkout">
-                        <button type="submit" form="cart-form" name="pay">Оплатить</button>
+                        <button type="submit" class="btn btn-outline-maincolor mt-30" form="cart-form" name="pay">Оплатить</button>
                     </div>
                 {% else %}
                     <div class="text-center pt-5 pb-5">
                         <h4 style="text-transform: unset;">Нет товаров в корзине</h4>
-                        <a href="{% url 'shop' %}" class="btn btn-outline-success mt-4">Вернуться в магазин <i class="fa fa-arrow-right pl-2"></i></a>
+                        <a href="{% url 'shop' %}" class="btn btn-outline-maincolor mt-4">Вернуться в магазин <i class="fa fa-arrow-right pl-2"></i></a>
                     </div>
 
                 {% endif %}

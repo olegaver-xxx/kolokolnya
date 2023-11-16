@@ -6,7 +6,8 @@ from apps.users.views import UserLoginView, RegisterView, activate_view
 from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
 from apps.users.views import ProfileView, update_user
 from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, \
-    RemoveCartItemView, create_gallery, ContactView, OrderListView, payment_event, RecordsView#, AddRecordView
+    RemoveCartItemView, create_gallery, ContactView, OrderListView, payment_event, RecordsView, \
+    RemoveRecord  # , AddRecordView
 from apps.utils.views import PreferencesView, MainView
 from django.conf import settings
 from django.contrib.auth.views import LogoutView
@@ -35,6 +36,7 @@ urlpatterns = [
     # path('tags-resluts/', TagsFilteringView.as_view(), name='tags'),
     path('update-cart/', UpdateCartView.as_view(), name='update_cart'),
     path('remove-cart-item/<int:item_id>', RemoveCartItemView.as_view(), name='remove_cart_item'),
+    path('remove-rec-item/<int:rec_id>', RemoveRecord.as_view(), name='del_rec'),
     # path('add_item/', create_gallery, name='add'),
     # path('add_article/', AddArticle.as_view(), name='add_art'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
@@ -47,7 +49,7 @@ urlpatterns = [
     # path('test_home/', TemplateView.as_view(template_name='index.html'), name='test-home'),
     path('test_home/', MainView.as_view(), name='test-home'),
     path('payment-event/', payment_event, name='payment-event'),
-    path('history/', TemplateView.as_view(template_name='history.html'), name='history'),
+    path('history/', TemplateView.as_view(template_name='history.html'), name='town_history'),
 ]
 
 if settings.DEBUG:
@@ -56,3 +58,4 @@ if settings.DEBUG:
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT
     )
+

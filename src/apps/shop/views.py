@@ -92,8 +92,6 @@ class AddCartView(LoginRequiredMixin, View):
 #         # return JsonResponse({'status': 'ok', 'price': total_price}), rec_item
 
 
-
-
 class CartView(LoginRequiredMixin, ListView):
     template_name = 'shop-cart.html'
     model = CartProduct
@@ -128,6 +126,12 @@ class UpdateCartView(LoginRequiredMixin, View):
 class RemoveCartItemView(LoginRequiredMixin, View):
     def get(self, request, item_id, *args, **kwargs):
         shop_services.delete_cart_item(item_id, request.user)
+        return redirect(reverse('cart'))
+
+
+class RemoveRecord(LoginRequiredMixin, View):
+    def get(self, request, rec_id, *args, **kwargs):
+        shop_services.delete_record(rec_id, request.user)
         return redirect(reverse('cart'))
 
 

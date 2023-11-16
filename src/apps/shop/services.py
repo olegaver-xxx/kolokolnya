@@ -31,6 +31,11 @@ def add_record_to_cart(record, user):
     record.save()
 
 
+def delete_record(rec_id, user):
+    record = Record.objects.get(id=rec_id, cart__user=user)
+    record.delete()
+
+
 def get_record_for_cart(user):
     cart = get_user_cart(user)
     records = cart.records.all()
