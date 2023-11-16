@@ -50,6 +50,7 @@ urlpatterns = [
     path('test_home/', MainView.as_view(), name='test-home'),
     path('payment-event/', payment_event, name='payment-event'),
     path('history/', TemplateView.as_view(template_name='history.html'), name='town_history'),
+    path('attractions/', TemplateView.as_view(template_name='attractions.html'), name='attractions'),
 ]
 
 if settings.DEBUG:
