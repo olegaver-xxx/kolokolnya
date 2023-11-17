@@ -157,6 +157,8 @@ def confirm_payment(user):
     payment.capture()
     cart.status = Cart.STATUS.COMPLETED
     cart.save()
+    redirect = get_payment_success_callback_url()
+    return redirect
 
 #
 # def complete_order(user):
