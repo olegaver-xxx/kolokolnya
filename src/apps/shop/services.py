@@ -6,6 +6,13 @@ import math
 from apps.shop.forms import RecordForm
 from apps.shop.models import Product, Cart, CartProduct, Record, CartRecord
 from main import settings
+from apps.utils.yookassa import get_credentials
+from yookassa import Configuration, Payment
+from yookassa.domain.models.currency import Currency
+from yookassa.domain.models.receipt import Receipt
+from yookassa.domain.common.confirmation_type import ConfirmationType
+from yookassa.domain.request.payment_request_builder import PaymentRequestBuilder
+from django.utils import timezone
 
 
 def get_record_data():
@@ -112,14 +119,6 @@ def get_payment_success_callback_url():
 
 
 def create_order(user):
-    from apps.utils.yookassa import get_credentials
-    from yookassa import Configuration, Payment
-    from yookassa.domain.models.currency import Currency
-    from yookassa.domain.models.receipt import Receipt
-    from yookassa.domain.common.confirmation_type import ConfirmationType
-    from yookassa.domain.request.payment_request_builder import PaymentRequestBuilder
-    from django.utils import timezone
-
     if not user.is_authenticated:
         raise Http404
 
@@ -147,21 +146,31 @@ def create_order(user):
     res = Payment.create(request)
     cart.payment_id = res.id
     cart.save()
+
     return res.confirmation.confirmation_url, res.id
 
 
-def complete_order(user):
-    from yookassa.domain.request.payment_request_builder import PaymentRequestBuilder
-    from yookassa.domain.models.currency import Currency
-    from yookassa import Payment
-    import uuid
-    builder = PaymentRequestBuilder()
+def confirm_payment(user):
     cart = get_pending_cart(user)
-    total_price = cart.get_total_price()
     payment_id = cart.payment_id
-    idempotence_key = str(uuid.uuid4())
-    response = Payment.capture(
-        payment_id, builder.set_amount({"value": int(total_price), "currency": Currency.RUB}),
-        idempotence_key
-    )
-    return response
+    payment = Payment.find_one(payment_id)
+    payment.capture()
+    cart.status = Cart.STATUS.COMPLETED
+    cart.save()
+
+#
+# def complete_order(user):
+#     from yookassa.domain.request.payment_request_builder import PaymentRequestBuilder
+#     from yookassa.domain.models.currency import Currency
+#     from yookassa import Payment
+#     import uuid
+#     builder = PaymentRequestBuilder()
+#     cart = get_pending_cart(user)
+#     total_price = cart.get_total_price()
+#     payment_id = cart.payment_id
+#     idempotence_key = str(uuid.uuid4())
+#     response = Payment.capture(
+#         payment_id, builder.set_amount({"value": int(total_price), "currency": Currency.RUB}),
+#         idempotence_key
+#     )
+#     return response
