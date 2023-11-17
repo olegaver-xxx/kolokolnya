@@ -61,6 +61,11 @@ def get_user_cart(user) -> Cart:
         return Cart.objects.filter(user=user, status=Cart.STATUS.COLLECTING).first() or create_user_cart(user)
 
 
+def get_pending_cart(user) -> Cart:
+    if user.is_authenticated:
+        return Cart.objects.filter(user=user, status=Cart.STATUS.PENDING).first()
+
+
 def create_user_cart(user):
     return Cart.objects.create(user=user)
 
@@ -143,3 +148,20 @@ def create_order(user):
     cart.payment_id = res.id
     cart.save()
     return res.confirmation.confirmation_url, res.id
+
+
+def complete_order(user):
+    from yookassa.domain.request.payment_request_builder import PaymentRequestBuilder
+    from yookassa.domain.models.currency import Currency
+    from yookassa import Payment
+    import uuid
+    builder = PaymentRequestBuilder()
+    cart = get_pending_cart(user)
+    total_price = cart.get_total_price()
+    payment_id = cart.payment_id
+    idempotence_key = str(uuid.uuid4())
+    response = Payment.capture(
+        payment_id, builder.set_amount({"value": int(total_price), "currency": Currency.RUB}),
+        idempotence_key
+    )
+    return response
