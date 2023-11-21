@@ -228,7 +228,6 @@ class RecordsView(LoginRequiredMixin, FormView):
 def payment_event(request):
     from yookassa.domain.notification import WebhookNotification
     event_json = json.loads(request.body)
-    print(event_json)
     # {'type': 'notification', 'event': 'payment.waiting_for_capture',
     #  'object': {'id': '2cd081c3-000f-5000-8000-18fb1a9aa326', 'status': 'waiting_for_capture',
     #             'amount': {'value': '100.00', 'currency': 'RUB'}, 'description': 'Заказ 222',
@@ -242,11 +241,13 @@ def payment_event(request):
     #             'authorization_details': {'rrn': '154342014456756', 'auth_code': '216410',
     #                                       'three_d_secure': {'applied': True, 'protocol': 'v1',
     #                                                          'method_completed': False, 'challenge_completed': True}}}}
-    # try:
-    #     notification_object = WebhookNotification(event_json)
-    # except Exception:
-    # # обработка ошибок
-    #
+    try:
+        notification_object = WebhookNotification(event_json)
+    except Exception:
+        raise
+    # обработка ошибок
     # # Получите объекта платежа
-    # payment = notification_object.object
+    payment = notification_object.object
+    order_id = int(payment.metadata['orderNumber'])
+    shop_services.update_order(order_id, payment.status)
     return HttpResponse(status=200)

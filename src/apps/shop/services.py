@@ -146,7 +146,7 @@ def create_order(user):
     res = Payment.create(request)
     cart.payment_id = res.id
     cart.save()
-
+    order_changed_event(cart)
     return res.confirmation.confirmation_url, res.id
 
 
@@ -176,3 +176,23 @@ def confirm_payment(user):
 #         idempotence_key
 #     )
 #     return response
+
+
+def update_order(order_id, status):
+    order = get_object_or_404(Cart, id=order_id)
+    order.status = status
+    order.save()
+    order_changed_event(order)
+    return order
+
+
+def order_changed_event(order):
+    from .models import Cart as Order
+    if order.status == Order.STATUS.CANCELED:
+        # add log message
+        pass
+    elif order.status == Order.STATUS.COMPLETED:
+        # send admin notification
+        pass
+    elif order.status == Order.STATUS.PENDING:
+        pass
