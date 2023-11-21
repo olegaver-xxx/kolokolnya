@@ -2,27 +2,24 @@
 <footer class="page_footer ds s-overlay s-parallax s-pt-80 s-pb-30 s-pb-md-65 s-pt-md-120 s-pt-lg-135 s-pb-xl-110 c-mb-20 c-gutter-60">
 				<div class="container">
 					<div class="row">
+
 						<div class=" col-lg-4 text-center animate" data-animation="fadeInUp">
 							<div class="divider-25 d-none d-xl-block"></div>
 							<div class="widget mb-0">
 
-								<h3 class="widget-title">Newsletter</h3>
+                                <a href="https://{{ VK }}">
+                                        <h3 class="widget-title">{% text_block 'footer_social_net1' %}</h3>
+                                </a>
 
-								<p>
-									We promise not to spam!
-								</p>
+                                <a href="https://{{ TG }}">
+                                        <h3 class="widget-title">{% text_block 'footer_social_net2' %}</h3>
+                                </a>
 
-								<form class="signup" action="/">
+                                <a href="{% url 'home' %}">
+                                        <h3 class="widget-title">Наш сайт</h3>
+                                </a>
 
-									<input id="mailchimp_email" name="email" type="email" class="form-control mailchimp_email text-center" placeholder="Email Address">
-
-									<button type="submit" class="btn btn-outline-maincolor mt-30">
-										Subscribe
-									</button>
-									<div class="response"></div>
-								</form>
-
-							</div>
+                            </div>
 							<div class="divider-50"></div>
 						</div>
 
@@ -31,7 +28,6 @@
 								<a href="./" class="logo flex-column text-center pb-0">
 									<img src="{% static 'images/logo.png' %}" alt="logo">
 								</a>
-								<p>{% text_block 'FOOTER_TEXT' %}</p>
 								<ul class="mb-10">
 									<li class="icon-inline">
 										<div class="icon-styled icon-top color-main fs-14">
@@ -55,8 +51,8 @@
 									</li>
 								</ul>
 								<span class="social-icons">
-									<a href="#" class="fa fa-facebook bg-light border-icon rounded-icon" title="facebook"></a>
-									<a href="#" class="fa fa-twitter bg-light border-icon rounded-icon" title="twitter"></a>
+									<a href="https://{{ VK }}" class="fa fa-vk bg-light border-icon rounded-icon" title="VK"></a>
+									<a href="https://{{ TG }}" class="fa fa-telegram bg-light border-icon rounded-icon" title="twitter"></a>
 									<a href="#" class="fa fa-google bg-light border-icon rounded-icon" title="google"></a>
 								</span>
 							</div>
@@ -65,7 +61,8 @@
 						<div class="col-lg-4 animate" data-animation="fadeInUp">
 							<div class="divider-25 d-none d-xl-block"></div>
 							<div class="widget widget_instagram">
-								<h3 class="widget-title">Instagram</h3>
+								<h3 class="widget-title">О нас</h3>
+								<p>{% text_block 'FOOTER_TEXT' %}</p>
 								<div class="instafeed"></div>
 							</div>
 						</div>
@@ -79,7 +76,7 @@
 						<div class="divider-20 d-none d-lg-block"></div>
 						<div class="divider-10 d-none d-md-block"></div>
 						<div class="col-md-12 text-center">
-							<p>&copy; Copyright <span class="copyright_year">2018</span> All Rights Reserved</p>
+							<p>&copy; Copyright <span class="copyright_year">2023</span> All Rights Reserved</p>
 						</div>
 						<div class="divider-20 d-none d-lg-block"></div>
 						<div class="divider-10 d-none d-md-block"></div>

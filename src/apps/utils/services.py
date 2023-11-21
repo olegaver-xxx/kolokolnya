@@ -10,6 +10,8 @@ PREFS = {
     'contact_phone': dict(label='Contact Phone', value='000000000000', type=str),
     'contact_email': dict(label='Contact Email', value='', type=str),
     'address': dict(label='Address', value='', type=str),
+    'vk': dict(label='VK', value='', type=str),
+    'tg': dict(label='Telegram', value='', type=str),
     'disable_shop': dict(label='Disable Shop', value=False, type=bool),
     'slider_image1': dict(label='Slider Image 1', value='images/hiero.png', type=str, choices=list_images),
     'slider_image2': dict(label='Slider Image 2', value='images/hiero.png', type=str, choices=list_images),
