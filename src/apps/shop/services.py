@@ -13,6 +13,7 @@ from yookassa.domain.models.receipt import Receipt
 from yookassa.domain.common.confirmation_type import ConfirmationType
 from yookassa.domain.request.payment_request_builder import PaymentRequestBuilder
 from django.utils import timezone
+from tasks.payment_tasks import on_order_changed
 
 
 def get_record_data():
@@ -146,7 +147,7 @@ def create_order(user):
     res = Payment.create(request)
     cart.payment_id = res.id
     cart.save()
-    order_changed_event(cart)
+    on_order_changed.send(cart.id)
     return res.confirmation.confirmation_url, res.id
 
 
@@ -157,6 +158,7 @@ def confirm_payment(user):
     payment.capture()
     cart.status = Cart.STATUS.COMPLETED
     cart.save()
+    on_order_changed.send(cart.id)
     redirect = get_payment_success_callback_url()
     return redirect
 
@@ -182,11 +184,12 @@ def update_order(order_id, status):
     order = get_object_or_404(Cart, id=order_id)
     order.status = status
     order.save()
-    order_changed_event(order)
+    on_order_changed.send(order.id)
     return order
 
 
-def order_changed_event(order):
+def order_changed_event(order_id: int):
+    order = get_object_or_404(Cart, id=order_id)
     from .models import Cart as Order
     if order.status == Order.STATUS.CANCELED:
         # add log message

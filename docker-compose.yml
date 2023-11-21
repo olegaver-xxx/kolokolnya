@@ -3,7 +3,7 @@ version: '3.4'
 services:
   app:
     image: kolo:latest
-    user: "${UID}:${GID}"
+#    user: "${UID}:${GID}"
     build:
       context: .
       dockerfile: Dockerfile
@@ -13,13 +13,40 @@ services:
       - ${DATA_DIR}/app:/data
     environment:
       - POSTGRES_HOST=${APP_NAME}-db
+      - REDIS_HOST=${APP_NAME}-redis
     ports:
       - ${APP_PORT}:8000
     depends_on:
       - database
+      - redis
     networks:
       - backend
 
+  redis:
+    container_name: ${APP_NAME}-redis
+    image: redis:alpine
+    volumes:
+      - ${DATA_DIR}/redis:/data
+    networks:
+      - backend
+
+  worker:
+    image: kolo:latest
+#    user: "${UID}:${GID}"
+    container_name: ${APP_NAME}-worker
+    env_file: .env
+    entrypoint: ["/app/entrypoint-worker.sh"]
+    volumes:
+      - ${DATA_DIR}/app:/data
+    environment:
+      - POSTGRES_HOST=${APP_NAME}-db
+      - REDIS_HOST=${APP_NAME}-redis
+      - AAAAA=11111
+    depends_on:
+      - database
+      - redis
+    networks:
+      - backend
 
   database:
     container_name: ${APP_NAME}-db

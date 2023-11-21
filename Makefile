@@ -20,3 +20,6 @@ build:
 
 up:
 	docker compose up -d
+
+updev:
+	docker compose up worker database

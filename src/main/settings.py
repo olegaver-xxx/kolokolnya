@@ -268,3 +268,7 @@ JAZZMIN_SETTINGS = {
 YOOKASSA_API_KEY = os.getenv('YOOKASSA_API_KEY')
 YOOKASSA_SHOP_ID = os.getenv('YOOKASSA_SHOP_ID')
 # from yookassa import Configuration
+
+# redis
+REDIS_HOST = os.getenv('REDIS_HOST') or 'localhost'
+REDIS_PORT = int(os.getenv('REDIS_PORT', 0)) or 6379
