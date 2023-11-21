@@ -1,17 +1,14 @@
 import json
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
-from django.core.paginator import Paginator, EmptyPage
 from .forms import ProductForm, ImageForm, RecordForm
 from .models import Product, Cart, CartProduct, ProductImage, Tag, Order, Record
 from django.views.generic import DetailView, ListView, TemplateView, CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
 from . import services as shop_services
-from yookassa import Configuration
 
 
 class ProductListView(ListView):
