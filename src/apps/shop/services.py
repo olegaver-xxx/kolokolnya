@@ -69,7 +69,7 @@ def get_user_cart(user) -> Cart:
 
 
 def get_pending_cart(user) -> Cart:
-    if request.user.is_authenticated:
+    if user.is_authenticated:
         return Cart.objects.filter(user=user, status=Cart.STATUS.PENDING).first()
 
 
@@ -114,7 +114,7 @@ def get_cart_item_ids(user):
 
 
 def get_payment_success_callback_url():
-    path = reverse('payment-success')
+    path = reverse('complete')
     return f'{settings.PROTOCOL}://{settings.DOMAIN_NAME}{path}'
 
 
