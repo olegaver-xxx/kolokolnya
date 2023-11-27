@@ -69,7 +69,7 @@ def get_user_cart(user) -> Cart:
 
 
 def get_pending_cart(user) -> Cart:
-    if user.is_authenticated:
+    if request.user.is_authenticated:
         return Cart.objects.filter(user=user, status=Cart.STATUS.PENDING).first()
 
 
