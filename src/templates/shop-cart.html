@@ -24,7 +24,7 @@
 
                 <main class="col-lg-12">
 
-                {% if products.count %}
+                {% if products.count or records %}
                     <form class="woocommerce-cart-form" action="{% url 'update_cart' %}" method="post" id="cart-form">
                         {% csrf_token %}
                         <table class="shop_table shop_table_responsive cart">
