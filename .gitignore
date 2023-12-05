@@ -12,3 +12,4 @@ docker-compose.override.yml
 debug*
 /pages.txt
 /src/templates/~testrec.html
+machinet.conf
