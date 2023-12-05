@@ -169,7 +169,7 @@
                     </form>
 
                     <div class="wc-proceed-to-checkout">
-                        <button type="submit" class="btn btn-outline-maincolor mt-30" form="cart-form" name="pay">Оплатить</button>
+                        <a href="{% url 'make_order' %}" class="btn btn-outline-maincolor mt-30">Оформить заказ</a>
                     </div>
                 {% else %}
                     <div class="text-center pt-5 pb-5">

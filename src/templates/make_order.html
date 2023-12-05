@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block page-title %}
+    Оформление Заказа
+{% endblock %}
+
+{% block head %}
+    <script src="https://widget.pochta.ru/map/widget/widget.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="ls s-py-80 s-py-md-120 s-py-xl-160">
+        <div class="container">
+            <div class="row">
+
+                <main class="col-lg-12">
+                    <article id="post-1707" class="post-1707 page type-page status-publish hentry">
+                        {% if is_empty %}
+                        	Заказ пуст
+                        {% else %}
+                            {{ products }}
+                            <br>
+                            {{ records }}
+                            <br>
+                            {{ total_sum }}
+                        {% endif %}
+
+                        <h3>Укажите адрес доставки</h3>
+                        <div id="ecom-widget" style="height: 400px; width: 500px"></div>
+                        <h5>Стоимость заказа: {{ total_sum }}р</h5>
+                        <h5>Стоимость доставки: <span id="delivery-cost"></span>р</h5>
+                        <h5>ИТОГО: <span id="total"></span>р</h5>
+                        <form action="{% url 'make_order_submit' %}" method="post">
+                            {% csrf_token %}
+                             <div class="wc-proceed-to-checkout">
+                                <button type="submit" class="btn btn-outline-maincolor mt-30" form="cart-form" name="pay">Оплатить</button>
+                             </div>
+                        </form>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+        let total_sum = {{ total_sum }};
+        let delivery_cost = {{delivery_cost}};
+        function set_address(data){
+            let d = window.btoa(unescape(encodeURIComponent(JSON.stringify(data))))
+            $.ajax({
+                url: '{% url 'update_cart' %}',
+                type: 'POST',
+                data: {
+                    delivery_info: d,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                dataType: 'text',
+                success: function(result) {
+                    alert(result.Result);
+                }
+            });
+
+            delivery_cost = Math.floor(data.cashOfDelivery/100);
+            compute_total()
+        }
+        function compute_total(){
+            let total = total_sum+delivery_cost;
+            console.log(total)
+            $("#delivery-cost").html(delivery_cost)
+            $("#total").html(total)
+        }
+        $(document).ready(() => {
+            ecomStartWidget({
+                id: 45145,
+                callbackFunction: set_address,
+                containerId: 'ecom-widget'
+            });
+            compute_total()
+        })
+    </script>
+{% endblock %}

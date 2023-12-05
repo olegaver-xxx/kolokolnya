@@ -24,6 +24,7 @@
     {% block css %}{% endblock %}
 
 	<script src="{% static 'js/vendor/modernizr-custom.js' %}"></script>
+    {% block head %}{% endblock %}
 
 	<!--[if lt IE 9]>
 		<script src="{% static 'js/vendor/html5shiv.min.js' %}"></script>
@@ -32,12 +33,12 @@
 	<![endif]-->
 
 </head>
-
+<body>
 {% block base %}
 
 {% endblock %}
 
-<body>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="{% static 'js/compressed.js' %}"></script>
