@@ -83,16 +83,7 @@
 											</span>
                                 </p>
                             </div>
-                            <div id="ecom-widget" style="height: 500px">
-                                <script src="https://widget.pochta.ru/map/widget/widget.js"></script>
-                                <script>
-                                    ecomStartWidget({
-                                        id: 45145,
-                                        callbackFunction: null,
-                                        containerId: 'ecom-widget'
-                                    });
-                                </script>
-                            </div>
+
                             <h1 class="product_title entry-title">{{ object.name }}</h1>
                             <div>
                                 <p>{{ object.description }}</p>
@@ -108,7 +99,16 @@
 
 
                             </div>
-
+                            <div id="ecom-widget" style="height: 500px">
+                                <script src="https://widget.pochta.ru/map/widget/widget.js"></script>
+                                <script>
+                                    ecomStartWidget({
+                                        id: 45145,
+                                        callbackFunction: address,
+                                        containerId: 'ecom-widget'
+                                    });
+                                </script>
+                            </div>
                             <form>
 
                                 <table class="variations">
