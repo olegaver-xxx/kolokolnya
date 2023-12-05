@@ -106,7 +106,7 @@ def get_cart_products(user):
     cart = get_user_cart(user)
     if not cart:
         return []
-    return cart.cartproduct_set.all().prefetch_related('product')
+    return cart.products.all().prefetch_related('product')
 
 
 def get_cart_item_ids(user):
