@@ -46,6 +46,7 @@ class Cart(models.Model):
     ))
     computed_sum = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     payment_id = models.CharField(max_length=128, blank=True, null=True)
+    order_details = models.JSONField(default=dict, blank=True)
 
     def __str__(self):
         return f"{self.user}"

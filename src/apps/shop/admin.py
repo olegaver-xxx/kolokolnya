@@ -19,7 +19,7 @@ class ProductModelAdmin(admin.ModelAdmin):
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
     inlines = [CartProductInline]
-    fields = 'user', 'active', 'status', 'computed_sum', 'payment_id'
+    fields = 'user', 'active', 'status', 'computed_sum', 'payment_id', 'order_details'
     list_display = 'user', 'status', 'computed_sum'
 
 

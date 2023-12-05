@@ -196,3 +196,13 @@ def order_changed_event(order):
         pass
     elif order.status == Order.STATUS.PENDING:
         pass
+
+
+def update_delivery_info(param, user):
+    order = get_user_cart(user)
+    order.order_details.update({'delivery_info': param})
+    order.save()
+
+
+def get_order_total_price(order):
+    return 100  # TODO

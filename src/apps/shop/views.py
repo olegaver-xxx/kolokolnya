@@ -1,3 +1,4 @@
+import base64
 import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
@@ -113,11 +114,17 @@ class UpdateCartView(LoginRequiredMixin, View):
                 item_id = int(key.split('-')[-1])
                 count = self.request.POST[key]
                 shop_services.update_product_to_cart(item_id, self.request.user, count)
-        if 'pay' in self.request.POST:
-            payment_url, order_id = shop_services.create_order(user=self.request.user)
-            return HttpResponseRedirect(payment_url)
-        else:
-            return redirect(reverse('cart'))
+                return redirect(reverse('cart'))
+            if key == 'delivery_info':
+                data: str = self.request.POST[key]
+                delivery_info = base64.decodebytes(data.encode('utf8')).decode('utf8')
+                shop_services.update_delivery_info(json.loads(delivery_info), self.request.user)
+        return redirect(reverse('cart'))
+
+
+def make_order(request):
+    payment_url, order_id = shop_services.create_order(user=request.user)
+    return HttpResponseRedirect(payment_url)
 
 
 class RemoveCartItemView(LoginRequiredMixin, View):
@@ -205,6 +212,20 @@ class OrderDetail(DetailView):
         qs = super().get_queryset()
         qs = qs.filter(user=self.request.user.id).exclude(status=Cart.STATUS.COLLECTING)
         return qs
+
+
+class MakeOrder(TemplateView):
+    template_name = 'make_order.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data()
+        cart = shop_services.get_user_cart(self.request.user)
+        ctx['delivery_cost'] = cart.order_details.get('delivery_info', {}).get('cashOfDelivery', 0) // 100
+        ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user)]
+        ctx['records'] = shop_services.get_record_for_cart(self.request.user)
+        ctx['total_sum'] = shop_services.get_order_total_price(cart)
+        ctx['is_empty'] = not any([ctx['cart_items'], ctx['records']])
+        return ctx
 
 
 class RecordsView(LoginRequiredMixin, FormView):
