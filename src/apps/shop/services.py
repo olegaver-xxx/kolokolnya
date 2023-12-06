@@ -1,5 +1,5 @@
 from django.db.models import F
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.http import HttpResponseRedirect, Http404
 import math
@@ -150,15 +150,20 @@ def create_order(user):
     return res.confirmation.confirmation_url, res.id
 
 
-def confirm_payment(user):
-    cart = get_pending_cart(user)
-    payment_id = cart.payment_id
-    payment = Payment.find_one(payment_id)
-    payment.capture()
+# def confirm_payment(user):
+#     cart = get_pending_cart(user)
+#     payment_id = cart.payment_id
+#     payment = Payment.find_one(payment_id)
+#     payment.capture()
+#     cart.status = Cart.STATUS.COMPLETED
+#     cart.save()
+#     redirect = get_payment_success_callback_url()
+#     return redirect
+def payment_success(request):
+    cart = get_pending_cart(request.user)
     cart.status = Cart.STATUS.COMPLETED
     cart.save()
-    redirect = get_payment_success_callback_url()
-    return redirect
+    return render(request, 'payment-success.html')
 
 #
 # def complete_order(user):
@@ -205,4 +210,4 @@ def update_delivery_info(param, user):
 
 
 def get_order_total_price(order):
-    return 100  # TODO
+    return 100

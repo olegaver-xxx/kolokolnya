@@ -214,8 +214,23 @@ class OrderDetail(DetailView):
         return qs
 
 
-class MakeOrder(TemplateView):
+# class MakeOrder(TemplateView):
+#     template_name = 'make_order.html'
+#
+#     def get_context_data(self, **kwargs):
+#         ctx = super().get_context_data()
+#         cart = shop_services.get_user_cart(self.request.user)
+#         ctx['delivery_cost'] = cart.order_details.get('delivery_info', {}).get('cashOfDelivery', 0) // 100
+#         ctx['cart_items'] = [x.product.id for x in shop_services.get_cart_products(self.request.user)]
+#         ctx['records'] = shop_services.get_record_for_cart(self.request.user)
+#         ctx['total_sum'] = shop_services.get_order_total_price(cart)
+#         ctx['is_empty'] = not any([ctx['cart_items'], ctx['records']])
+#         return ctx
+
+class MakeOrder(ListView):
     template_name = 'make_order.html'
+    model = CartProduct
+    context_object_name = 'order_items'
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
@@ -226,7 +241,6 @@ class MakeOrder(TemplateView):
         ctx['total_sum'] = shop_services.get_order_total_price(cart)
         ctx['is_empty'] = not any([ctx['cart_items'], ctx['records']])
         return ctx
-
 
 class RecordsView(LoginRequiredMixin, FormView):
     template_name = 'records.html'
@@ -283,4 +297,6 @@ def payment_event(request):
     payment = notification_object.object
     order_id = int(payment.metadata['orderNumber'])
     shop_services.update_order(order_id, payment.status)
+    shop_services.payment_success(request)
+    print(request.POST)
     return HttpResponse(status=200)

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 {% block page-title %}
     Оформление Заказа
 {% endblock %}
@@ -17,15 +18,75 @@
                 <main class="col-lg-12">
                     <article id="post-1707" class="post-1707 page type-page status-publish hentry">
                         {% if is_empty %}
-                        	Заказ пуст
+                            Заказ пуст
                         {% else %}
-                            {{ products }}
-                            <br>
-                            {{ records }}
-                            <br>
-                            {{ total_sum }}
-                        {% endif %}
+                            {#                            {{ products }}#}
+                            <main class="col-lg-12">
 
+                            <form class="woocommerce-cart-form" action="{% url 'update_cart' %}" method="post"
+                                  id="cart-form">
+                            {% csrf_token %}
+                            <table class="shop_table shop_table_responsive cart">
+                            <thead>
+                            <tr>
+                                <th class="product-remove">&nbsp;</th>
+                                <th class="product-thumbnail">&nbsp;</th>
+                                <th class="product-name">Название</th>
+                                <th class="product-price">Цена</th>
+                                <th class="product-quantity">Количество</th>
+                                <th class="product-subtotal">Всего</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for product_cart in order_items %}
+
+
+                            <tr class="cart_item">
+
+                            <td class="product-remove">
+                                <a href="{% url 'remove_cart_item' item_id=product_cart.id %}"
+                                   class="remove-btn"
+                                        {#                                           aria-label="Remove this item" #}
+                                        {#                                           data-product_id="73"#}
+                                        {#                                           data-product_sku=""#}
+                                >×</a>
+                            </td>
+                            <td class="product-thumbnail">
+                                {% for image in product_cart.product.images.all %}
+                                    <a href="{% url 'detail' pk=product_cart.product.id %}">
+                                        <img width="180" height="180" src="{% thumbnail image.image 900x900 %}"
+                                             class="" alt="img">
+                                    </a>
+                                {% endfor %}
+                            </td>
+
+                            <td class="product-name" data-title="Product">
+                                <a href="{% url 'detail' pk=product_cart.product.id %}">{{ product_cart.product.name }}</a>
+                            </td>
+
+                            <td class="product-price" data-title="Price">
+												<span class="amount">
+													<span>₽ </span>{{ product_cart.product.price }}
+												</span>
+                            </td>
+
+                                    <td class="product-subtotal" data-title="Total">
+												<span class="amount">
+													<span> </span>{{ product_cart.quantity }}
+												</span>
+                                    </td>
+                                 <td class="product-subtotal" data-title="Total">
+												<span class="amount">
+													<span>₽ </span>{{ product_cart.total_price }}
+												</span>
+                                    </td>
+                                </tr>
+                        </tbody>
+                        </table>
+                        </form>
+                        </main>
+                    </article>
                         <h3>Укажите адрес доставки</h3>
                         <div id="ecom-widget" style="height: 400px; width: 500px"></div>
                         <h5>Стоимость заказа: {{ total_sum }}р</h5>
@@ -33,22 +94,31 @@
                         <h5>ИТОГО: <span id="total"></span>р</h5>
                         <form action="{% url 'make_order_submit' %}" method="post">
                             {% csrf_token %}
-                             <div class="wc-proceed-to-checkout">
-                                <button type="submit" class="btn btn-outline-maincolor mt-30" form="cart-form" name="pay">Оплатить</button>
-                             </div>
+                            <div class="wc-proceed-to-checkout">
+                                {#                                <button type="submit" class="btn btn-outline-maincolor mt-30" form="cart-form" name="pay">Оплатить</button>#}
+                                <button type="submit" class="btn btn-outline-maincolor mt-30" form="cart-form"
+                                        name="pay">Оплатить
+                                </button>
+                            </div>
                         </form>
-                    </article>
+
+
+                {% endfor %}
+
                 </main>
             </div>
         </div>
     </section>
+                        {% endif %}
+
 {% endblock %}
 
 {% block scripts %}
-<script>
+    <script>
         let total_sum = {{ total_sum }};
         let delivery_cost = {{delivery_cost}};
-        function set_address(data){
+
+        function set_address(data) {
             let d = window.btoa(unescape(encodeURIComponent(JSON.stringify(data))))
             $.ajax({
                 url: '{% url 'update_cart' %}',
@@ -58,20 +128,22 @@
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 dataType: 'text',
-                success: function(result) {
+                success: function (result) {
                     alert(result.Result);
                 }
             });
 
-            delivery_cost = Math.floor(data.cashOfDelivery/100);
+            delivery_cost = Math.floor(data.cashOfDelivery / 100);
             compute_total()
         }
-        function compute_total(){
-            let total = total_sum+delivery_cost;
+
+        function compute_total() {
+            let total = total_sum + delivery_cost;
             console.log(total)
             $("#delivery-cost").html(delivery_cost)
             $("#total").html(total)
         }
+
         $(document).ready(() => {
             ecomStartWidget({
                 id: 45145,

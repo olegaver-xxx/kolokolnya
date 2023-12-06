@@ -30,8 +30,10 @@
 										</li>
                                         {% if user.is_authenticated %}
                                         <li>
-											<a href="">{{ user }}
-                                            <i class="fa fa fa-caret-down"></i>
+											<a href="">
+{#                                                {{ user }}#}
+{#                                            <i class="fa fa fa-caret-down"></i>#}
+                                            <i class="fa fa-user" aria-hidden="true"></i>
                                             </a>
 											<ul>
 												<li>

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from django.views.generic import TemplateView
 
-from apps.shop.services import confirm_payment
+# from apps.shop.services import confirm_payment
 from apps.users.views import UserLoginView, RegisterView, activate_view
 from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
 from apps.users.views import ProfileView, update_user
@@ -56,7 +56,7 @@ urlpatterns = [
     path('attractions/', TemplateView.as_view(template_name='attractions.html'), name='attractions'),
     # path('test/', TemplateView.as_view(template_name='order_detail.html'), name='test_link'),
     path('test/<int:pk>', OrderDetail.as_view(), name='order_detail'),
-    path('complete_order/', confirm_payment, name='complete'),
+    # path('complete_order/', confirm_payment, name='complete'),
 
 ]
 
