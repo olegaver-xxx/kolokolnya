@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
 {% block content %}
+{% block css %}
+    <style>
+    .gtc_forms {
+    width: 10px;
+	border-top: 1px solid #eae9e7;
+	margin-top: 40px;
+    padding-top: -40px;
+    padding-left: 10px;
+	{#padding-top: 40px;#}
+}
+
+    </style>
+{% endblock %}
 
     {#    <section class="page_title ds s-py-5">#}
     {#        <div class="container">#}
@@ -24,7 +37,7 @@
     {#            </div>#}
     {#        </div>#}
     {#    </section>#}
-    </div>
+
 
 
     <section class="ls s-py-80 s-py-md-120 s-py-xl-160">
@@ -73,22 +86,24 @@
                         <div class="summary entry-summary">
                             <div class="divider-40"></div>
                             <div class="woocommerce-product-rating">
-                                <div class="star-rating">
-                                    <span style="width:60%">Rated <strong
-                                            class="rating">3</strong> out of 5 based on <span class="rating">3</span> customer ratings</span>
-                                </div>
-                                <p class="price">
-											<span class="color-main3">
-												<span>P</span>{{ object.price }}
-											</span>
-                                </p>
+{#                                <div class="star-rating">#}
+{#                                    <span style="width:60%">Rated <strong#}
+{#                                            class="rating">3</strong> out of 5 based on <span class="rating">3</span> customer ratings</span>#}
+{#                                </div>#}
                             </div>
                             <h1 class="product_title entry-title">{{ object.name }}</h1>
                             <div>
                                 <p>{{ object.description }}</p>
                             </div>
 
-{#                            <div class="product_meta">#}
+                            <div class="pb-10">
+                                <h5><p class="price">
+											<span class="color-main3">
+												<span>P</span>{{ object.price }}
+											</span>
+                                </p></h5>
+                            </div>
+                            {#                            <div class="product_meta">#}
 {#										<span class="posted_in">Categories:#}
 {#											<a href="shop-.html" rel="tag">T-shirts</a>,#}
 {#											<a href="shop-.html" rel="tag">man</a>,#}
@@ -101,42 +116,42 @@
 
                             <form>
 
-                                <table class="variations">
-                                    <tbody>
-                                    <tr>
+{#                                <table class="variations">#}
+{#                                    <tbody>#}
+{#                                    <tr>#}
+{##}
+{#                                        <td class="value">#}
+{#                                            <label for="pa_color">Color</label>#}
+{#                                            <select id="pa_color" class="wc-default-select" name="attribute_pa_color"#}
+{#                                                    data-attribute_name="attribute_pa_color">#}
+{#                                                <option value="">Show all</option>#}
+{#                                                <option value="blue" class="attached enabled">Blue</option>#}
+{#                                            </select>#}
+{#                                        </td>#}
+{#                                    </tr>#}
+{#                                    <tr>#}
+{##}
+{#                                        <td class="value">#}
+{#                                            <label for="pa_size">Size</label>#}
+{#                                            <select id="pa_size" class="wc-default-select" name="attribute_pa_size"#}
+{#                                                    data-attribute_name="attribute_pa_size">#}
+{#                                                <option value="">Show all</option>#}
+{#                                                <option value="x-small" class="attached enabled">X Small</option>#}
+{#                                                <option value="small" class="attached enabled">Small</option>#}
+{#                                                <option value="medium" class="attached enabled">Medium</option>#}
+{#                                                <option value="large" class="attached enabled">Large</option>#}
+{#                                                <option value="x-large" class="attached enabled">X Large</option>#}
+{#                                                <option value="xx-large" class="attached enabled">XX Large</option>#}
+{#                                                <option value="xxx-large" class="attached enabled">XXX Large</option>#}
+{#                                            </select>#}
+{##}
+{#                                        </td>#}
+{#                                    </tr>#}
+{#                                    </tbody>#}
+{#                                </table>#}
 
-                                        <td class="value">
-                                            <label for="pa_color">Color</label>
-                                            <select id="pa_color" class="wc-default-select" name="attribute_pa_color"
-                                                    data-attribute_name="attribute_pa_color">
-                                                <option value="">Show all</option>
-                                                <option value="blue" class="attached enabled">Blue</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
 
-                                        <td class="value">
-                                            <label for="pa_size">Size</label>
-                                            <select id="pa_size" class="wc-default-select" name="attribute_pa_size"
-                                                    data-attribute_name="attribute_pa_size">
-                                                <option value="">Show all</option>
-                                                <option value="x-small" class="attached enabled">X Small</option>
-                                                <option value="small" class="attached enabled">Small</option>
-                                                <option value="medium" class="attached enabled">Medium</option>
-                                                <option value="large" class="attached enabled">Large</option>
-                                                <option value="x-large" class="attached enabled">X Large</option>
-                                                <option value="xx-large" class="attached enabled">XX Large</option>
-                                                <option value="xxx-large" class="attached enabled">XXX Large</option>
-                                            </select>
-
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-
-                                <div class="single_variation_wrap">
+                                <div class="gtc_forms">
                                     <div>
 
                                         {#                                                     <button type="submit" class="single_add_to_cart_button button alt">Add to cart#}
