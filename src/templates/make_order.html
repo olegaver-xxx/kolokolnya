@@ -23,8 +23,8 @@
                             {#                            {{ products }}#}
                             <main class="col-lg-12">
 
-                            <form class="woocommerce-cart-form" action="{% url 'update_cart' %}" method="post"
-                                  id="cart-form">
+{#                            <form class="woocommerce-cart-form" action="{% url 'update_cart' %}" method="post"#}
+{#                                  id="cart-form">#}
                             {% csrf_token %}
                             <table class="shop_table shop_table_responsive cart">
                             <thead>
@@ -86,7 +86,7 @@
 
                         </tbody>
                         </table>
-                        </form>
+{#                        </form>#}
                         </main>
 
                     </article>
@@ -99,7 +99,7 @@
                             {% csrf_token %}
                             <div class="wc-proceed-to-checkout">
                                 {#                                <button type="submit" class="btn btn-outline-maincolor mt-30" form="cart-form" name="pay">Оплатить</button>#}
-                                <button type="submit" class="btn btn-outline-maincolor mt-30" form="cart-form"
+                                <button type="submit" class="btn btn-outline-maincolor mt-30"
                                         name="pay">Оплатить
                                 </button>
                             </div>
@@ -132,7 +132,7 @@
                 },
                 dataType: 'text',
                 success: function (result) {
-                    alert(result.Result);
+                    {#alert(result.Result);#}
                 }
             });
 
