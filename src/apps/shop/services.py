@@ -159,11 +159,8 @@ def create_order(user):
 #     cart.save()
 #     redirect = get_payment_success_callback_url()
 #     return redirect
-def payment_success(request):
-    cart = get_pending_cart(request.user)
-    cart.status = Cart.STATUS.COMPLETED
-    cart.save()
-    return render(request, 'payment-success.html')
+def payment_success(order_id):
+    update_order(order_id, Cart.STATUS.PAYED)
 
 #
 # def complete_order(user):
@@ -196,8 +193,11 @@ def order_changed_event(order):
     if order.status == Order.STATUS.CANCELED:
         # add log message
         pass
-    elif order.status == Order.STATUS.COMPLETED:
+    elif order.status == Order.STATUS.PAYED:
         # send admin notification
+        pass
+    elif order.status == Order.STATUS.COMPLETED:
+        # ????
         pass
     elif order.status == Order.STATUS.PENDING:
         pass

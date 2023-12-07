@@ -31,6 +31,7 @@ class Cart(models.Model):
     class STATUS:
         COLLECTING = 'collecting'
         PENDING = 'pending'
+        PAYED = 'payed'
         COMPLETED = 'completed'
         CANCELED = 'canceled'
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -41,6 +42,7 @@ class Cart(models.Model):
     status = models.CharField(max_length=255, default=STATUS.COLLECTING, choices=(
         (STATUS.COLLECTING, 'Collecting'),
         (STATUS.PENDING, 'Pending Payment'),
+        (STATUS.PAYED, 'Payed'),
         (STATUS.CANCELED, 'Canceled'),
         (STATUS.COMPLETED, 'Completed')
     ))

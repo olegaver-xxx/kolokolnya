@@ -124,7 +124,6 @@ class UpdateCartView(LoginRequiredMixin, View):
 
 def make_order(request):
     payment_url, order_id = shop_services.create_order(user=request.user)
-    print('payment_url', payment_url, flush=True)
     return HttpResponseRedirect(payment_url)
 
 
@@ -280,28 +279,44 @@ class RecordsView(LoginRequiredMixin, FormView):
 def payment_event(request):
     from yookassa.domain.notification import WebhookNotification
     event_json = json.loads(request.body)
-    # {'type': 'notification', 'event': 'payment.waiting_for_capture',
-    #  'object': {'id': '2cd081c3-000f-5000-8000-18fb1a9aa326', 'status': 'waiting_for_capture',
-    #             'amount': {'value': '100.00', 'currency': 'RUB'}, 'description': 'Заказ 222',
-    #             'recipient': {'account_id': '266415', 'gateway_id': '2131910'},
-    #             'payment_method': {'type': 'bank_card', 'id': '2cd081c3-000f-5000-8000-18fb1a9aa326', 'saved': False,
-    #                                'title': 'Bank card *4477',
-    #                                'card': {'first6': '555555', 'last4': '4477', 'expiry_year': '2010',
-    #                                         'expiry_month': '12', 'card_type': 'MasterCard', 'issuer_country': 'US'}},
-    #             'created_at': '2023-10-29T14:36:51.955Z', 'expires_at': '2023-11-05T14:39:48.605Z', 'test': True,
-    #             'paid': True, 'refundable': False, 'metadata': {'orderNumber': '222'},
-    #             'authorization_details': {'rrn': '154342014456756', 'auth_code': '216410',
-    #                                       'three_d_secure': {'applied': True, 'protocol': 'v1',
-    #                                                          'method_completed': False, 'challenge_completed': True}}}}
+    # {'type': 'notification',
+    #  'event': 'payment.waiting_for_capture',
+    #  'object': {
+    #       'id': '2cd081c3-000f-5000-8000-18fb1a9aa326',
+    #       'status': 'waiting_for_capture',
+    #       'amount': {
+    #           'value': '100.00',
+    #           'currency': 'RUB'
+    #       },
+    #  'description': 'Заказ 222',
+    #  'recipient': {'account_id': '266415', 'gateway_id': '2131910'},
+    #  'payment_method': {
+    #       'type': 'bank_card',
+    #       'id': '2cd081c3-000f-5000-8000-18fb1a9aa326',
+    #       'saved': False,
+    #       'title': 'Bank card *4477',
+    #       'card': {'first6': '555555', 'last4': '4477', 'expiry_year': '2010', 'expiry_month': '12', 'card_type': 'MasterCard', 'issuer_country': 'US'}
+    #       },
+    #  'created_at': '2023-10-29T14:36:51.955Z',
+    #  'expires_at': '2023-11-05T14:39:48.605Z',
+    #  'test': True,
+    #  'paid': True,
+    #  'refundable': False,
+    #  'metadata': {'orderNumber': '222'},
+    #  'authorization_details': {
+    #      'rrn': '154342014456756',
+    #      'auth_code': '216410',
+    #      'three_d_secure': {'applied': True, 'protocol': 'v1', 'method_completed': False, 'challenge_completed': True}
+    #      }
+    #  }
+    #  }
     try:
         notification_object = WebhookNotification(event_json)
-    except Exception:
-        raise
-    # обработка ошибок
-    # # Получите объекта платежа
+    except Exception as e:
+        # обработка ошибок
+        raise Exception(f'Invalid notification object {e}, {event_json}')
+    # Получите объекта платежа
     payment = notification_object.object
     order_id = int(payment.metadata['orderNumber'])
-    shop_services.update_order(order_id, payment.status)
-    shop_services.payment_success(request)
-    print(request.POST)
+    shop_services.payment_success(order_id)
     return HttpResponse(status=200)
