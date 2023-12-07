@@ -124,6 +124,7 @@ class UpdateCartView(LoginRequiredMixin, View):
 
 def make_order(request):
     payment_url, order_id = shop_services.create_order(user=request.user)
+    print('payment_url', payment_url, flush=True)
     return HttpResponseRedirect(payment_url)
 
 
@@ -231,6 +232,10 @@ class MakeOrder(ListView):
     template_name = 'make_order.html'
     model = CartProduct
     context_object_name = 'order_items'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(cart__user=self.request.user.id, cart__status=Cart.STATUS.COLLECTING)
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
