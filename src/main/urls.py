@@ -31,7 +31,7 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('blog/', BlogView.as_view(), name='blog'),
     path('blog/<int:pk>', ArticleView.as_view(), name='article'),
-    path('detail/<int:pk>', ProductDetailView.as_view(), name='detail'),
+    path('product/<int:pk>', ProductDetailView.as_view(), name='detail'),
     path('add_to_cart/<int:product_id>/', AddCartView.as_view(), name='add_to_cart'),
     # path('add-record/', AddRecordView.as_view(), name='add_record'),
     path('change_password/', auth_views.PasswordChangeView.as_view(), name='change_password'),
@@ -56,7 +56,7 @@ urlpatterns = [
     path('attractions/', TemplateView.as_view(template_name='attractions.html'), name='attractions'),
     # path('test/', TemplateView.as_view(template_name='order_detail.html'), name='test_link'),
     path('test/<int:pk>', OrderDetail.as_view(), name='order_detail'),
-    # path('complete_order/', confirm_payment, name='complete'),
+    path('complete_order/', payment_event, name='complete'),
 
 ]
 
