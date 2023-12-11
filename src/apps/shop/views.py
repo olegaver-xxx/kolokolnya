@@ -3,7 +3,7 @@ import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import View
-from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from .forms import ProductForm, ImageForm, RecordForm
 from .models import Product, Cart, CartProduct, ProductImage, Tag, Order, Record
 from django.views.generic import DetailView, ListView, TemplateView, CreateView, FormView
@@ -277,6 +277,8 @@ class RecordsView(LoginRequiredMixin, FormView):
 
 @csrf_exempt
 def payment_event(request):
+    if not request.method == 'POST':
+        return HttpResponseBadRequest('Bad request')
     from yookassa.domain.notification import WebhookNotification
     event_json = json.loads(request.body)
     # {'type': 'notification',

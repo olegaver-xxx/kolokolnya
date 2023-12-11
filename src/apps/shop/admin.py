@@ -20,11 +20,11 @@ class ProductModelAdmin(admin.ModelAdmin):
 class CartAdmin(admin.ModelAdmin):
     inlines = [CartProductInline]
     fields = 'user', 'active', 'status', 'computed_sum', 'payment_id', 'order_details'
-    list_display = 'user', 'status', 'computed_sum'
+    list_display = 'user', 'status', 'computed_sum', 'pk'
 
 
 admin.site.register(Tag)
-admin.site.register(Order)
+# admin.site.register(Order)
 admin.site.register(Record)
 
 # @admin.register(CartProduct)

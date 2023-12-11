@@ -93,34 +93,36 @@
                             <h3>Укажите адрес доставки</h3>
                             <div id="ecom-widget" style="height: 400px; width: 500px"></div>
                             <h5>Стоимость заказа: {{ total_sum }}р</h5>
-                            <h5>Стоимость доставки: <span id="delivery-cost"></span>р</h5>
+                            <h5>Стоимость доставки: <span id="delivery-cost"></span>р
+                                {% if not delivery_cost %}
+                                <span style="color: red" id="address-error">Не указан адрес доставки</span>
+                                {% endif %}
+                            </h5>
                             <h5>ИТОГО: <span id="total"></span>р</h5>
-                            {% if delivery_cost != 0 %}
-
-
+{#                            {% if delivery_cost != 0 %}#}
                                 <form action="{% url 'make_order_submit' %}" method="post">
                                     {% csrf_token %}
                                     <div class="wc-proceed-to-checkout">
-                                        {#                                <button type="submit" class="btn btn-outline-maincolor mt-30" form="cart-form" name="pay">Оплатить</button>#}
-                                        <button type="submit" class="btn btn-outline-maincolor mt-30"
-                                                name="pay">Оплатить
+                                        <button type="submit" class="btn btn-outline-maincolor mt-30" id="submit-btn"
+                                                name="pay" {% if not delivery_cost %}disabled="disabled"{% endif %}>
+                                            Оплатить
                                         </button>
                                     </div>
                                 </form>
-                            {% else %}
-                                <div class="wc-proceed-to-checkout">
+{#                            {% else %}#}
+{#                                <div class="wc-proceed-to-checkout">#}
                                     {#                                <button type="submit" class="btn btn-outline-maincolor mt-30" form="cart-form" name="pay">Оплатить</button>#}
-                                    <a rel="nofollow" href="#"
-                                       style="display: block"
-                                       class="btn btn-outline-maincolor mt-30"
-                                       id="myButton">Оплатить</a>
-
-                                    <div id="myModal" style="display: none;">
-                                        <p>Выберите адрес доставки</p>
-                                    </div>
-                                </div>
-
-                            {% endif %}
+{#                                    <a rel="nofollow" href="#"#}
+{#                                       style="display: block"#}
+{#                                       class="btn btn-outline-maincolor mt-30"#}
+{#                                       id="myButton">Оплатить</a>#}
+{##}
+{#                                    <div id="myModal" style="display: none;">#}
+{#                                        <p>Выберите адрес доставки</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{##}
+{#                            {% endif %}#}
 
 
 
@@ -166,6 +168,8 @@
 
             delivery_cost = Math.floor(data.cashOfDelivery / 100);
             compute_total()
+            $('#submit-btn').prop('disabled', false)
+            $('#address-error').hide()
         }
 
         function compute_total() {
