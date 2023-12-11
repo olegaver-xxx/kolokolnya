@@ -82,15 +82,14 @@
                         <hr>
                         <div class="row pt-4">
                             <div class="col-md-6">
-                                <h5>Укажите адрес доставки</h5>
                                 <div id="ecom-widget" style="height: 400px; width: 500px"></div>
+                                <p>Укажите адрес доставки</p>
                             </div>
                             <div class="col-md-6">
-                                <h5>Рассчёт стоимости</h5>
                                 <h6>Стоимость заказа: {{ total_sum }}р</h6>
                                 <h6>Стоимость доставки: <span id="delivery-cost"></span>р
                                     {% if not delivery_cost %}
-                                        <span style="color: red" id="address-error">Не указан адрес доставки</span>
+                                        <span style="color: red" id="address-error"><br>Не указан адрес доставки</span>
                                     {% endif %}
                                 </h6>
                                 <h6>ИТОГО: <span id="total"></span>р</h6>
