@@ -20,3 +20,9 @@ build:
 
 up:
 	docker compose up -d
+
+update:
+	git fetch --all
+	git reset --hard origin/master
+	docker-compose build app
+	docker-compose up -d
