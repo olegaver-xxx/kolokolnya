@@ -1,16 +1,11 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
+
 {% block page-title %}
     Оформление Заказа
 {% endblock %}
 
-{% block head %}
-    <script src="https://widget.pochta.ru/map/widget/widget.js"></script>
-
-{% endblock %}
-
 {% block content %}
-
     <section class="ls s-py-80 s-py-md-120 s-py-xl-160">
         <div class="container">
             <div class="row">
@@ -18,120 +13,113 @@
                 <main class="col-lg-12">
                     <article id="post-1707" class="post-1707 page type-page status-publish hentry">
                         {% if is_empty %}
-                            Заказ пуст
+                        Заказ пуст
                         {% else %}
-                            {#                            {{ products }}#}
-                            <main class="col-lg-12">
+                        <main class="col-lg-12">
 
-                                {#                            <form class="woocommerce-cart-form" action="{% url 'update_cart' %}" method="post"#}
-                                {#                                  id="cart-form">#}
-                                {% csrf_token %}
-                                <table class="shop_table shop_table_responsive cart">
-                                    <thead>
-                                    <tr>
-                                        <th class="product-thumbnail">&nbsp;</th>
-                                        <th class="product-name">Название</th>
-                                        <th class="product-price">Цена</th>
-                                        <th class="product-quantity">Количество</th>
-                                        <th class="product-subtotal">Всего</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
+                            <table class="shop_table shop_table_responsive cart">
+                                <thead>
+                                <tr>
+                                    <th class="product-thumbnail">&nbsp;</th>
+                                    <th class="product-name">Название</th>
+                                    <th class="product-price">Цена</th>
+                                    <th class="product-quantity">Количество</th>
+                                    <th class="product-subtotal">Всего</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-                                    {% for product_cart in order_items %}
+                                {% for product_cart in order_items %}
 
 
-                                        <tr class="cart_item">
+                                    <tr class="cart_item">
 
-                                            {#                            <td class="product-remove">#}
-                                            {#                                <a href="{% url 'remove_cart_item' item_id=product_cart.id %}"#}
-                                            {#                                   class="remove-btn"#}
-                                            {#                                           aria-label="Remove this item" #}
-                                            {#                                           data-product_id="73"#}
-                                            {#                                           data-product_sku=""#}
-                                            {#                                >×</a>#}
-                                            {#                            </td>#}
-                                            <td class="product-thumbnail">
-                                                {% for image in product_cart.product.images.all %}
-                                                    <a href="{% url 'detail' pk=product_cart.product.id %}">
-                                                        <img width="180" height="180"
-                                                             src="{% thumbnail image.image 900x900 %}"
-                                                             class="" alt="img">
-                                                    </a>
-                                                {% endfor %}
-                                            </td>
+                                        {#                            <td class="product-remove">#}
+                                        {#                                <a href="{% url 'remove_cart_item' item_id=product_cart.id %}"#}
+                                        {#                                   class="remove-btn"#}
+                                        {#                                           aria-label="Remove this item" #}
+                                        {#                                           data-product_id="73"#}
+                                        {#                                           data-product_sku=""#}
+                                        {#                                >×</a>#}
+                                        {#                            </td>#}
+                                        <td class="product-thumbnail">
+                                            {% for image in product_cart.product.images.all %}
+                                                <a href="{% url 'detail' pk=product_cart.product.id %}">
+                                                    <img width="180" height="180"
+                                                         src="{% thumbnail image.image 900x900 %}"
+                                                         class="" alt="img">
+                                                </a>
+                                            {% endfor %}
+                                        </td>
 
-                                            <td class="product-name" data-title="Product">
-                                                <a href="{% url 'detail' pk=product_cart.product.id %}">{{ product_cart.product.name }}</a>
-                                            </td>
+                                        <td class="product-name" data-title="Product">
+                                            <a href="{% url 'detail' pk=product_cart.product.id %}">{{ product_cart.product.name }}</a>
+                                        </td>
 
-                                            <td class="product-price" data-title="Price">
+                                        <td class="product-price" data-title="Price">
 												<span class="amount">
 													<span>₽ </span>{{ product_cart.product.price }}
 												</span>
-                                            </td>
+                                        </td>
 
-                                            <td class="product-subtotal" data-title="Total">
+                                        <td class="product-subtotal" data-title="Total">
 												<span class="amount">
 													<span> </span>{{ product_cart.quantity }}
 												</span>
-                                            </td>
-                                            <td class="product-subtotal" data-title="Total">
+                                        </td>
+                                        <td class="product-subtotal" data-title="Total">
 												<span class="amount">
 													<span>₽ </span>{{ product_cart.total_price }}
 												</span>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
 
-                                    </tbody>
-                                </table>
-                                {#                        </form>#}
-                            </main>
-
-                            </article>
-                            <h3>Укажите адрес доставки</h3>
-                            <div id="ecom-widget" style="height: 400px; width: 500px"></div>
-                            <h5>Стоимость заказа: {{ total_sum }}р</h5>
-                            <h5>Стоимость доставки: <span id="delivery-cost"></span>р
-                                {% if not delivery_cost %}
-                                <span style="color: red" id="address-error">Не указан адрес доставки</span>
-                                {% endif %}
-                            </h5>
-                            <h5>ИТОГО: <span id="total"></span>р</h5>
-{#                            {% if delivery_cost != 0 %}#}
+                                </tbody>
+                            </table>
+                            {#                        </form>#}
+                        </main>
+                        <hr>
+                        <div class="row pt-4">
+                            <div class="col-md-6">
+                                <h5>Укажите адрес доставки</h5>
+                                <div id="ecom-widget" style="height: 400px; width: 500px"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Рассчёт стоимости</h5>
+                                <h6>Стоимость заказа: {{ total_sum }}р</h6>
+                                <h6>Стоимость доставки: <span id="delivery-cost"></span>р
+                                    {% if not delivery_cost %}
+                                        <span style="color: red" id="address-error">Не указан адрес доставки</span>
+                                    {% endif %}
+                                </h6>
+                                <h6>ИТОГО: <span id="total"></span>р</h6>
+                                {#                            {% if delivery_cost != 0 %}#}
                                 <form action="{% url 'make_order_submit' %}" method="post">
                                     {% csrf_token %}
                                     <div class="wc-proceed-to-checkout">
-                                        <button type="submit" class="btn btn-outline-maincolor mt-30" id="submit-btn"
+                                        <button type="submit" class="btn btn-outline-maincolor mt-30"
+                                                id="submit-btn"
                                                 name="pay" {% if not delivery_cost %}disabled="disabled"{% endif %}>
                                             Оплатить
                                         </button>
                                     </div>
                                 </form>
-{#                            {% else %}#}
-{#                                <div class="wc-proceed-to-checkout">#}
-                                    {#                                <button type="submit" class="btn btn-outline-maincolor mt-30" form="cart-form" name="pay">Оплатить</button>#}
-{#                                    <a rel="nofollow" href="#"#}
-{#                                       style="display: block"#}
-{#                                       class="btn btn-outline-maincolor mt-30"#}
-{#                                       id="myButton">Оплатить</a>#}
-{##}
-{#                                    <div id="myModal" style="display: none;">#}
-{#                                        <p>Выберите адрес доставки</p>#}
-{#                                    </div>#}
-{#                                </div>#}
-{##}
-{#                            {% endif %}#}
-
-
-
-
-                            </main>
                             </div>
-                            </div>
-                            </section>
-                        {% endif %}
+                        </div>
+                    {% endif %}
+                    </article>
+                </main>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block head %}
+
+    <script src="https://widget.pochta.ru/map/widget/widget.js"></script>
+{#                        {% endif %}#}
 
 {% endblock %}
 
