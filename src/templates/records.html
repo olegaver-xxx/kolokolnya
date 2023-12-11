@@ -24,11 +24,20 @@
 {#                            <option value="tag3">Tag 3</option>#}
 {#                        </select>#}
 
-                        <p>Стоимость: <span id="wordCount">0</span></p>
+{#                        <p>Стоимость: <span id="wordCount">0</span></p>#}
                         <p id="errorMessage" style="color: red;"></p>
 
                         <button class="btn btn-outline-maincolor mt-30">Отправить</button>
                     </form>
+                    <select id="tag-select" onchange="updatePrice()">
+                            <option value="tag1">Панихида</option>
+                            <option value="tag2">Молебен</option>
+                            <option value="tag3">Сорокоуст</option>
+                            <option value="tag4">Заказная</option>
+                            <option value="tag5">Вечное поминовение</option>
+                            <option value="tag6">Именной кирпичик</option>
+                    </select>
+                    <p>Цена: <span id="price">0</span></p><<
                 </main>
             </div>
         </div>
@@ -61,7 +70,29 @@
 {#          });#}
 {#        });#}
 {#    </script>#}
+<script>
+    function updatePrice() {
+        var selectedTag = document.getElementById("tag-select").value;
+        var price = 0;
 
+        // Здесь вы можете добавить логику для определения цены в зависимости от выбранного параметра
+        if (selectedTag === "tag6") {
+            price = 1000;
+        } else if (selectedTag === "tag5") {
+            price = 10000;
+        } else if (selectedTag === "tag1") {
+            price = 30;
+        } else if (selectedTag === "tag2") {
+            price = 30;
+        } else if (selectedTag === "tag3") {
+            price = 30;
+        } else if (selectedTag === "tag4") {
+            price = 30;
+        }
+
+        document.getElementById("price").innerText = price;
+    }
+</script>
     <script>
 
     function update_cost (){
