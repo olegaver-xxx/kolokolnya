@@ -57,6 +57,35 @@
 
                                         {% endif %}
 
+                                    {% if user.is_superuser %}
+                                        <li>
+											<a href="">
+{#                                                {{ user }}#}
+{#                                            <i class="fa fa fa-caret-down"></i>#}
+                                            <i class="fa fa-gear" aria-hidden="true"></i>
+                                            </a>
+											<ul>
+												<li>
+													<a href="{% url 'payed_list' %}">Список оплаченных заказов</a>
+												</li>
+												<li>
+													<a href="{% url 'completed_list' %}">Список Завершённых заказов</a>
+												</li>
+												<li>
+													<a href="../admin/">Админ-панель</a>
+												</li>
+											</ul>
+										</li>
+                                        {% else %}
+                                            <li>
+                                                <a href="{% url 'login' %}">ВОЙТИ</a>
+                                            </li>
+                                             <li>
+                                                <a href="{% url 'register' %}">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+                                            </li>
+
+                                        {% endif %}
+
 									</ul>
 
 

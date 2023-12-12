@@ -8,7 +8,8 @@ from apps.blog.views import BlogView, HomeView, ArticleView, AddArticle
 from apps.users.views import ProfileView, update_user
 from apps.shop.views import ProductListView, ProductDetailView, AddCartView, CartView, UpdateCartView, \
     RemoveCartItemView, create_gallery, ContactView, OrderListView, payment_event, RecordsView, \
-    RemoveRecord, OrderDetailView, OrderDetail, MakeOrder, make_order  # , AddRecordView
+    RemoveRecord, OrderDetailView, OrderDetail, MakeOrder, make_order, PayedOrdersView, CompleteOrder, \
+    CompletedOrdersView  # , AddRecordView
 from apps.utils.views import PreferencesView, MainView
 from django.conf import settings
 from django.contrib.auth.views import LogoutView
@@ -57,6 +58,9 @@ urlpatterns = [
     # path('test/', TemplateView.as_view(template_name='order_detail.html'), name='test_link'),
     path('test/<int:pk>', OrderDetail.as_view(), name='order_detail'),
     path('complete_order/', payment_event, name='complete'),
+    path('complete/', CompleteOrder.as_view(), name='complete_order'),
+    path('payed-orders/', PayedOrdersView.as_view(), name='payed_list'),
+    path('completed_orders/', CompletedOrdersView.as_view(), name='completed_list'),
 
 ]
 

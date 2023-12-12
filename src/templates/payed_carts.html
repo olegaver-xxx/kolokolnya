@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block page-title %}
+    ОПЛАЧЕННЫЕ ЗАКАЗЫ
+{% endblock %}
+
+{% block content %}
+
+    {% if user.is_superuser %}
+    {% if payed_orders %}
+
+
+
+        <main class="col-lg-12">
+
+            <table class="shop_table shop_table_responsive cart">
+                <thead>
+                <tr>
+                    <th class="product-thumbnail">&nbsp;</th>
+                    <th class="product-name">EMAIL пользователя</th>
+                    <th class="product-price">Детали</th>
+                    {#                                    <th class="product-quantity">Количество</th>#}
+                    <th class="product-subtotal">Сумма заказа</th>
+                    <th class="product-subtotal">Завершить заказ</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for payed_order in payed_orders %}
+
+
+                    <tr class="cart_item">
+                        <td class="product-thumbnail">
+
+                        </td>
+
+                        <td class="product-name" data-title="Product">
+                            <a href="mailto:{{ payed_order.user.email }}">{{ payed_order.user.email }}</a>
+
+                        </td>
+
+                        <td class="product-price" data-title="Price">
+												<span class="amount">
+													<a href="/admin/shop/cart/{{ payed_order.id }}/change/"><span>Ссылка</span></a>
+												</span>
+                        </td>
+
+
+                        <td class="product-subtotal" data-title="Total">
+												<span class="amount">
+													{{ payed_order.computed_sum }}₽
+												</span>
+                        </td>
+                        <td class="product-subtotal" data-title="Total">
+                                <a rel="nofollow" href="#" data-product_id="{{ payed_order.id }}"
+                                   id="add-btn-{{ payed_order.id }}"
+                                   class="button product_type_simple add_to_cart_button add-to-cart">Подтвердить
+                                </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        <div class="text-center pt-5 pb-5">
+                        <a href="{% url 'home' %}" class="btn btn-outline-maincolor mt-4">Вернуться на главную <i class="fa fa-arrow-right pl-2"></i></a>
+        </div>
+        </main>
+        {% else %}
+        <div class="text-center pt-5 pb-5">
+            <h4 style="text-transform: unset;">Тут ничего нет!</h4>
+            <a href="{% url 'home' %}" class="btn btn-outline-maincolor mt-4">Вернуться на главную <i class="fa fa-arrow-right pl-2"></i></a>
+        </div>
+        {% endif %}
+
+    {% else %}
+        Упс!, Вы не администратор!
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+	<script>
+
+        $(document).ready(() => {
+            $('.add-to-cart').each((i, element) => {
+                $(element).click((e) => {
+                    e.preventDefault();
+                    let p_id = $(e.target).data('product_id');
+                    $.post("/complete/",
+                        {
+                            order_id: p_id,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                        }
+                    ).then((data) => {
+                        console.log(data)
+                    })
+                    location.reload()
+                });
+            });
+        });
+    </script>
+{% endblock %}

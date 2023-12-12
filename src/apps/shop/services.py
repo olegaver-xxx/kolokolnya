@@ -211,3 +211,7 @@ def update_delivery_info(param, user):
 
 def get_order_total_price(order):
     return 100
+
+
+def compete_order(order_id):
+    update_order(order_id, Cart.STATUS.COMPLETED)

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+
+{% block page-title %}
+	ЗАВЕРШЁННЫЕ ЗАКАЗЫ
+{% endblock %}
+
+
+{% block content %}
+    {% if user.is_superuser %}
+    {% if completed_orders %}
+
+
+
+        <main class="col-lg-12">
+
+            <table class="shop_table shop_table_responsive cart">
+                <thead>
+                <tr>
+                    <th class="product-thumbnail">&nbsp;</th>
+                    <th class="product-name">EMAIL пользователя</th>
+                    <th class="product-price">Детали</th>
+                    {#                                    <th class="product-quantity">Количество</th>#}
+                    <th class="product-subtotal">Сумма заказа</th>
+                </tr>
+                </thead>
+                <tbody>
+	{% for payed_order in completed_orders %}
+
+
+                    <tr class="cart_item">
+                        <td class="product-thumbnail">
+                            {% for image in payed_order.product.images.all %}
+                                {#                                                <a href="{% url 'detail' pk=payed_order.order.id %}">#}
+{#                                <img width="180" height="180"#}
+{#                                     src="{% thumbnail image.image 900x900 %}"#}
+{#                                     class="" alt="img">#}
+                                {#                                                </a>#}
+                            {% endfor %}
+                        </td>
+
+                        <td class="product-name" data-title="Product">
+                            <a href="mailto:{{ payed_order.user.email }}">{{ payed_order.user.email }}</a>
+
+                        </td>
+
+                        <td class="product-price" data-title="Price">
+												<span class="amount">
+													<a href="/admin/shop/cart/{{ payed_order.id }}/change/"><span>Ссылка</span></a>
+												</span>
+                        </td>
+
+
+                        <td class="product-subtotal" data-title="Total">
+												<span class="amount">
+													{{ payed_order.computed_sum }}₽
+												</span>
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+        <div class="text-center pt-5 pb-5">
+                        <a href="{% url 'home' %}" class="btn btn-outline-maincolor mt-4">Вернуться на главную <i class="fa fa-arrow-right pl-2"></i></a>
+        </div>
+        </main>
+        {% else %}
+        <div class="text-center pt-5 pb-5">
+            <h4 style="text-transform: unset;">Тут ничего нет!</h4>
+            <a href="{% url 'home' %}" class="btn btn-outline-maincolor mt-4">Вернуться на главную <i class="fa fa-arrow-right pl-2"></i></a>
+        </div>
+        {% endif %}
+
+    {% else %}
+        Упс!, Вы не администратор!
+    {% endif %}
+{% endblock %}

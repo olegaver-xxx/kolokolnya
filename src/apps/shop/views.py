@@ -246,6 +246,7 @@ class MakeOrder(ListView):
         ctx['is_empty'] = not any([ctx['cart_items'], ctx['records']])
         return ctx
 
+
 class RecordsView(LoginRequiredMixin, FormView):
     template_name = 'records.html'
     form_class = RecordForm
@@ -322,3 +323,31 @@ def payment_event(request):
     order_id = int(payment.metadata['orderNumber'])
     shop_services.payment_success(order_id)
     return HttpResponse(status=200)
+
+
+class PayedOrdersView(ListView):
+    template_name = 'payed_carts.html'
+    model = Cart
+    context_object_name = 'payed_orders'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(status=Cart.STATUS.PAYED)
+
+
+class CompletedOrdersView(ListView):
+    template_name = 'completed_carts.html'
+    model = Cart
+    context_object_name = 'completed_orders'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(status=Cart.STATUS.COMPLETED)
+
+
+class CompleteOrder(LoginRequiredMixin, View):
+
+    def post(self, request, *args, **kwargs):
+        order_id = self.request.POST.get('order_id')
+        complete = shop_services.compete_order(order_id)
+        return JsonResponse({'order_id': order_id, 'complete': complete})

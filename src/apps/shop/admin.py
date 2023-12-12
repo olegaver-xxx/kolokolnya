@@ -27,6 +27,7 @@ class CartAdmin(admin.ModelAdmin):
         models.JSONField: {'widget': JSONEditorWidget},
     }
 
+
 admin.site.register(Tag)
 # admin.site.register(Order)
 admin.site.register(Record)
