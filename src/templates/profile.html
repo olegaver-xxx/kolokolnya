@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+
+{% block page-title %}
+	Мой Аккаунт
+{% endblock %}
+
 {% block content %}
 
     <section class="ls s-py-80 s-py-md-120 s-py-xl-160">
@@ -8,14 +13,7 @@
                 <main class="col-lg-12">
 
                     <article>
-                        <header class="entry-header mb-20">
-                            <h1 class="entry-title pull-left">My account</h1>
-                            <span class="edit-link">
-										<a class="post-edit-link" href="{% url 'edit' %}">Edit
-											<span class="screen-reader-text"> "My account"</span>
-										</a>
-									</span>
-                        </header><!-- .entry-header -->
+
                         <div class="entry-content">
                             <div class="woocommerce">
                                 <nav class="woocommerce-MyAccount-navigation">
@@ -24,9 +22,15 @@
                                         <li>
                                             <a href="{% url 'history' %}">Заказы</a>
                                         </li>
+{#                                        <li>#}
+{#                                            <a href="{% url 'history' %}">Заказы</a>#}
+{#                                        </li>#}
+{#                                        <li>#}
+{#                                            <a href="{% url 'history' %}">Заказы</a>#}
+{#                                        </li>#}
                                         <li>
                                         <li>
-                                            <a href="shop-account-login.html">Logout</a>
+                                            <a href="{% url 'logout' %}">Выйти</a>
                                         </li>
                                     </ul>
                                 </nav>

@@ -4,6 +4,7 @@ from django.db.models import F, Sum
 from easy_thumbnails.fields import ThumbnailerImageField
 from apps.users.models import User
 from django.db import models
+from django.utils.timezone import now
 
 
 class Product(models.Model):
@@ -37,7 +38,7 @@ class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
     # created_at = models.DateTimeField(auto_now_add=True)
-    order_at = models.DateTimeField(blank=True, null=True)
+    order_at = models.DateTimeField(auto_now_add=True)
     payment_at = models.DateTimeField(blank=True, null=True)
     status = models.CharField(max_length=255, default=STATUS.COLLECTING, choices=(
         (STATUS.COLLECTING, 'Collecting'),

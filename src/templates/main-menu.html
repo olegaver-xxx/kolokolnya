@@ -37,6 +37,9 @@
                                             </a>
 											<ul>
 												<li>
+													<a href="{% url 'profile' %}">Профиль</a>
+												</li>
+                                                <li>
 													<a href="{% url 'cart' %}">Корзина</a>
 												</li>
 												<li>
@@ -76,14 +79,6 @@
 												</li>
 											</ul>
 										</li>
-                                        {% else %}
-                                            <li>
-                                                <a href="{% url 'login' %}">ВОЙТИ</a>
-                                            </li>
-                                             <li>
-                                                <a href="{% url 'register' %}">ЗАРЕГИСТРИРОВАТЬСЯ</a>
-                                            </li>
-
                                         {% endif %}
 
 									</ul>

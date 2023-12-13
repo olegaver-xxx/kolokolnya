@@ -16,7 +16,6 @@
             <table class="shop_table shop_table_responsive cart">
                 <thead>
                 <tr>
-                    <th class="product-thumbnail">&nbsp;</th>
                     <th class="product-name">EMAIL пользователя</th>
                     <th class="product-price">Детали</th>
                     {#                                    <th class="product-quantity">Количество</th>#}
@@ -30,9 +29,6 @@
 
 
                     <tr class="cart_item">
-                        <td class="product-thumbnail">
-
-                        </td>
 
                         <td class="product-name" data-title="Product">
                             <a href="mailto:{{ payed_order.user.email }}">{{ payed_order.user.email }}</a>
@@ -41,7 +37,7 @@
 
                         <td class="product-price" data-title="Price">
 												<span class="amount">
-													<a href="/admin/shop/cart/{{ payed_order.id }}/change/"><span>Ссылка</span></a>
+													<a href="/admin/shop/cart/{{ payed_order.id }}/change/"><span><i class="fa fa-link" style="font-size: 35px" aria-hidden="true"></i></span></a>
 												</span>
                         </td>
 
@@ -63,13 +59,13 @@
                 </tbody>
             </table>
         <div class="text-center pt-5 pb-5">
-                        <a href="{% url 'home' %}" class="btn btn-outline-maincolor mt-4">Вернуться на главную <i class="fa fa-arrow-right pl-2"></i></a>
+                        <a href="{% url 'home' %}" class="btn btn-outline-maincolor mt-4">Вернуться на главную <i class="fa fa-arrow-right pl-1"></i></a>
         </div>
         </main>
         {% else %}
         <div class="text-center pt-5 pb-5">
             <h4 style="text-transform: unset;">Тут ничего нет!</h4>
-            <a href="{% url 'home' %}" class="btn btn-outline-maincolor mt-4">Вернуться на главную <i class="fa fa-arrow-right pl-2"></i></a>
+            <a href="{% url 'home' %}" class="btn btn-outline-maincolor mt-4">Вернуться на главную <i class="fa fa-arrow-right pl-1"></i></a>
         </div>
         {% endif %}
 
