@@ -94,9 +94,11 @@
                                 </h6>
                                 <h6>ИТОГО: <span id="total"></span>р</h6>
                                 {#                            {% if delivery_cost != 0 %}#}
-                                <form action="{% url 'make_order_submit' %}" method="post">
+                                <form action="{% url 'make_order_submit' %}" method="post" id="order-form">
                                     {% csrf_token %}
                                     <div class="wc-proceed-to-checkout">
+                                    <input type="text" id="first-name" name="first_name" placeholder="First Name">
+                                    <input type="text" id="last-name" name="last_name" placeholder="Last Name">
                                         <button type="submit" class="btn btn-outline-maincolor mt-30"
                                                 id="submit-btn"
                                                 name="pay" {% if not delivery_cost %}disabled="disabled"{% endif %}>
@@ -104,6 +106,12 @@
                                         </button>
                                     </div>
                                 </form>
+{#                                <form id="order-form">#}
+{#                                  <input type="text" id="first-name" name="first_name" placeholder="First Name">#}
+{#                                  <input type="text" id="last-name" name="last_name" placeholder="Last Name">#}
+{#                                  <!-- Other form inputs -->#}
+{#                                  <button type="submit">Submit</button>#}
+{#                                </form>#}
                             </div>
                         </div>
                     {% endif %}
@@ -135,8 +143,18 @@
         });
     </script>
     <script>
+        document.getElementById("order-form").addEventListener("submit", function(event) {
+            event.preventDefault();
         let total_sum = {{ total_sum }};
         let delivery_cost = {{delivery_cost}};
+        var firstName = document.getElementById("first-name").value;
+        var lastName = document.getElementById("last-name").value;
+        var orderData = {
+          "first_name": firstName,
+          "last_name": lastName,
+          // Add other form input values to the JSON object
+            };
+
 
         function set_address(data) {
             let d = window.btoa(unescape(encodeURIComponent(JSON.stringify(data))))
@@ -145,6 +163,7 @@
                 type: 'POST',
                 data: {
                     delivery_info: d,
+                    orderdata: orderData,
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 dataType: 'text',
