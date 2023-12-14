@@ -88,6 +88,7 @@
                                     <div class="wc-proceed-to-checkout">
                                       <input type="text" id="first-name" name="first_name" placeholder="Имя" required>
                                       <input type="text" id="last-name" name="last_name" placeholder="Фамилия" required>
+                                      <input type="text" id="surname" name="surname" placeholder="Отчество" required>
                                         <button type="submit" class="btn btn-outline-maincolor mt-30"
                                                 id="submit-btn"
                                                 name="pay" {% if not delivery_cost %}disabled="disabled"{% endif %}>
@@ -123,9 +124,11 @@
         function set_address(data) {
             let firstName = document.getElementById("first-name").value;
             let lastName = document.getElementById("last-name").value;
+            let surname = document.getElementById("surname").value;
             data['recipient_info'] = {
                   "first_name": firstName,
                   "last_name": lastName,
+                  "surname": surname,
                 };
             let d = window.btoa(unescape(encodeURIComponent(JSON.stringify(data))))
             $.ajax({
