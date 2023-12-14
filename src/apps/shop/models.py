@@ -37,8 +37,7 @@ class Cart(models.Model):
         CANCELED = 'canceled'
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
-    # created_at = models.DateTimeField(auto_now_add=True)
-    order_at = models.DateTimeField(auto_now_add=True)
+    order_at = models.DateTimeField(blank=True, null=True)
     payment_at = models.DateTimeField(blank=True, null=True)
     status = models.CharField(max_length=255, default=STATUS.COLLECTING, choices=(
         (STATUS.COLLECTING, 'Collecting'),
