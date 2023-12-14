@@ -86,8 +86,8 @@
                                 <form action="{% url 'make_order_submit' %}" method="post" id="order-form">
                                     {% csrf_token %}
                                     <div class="wc-proceed-to-checkout">
-                                      <input type="text" id="first-name" name="first_name" placeholder="First Name" required>
-                                      <input type="text" id="last-name" name="last_name" placeholder="Last Name" required>
+                                      <input type="text" id="first-name" name="first_name" placeholder="Имя" required>
+                                      <input type="text" id="last-name" name="last_name" placeholder="Фамилия" required>
                                         <button type="submit" class="btn btn-outline-maincolor mt-30"
                                                 id="submit-btn"
                                                 name="pay" {% if not delivery_cost %}disabled="disabled"{% endif %}>
