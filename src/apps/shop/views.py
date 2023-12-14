@@ -128,11 +128,13 @@ class UpdateCartView(LoginRequiredMixin, View):
 def make_order(request):
     first_name = request.POST.get('first_name')
     last_name = request.POST.get('last_name')
+    surname = request.POST.get('surname')
     shop_services.update_delivery_info(
         {'user_info':
              {
                  'first_name': first_name,
-                 'last_name': last_name
+                 'last_name': last_name,
+                 'surname': surname
              }
          },
         request.user)
