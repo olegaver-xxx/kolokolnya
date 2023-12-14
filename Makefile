@@ -9,6 +9,9 @@ default:
 initdb:
 	docker exec ${APP_NAME}-app ./manage.py migrate
 
+makem:
+	docker exec ${APP_NAME}-app ./manage.py makemigrations
+
 mkuser:
 	docker exec -it ${APP_NAME}-app ./manage.py createsuperuser
 
