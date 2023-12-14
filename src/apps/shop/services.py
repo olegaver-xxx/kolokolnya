@@ -209,9 +209,9 @@ def order_changed_event(order):
         pass
 
 
-def update_delivery_info(param, info, user):
+def update_delivery_info(param, user):
     order = get_user_cart(user)
-    order.order_details.update({'delivery_info': param, 'order_data': info})
+    order.order_details.update(param)
     order.save()
 
 

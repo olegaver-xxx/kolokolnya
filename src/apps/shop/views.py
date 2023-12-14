@@ -118,12 +118,24 @@ class UpdateCartView(LoginRequiredMixin, View):
             if key == 'delivery_info':
                 data: str = self.request.POST[key]
                 delivery_info = base64.decodebytes(data.encode('utf8')).decode('utf8')
-                shop_services.update_delivery_info(json.loads(delivery_info), self.request.user)
+                shop_services.update_delivery_info(
+                    {'delivery_info': json.loads(delivery_info)},
+                    self.request.user)
 
         return redirect(reverse('cart'))
 
 
 def make_order(request):
+    first_name = request.POST.get('first_name')
+    last_name = request.POST.get('last_name')
+    shop_services.update_delivery_info(
+        {'user_info':
+             {
+                 'first_name': first_name,
+                 'last_name': last_name
+             }
+         },
+        request.user)
     payment_url, order_id = shop_services.create_order(user=request.user)
     return HttpResponseRedirect(payment_url)
 

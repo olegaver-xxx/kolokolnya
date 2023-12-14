@@ -33,15 +33,6 @@
 
 
                                     <tr class="cart_item">
-
-                                        {#                            <td class="product-remove">#}
-                                        {#                                <a href="{% url 'remove_cart_item' item_id=product_cart.id %}"#}
-                                        {#                                   class="remove-btn"#}
-                                        {#                                           aria-label="Remove this item" #}
-                                        {#                                           data-product_id="73"#}
-                                        {#                                           data-product_sku=""#}
-                                        {#                                >×</a>#}
-                                        {#                            </td>#}
                                         <td class="product-thumbnail">
                                             {% for image in product_cart.product.images.all %}
                                                 <a href="{% url 'detail' pk=product_cart.product.id %}">
@@ -77,7 +68,6 @@
 
                                 </tbody>
                             </table>
-                            {#                        </form>#}
                         </main>
                         <hr>
                         <div class="row pt-4">
@@ -93,12 +83,11 @@
                                     {% endif %}
                                 </h6>
                                 <h6>ИТОГО: <span id="total"></span>р</h6>
-                                {#                            {% if delivery_cost != 0 %}#}
-                                <form action="{% url 'make_order_submit' %}" method="post">
+                                <form action="{% url 'make_order_submit' %}" method="post" id="order-form">
                                     {% csrf_token %}
                                     <div class="wc-proceed-to-checkout">
-                                      <input type="text" id="first-name" name="first_name" placeholder="First Name">
-                                      <input type="text" id="last-name" name="last_name" placeholder="Last Name">
+                                      <input type="text" id="first-name" name="first_name" placeholder="First Name" required>
+                                      <input type="text" id="last-name" name="last_name" placeholder="Last Name" required>
                                         <button type="submit" class="btn btn-outline-maincolor mt-30"
                                                 id="submit-btn"
                                                 name="pay" {% if not delivery_cost %}disabled="disabled"{% endif %}>
@@ -106,12 +95,6 @@
                                         </button>
                                     </div>
                                 </form>
-{#                                <form id="order-form">#}
-{#                                  <input type="text" id="first-name" name="first_name" placeholder="First Name">#}
-{#                                  <input type="text" id="last-name" name="last_name" placeholder="Last Name">#}
-{#                                  <!-- Other form inputs -->#}
-{#                                  <button type="submit">Submit</button>#}
-{#                                </form>#}
                             </div>
                         </div>
                     {% endif %}
@@ -126,60 +109,24 @@
 {% block head %}
 
     <script src="https://widget.pochta.ru/map/widget/widget.js"></script>
-{#                        {% endif %}#}
 
 {% endblock %}
 
 {% block scripts %}
     <script>
-    document.getElementById("order-form").addEventListener("submit", function(event) {
-      event.preventDefault(); // Prevent form submission
-
-      // Get form input values
-      var firstName = document.getElementById("first-name").value;
-      var lastName = document.getElementById("last-name").value;
-      // Get other form input values
-
-      // Create JSON object
-      var orderData = {
-        "first_name": firstName,
-        "last_name": lastName,
-        // Add other form input values to the JSON object
-      };
-
-      // Convert JSON object to string
-      var jsonData = JSON.stringify(orderData);
-
-      // Send jsonData to the Russian Post widget or save it to a file
-    });
-    </script>
-    <script>
-        // Получаем кнопку и всплывающее окно по их идентификаторам
-        var button = document.getElementById("myButton");
-        var modal = document.getElementById("myModal");
-
-        // Добавляем обработчик события при клике на кнопку
-        button.addEventListener("click", function () {
-            // Отображаем всплывающее окно, установив его стилю display в "block"
-            modal.style.display = "block";
-        });
-    </script>
-    <script>
 
         let total_sum = {{ total_sum }};
         let delivery_cost = {{delivery_cost}};
-        var firstName = document.getElementById("first-name").value;
-        var lastName = document.getElementById("last-name").value;
-        var orderData = {
-          "first_name": firstName,
-          "last_name": lastName,
-          // Add other form input values to the JSON object
-            };
+
 
 
         function set_address(data) {
-            data['more_info'] = {'name': orderData.first_name, 'surname':orderData.last_name}
-            console.log(orderData)
+            let firstName = document.getElementById("first-name").value;
+            let lastName = document.getElementById("last-name").value;
+            data['recipient_info'] = {
+                  "first_name": firstName,
+                  "last_name": lastName,
+                };
             let d = window.btoa(unescape(encodeURIComponent(JSON.stringify(data))))
             $.ajax({
                 url: '{% url 'update_cart' %}',
@@ -189,8 +136,7 @@
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 dataType: 'text',
-                success: function (result) {
-                    {#alert(result.Result);#}
+                    success: function (result) {
                 }
             });
 
