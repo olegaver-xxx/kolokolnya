@@ -18,7 +18,7 @@
                 <thead>
                 <tr>
                     <th class="product-name">EMAIL пользователя</th>
-                    <th class="order-date">Дата заказа</th>
+{#                    <th class="order-date">Дата заказа</th>#}
                     <th class="product-price">Детали</th>
                     {#                                    <th class="product-quantity">Количество</th>#}
                     <th class="product-subtotal">Сумма заказа</th>
@@ -35,10 +35,10 @@
                             <a href="mailto:{{ payed_order.user.email }}">{{ payed_order.user.email }}</a>
 
                         </td>
-                        <td class="order-date" data-title="Product">
-                            {{ payed_order.payment_at }}
-
-                        </td>
+{#                        <td class="order-date" data-title="Product">#}
+{#                            {{ payed_order.payment_at }}#}
+{##}
+{#                        </td>#}
 
                         <td class="product-price" data-title="Price">
 												<span class="amount">
