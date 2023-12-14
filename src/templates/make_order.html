@@ -94,11 +94,11 @@
                                 </h6>
                                 <h6>ИТОГО: <span id="total"></span>р</h6>
                                 {#                            {% if delivery_cost != 0 %}#}
-                                <form action="{% url 'make_order_submit' %}" method="post" id="order-form">
+                                <form action="{% url 'make_order_submit' %}" method="post">
                                     {% csrf_token %}
                                     <div class="wc-proceed-to-checkout">
-                                    <input type="text" id="first-name" name="first_name" placeholder="First Name">
-                                    <input type="text" id="last-name" name="last_name" placeholder="Last Name">
+                                      <input type="text" id="first-name" name="first_name" placeholder="First Name">
+                                      <input type="text" id="last-name" name="last_name" placeholder="Last Name">
                                         <button type="submit" class="btn btn-outline-maincolor mt-30"
                                                 id="submit-btn"
                                                 name="pay" {% if not delivery_cost %}disabled="disabled"{% endif %}>
@@ -132,6 +132,28 @@
 
 {% block scripts %}
     <script>
+    document.getElementById("order-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get form input values
+      var firstName = document.getElementById("first-name").value;
+      var lastName = document.getElementById("last-name").value;
+      // Get other form input values
+
+      // Create JSON object
+      var orderData = {
+        "first_name": firstName,
+        "last_name": lastName,
+        // Add other form input values to the JSON object
+      };
+
+      // Convert JSON object to string
+      var jsonData = JSON.stringify(orderData);
+
+      // Send jsonData to the Russian Post widget or save it to a file
+    });
+    </script>
+    <script>
         // Получаем кнопку и всплывающее окно по их идентификаторам
         var button = document.getElementById("myButton");
         var modal = document.getElementById("myModal");
@@ -143,8 +165,7 @@
         });
     </script>
     <script>
-        document.getElementById("order-form").addEventListener("submit", function(event) {
-            event.preventDefault();
+
         let total_sum = {{ total_sum }};
         let delivery_cost = {{delivery_cost}};
         var firstName = document.getElementById("first-name").value;
@@ -157,13 +178,14 @@
 
 
         function set_address(data) {
+            data['more_info'] = {'name': orderData.first_name, 'surname':orderData.last_name}
+            console.log(orderData)
             let d = window.btoa(unescape(encodeURIComponent(JSON.stringify(data))))
             $.ajax({
                 url: '{% url 'update_cart' %}',
                 type: 'POST',
                 data: {
                     delivery_info: d,
-                    orderdata: orderData,
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 dataType: 'text',

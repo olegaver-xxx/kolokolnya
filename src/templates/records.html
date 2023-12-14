@@ -26,18 +26,18 @@
 
 {#                        <p>Стоимость: <span id="wordCount">0</span></p>#}
                         <p id="errorMessage" style="color: red;"></p>
-
-                        <button class="btn btn-outline-maincolor mt-30">Отправить</button>
-                    </form>
-                    <select id="tag-select" onchange="updatePrice()">
+                        <select id="tag-select" onchange="updatePrice()">
                             <option value="tag1">Панихида</option>
                             <option value="tag2">Молебен</option>
                             <option value="tag3">Сорокоуст</option>
                             <option value="tag4">Заказная</option>
                             <option value="tag5">Вечное поминовение</option>
                             <option value="tag6">Именной кирпичик</option>
-                    </select>
-                    <p>Цена: <span id="price">0</span></p><<
+                        </select>
+                    <p>Цена: <span id="price">0</span></p>
+                        <button class="btn btn-outline-maincolor mt-30">Отправить</button>
+                    </form>
+
                 </main>
             </div>
         </div>
@@ -81,42 +81,24 @@
         } else if (selectedTag === "tag5") {
             price = 10000;
         } else if (selectedTag === "tag1") {
-            price = 30;
-        } else if (selectedTag === "tag2") {
-            price = 30;
-        } else if (selectedTag === "tag3") {
-            price = 30;
-        } else if (selectedTag === "tag4") {
-            price = 30;
+            var userInput = document.getElementById("user-input").value;
+            price = parseInt(userInput);
+        }
+        else if (selectedTag === "tag2") {
+            var userInput = document.getElementById("user-input").value;
+            price = parseInt(userInput);
+    }
+        else if (selectedTag === "tag3") {
+            var userInput = document.getElementById("user-input").value;
+            price = parseInt(userInput);
+    }
+        else if (selectedTag === "tag4") {
+            var userInput = document.getElementById("user-input").value;
+            price = parseInt(userInput);
         }
 
         document.getElementById("price").innerText = price;
     }
 </script>
-    <script>
 
-    function update_cost (){
-            let words = this.value.replace(/[\t\n\r\.\?\!]/gm, " ").split(" ");
-            let count = words.reduce((a, b) => a + (b.trim() !== ''), 0);
-            let cost = {{record_info.cost}};
-            let names_count = {{record_info.names_per_cost}};
-            let total_cost = Math.ceil(count / names_count) * cost;
-            document.querySelector("#wordCount").innerText = `${total_cost}р`;
-            let errorMessage = document.querySelector("#errorMessage");
-            errorMessage.innerText = "";
-            for (let i = 0; i < words.length; i++) {
-                if (words[i].length > {{record_info.max_word_length}}) { // get from db
-                    $("#submit").prop("disabled", true)
-                    errorMessage.innerText = "Ошибка: Слишком длинное слово";
-                    return;
-                }
-            }
-            $("#submit").prop("disabled", false);
-        }
-        document.querySelector("#{{ form.description.id_for_label }}").addEventListener("input", update_cost );
-
-        $(document).ready(() => {
-            {#update_cost()#}
-         })
-    </script>
 {% endblock %}

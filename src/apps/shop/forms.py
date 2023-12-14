@@ -32,4 +32,4 @@ class RecordForm(forms.ModelForm):
 
     class Meta:
         model = Record
-        fields = 'description', 'cart'
+        fields = 'description', 'cart', 'price'

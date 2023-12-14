@@ -119,6 +119,7 @@ class UpdateCartView(LoginRequiredMixin, View):
                 data: str = self.request.POST[key]
                 delivery_info = base64.decodebytes(data.encode('utf8')).decode('utf8')
                 shop_services.update_delivery_info(json.loads(delivery_info), self.request.user)
+
         return redirect(reverse('cart'))
 
 

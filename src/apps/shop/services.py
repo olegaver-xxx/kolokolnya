@@ -18,7 +18,7 @@ from django.utils import timezone
 def get_record_data():
     return dict(
         names_per_cost=5,
-        cost=10,
+        price=10,
         max_word_length=20
     )
 
@@ -30,8 +30,14 @@ def calculate_record_price(descriptions):
     return total_cost
 
 
+def get_record_price(record, record_price):
+    price = record_price
+    record.price = price
+    return price
+
+
 def add_record_to_cart(record, user):
-    price = calculate_record_price(record.description)
+    price = get_record_price(record, record.price)
     record.cost = price
     cart = get_user_cart(user)
     record.cart = cart
@@ -203,9 +209,9 @@ def order_changed_event(order):
         pass
 
 
-def update_delivery_info(param, user):
+def update_delivery_info(param, info, user):
     order = get_user_cart(user)
-    order.order_details.update({'delivery_info': param})
+    order.order_details.update({'delivery_info': param, 'order_data': info})
     order.save()
 
 
