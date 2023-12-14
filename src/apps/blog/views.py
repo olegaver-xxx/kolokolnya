@@ -62,7 +62,7 @@ class ArticleView(DetailView):
 
 
 class HomeView(TemplateView):
-    template_name = 'home.html'
+    template_name = 'base-index.html'
 
     # def get_context_data(self, **kwargs):
     #     ctx = super().get_context_data()
