@@ -121,6 +121,7 @@ USE_TZ = True
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'login/'
 LOGIN_REDIRECT_URL = '/profile/'
 AUTH_USER_MODEL = 'users.User'
 STATIC_URL = 'static/'
