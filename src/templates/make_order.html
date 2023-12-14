@@ -142,8 +142,13 @@
 
             delivery_cost = Math.floor(data.cashOfDelivery / 100);
             compute_total()
-            $('#submit-btn').prop('disabled', false)
-            $('#address-error').hide()
+             if (delivery_cost > 0) {
+                $('#submit-btn').prop('disabled', false);
+                $('#address-error').hide();
+            } else {
+                $('#submit-btn').prop('disabled', true);
+                $('#address-error').show();
+    }
         }
 
         function compute_total() {
