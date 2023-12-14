@@ -5,7 +5,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from .forms import ProductForm, ImageForm, RecordForm
-from .models import Product, Cart, CartProduct, ProductImage, Tag, Order, Record
+from .models import Product, Cart, CartProduct, ProductImage, Tag, Order, Record, RECORD_COST
 from django.views.generic import DetailView, ListView, TemplateView, CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
@@ -272,6 +272,9 @@ class RecordsView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         rec = form.save()
+        if rec.record_type in RECORD_COST:
+            rec.price = RECORD_COST[rec.record_type]
+            rec.save()
         shop_services.add_record_to_cart(rec, self.request.user)
         return super().form_valid(form)
 

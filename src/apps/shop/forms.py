@@ -32,6 +32,7 @@ class RecordForm(forms.ModelForm):
         required=True)
     cart = forms.ModelChoiceField(queryset=Cart.objects.all(), empty_label=None, required=True,
                                   widget=forms.HiddenInput)
+    price = forms.DecimalField(max_digits=10, decimal_places=2, required=False)
 
     class Meta:
         model = Record

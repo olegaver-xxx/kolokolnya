@@ -30,61 +30,22 @@
 {% endblock %}
 
 {% block scripts %}
+    <script>
+    $(document).ready(function(){
+            let price_list = {
+                5: 100,
+                6: 200
+            };
 
-{#    <script>#}
-{#    $("#tag-select").change(function () {#}
-{#        var selectedTag = $(this).val();#}
-{#        var tagValue;#}
-{#    #}
-{#        if (selectedTag === "tag1") {#}
-{#            tagValue = "Value for tag 1";#}
-{#        } else if (selectedTag === "tag2") {#}
-{#            tagValue = "Value for tag 2";#}
-{#        } else {#}
-{#            tagValue = "Value for tag 3";#}
-{#    }#}
-{#    #}
-{#        $.ajax({#}
-{#            url: '{% url 'get_response' %}',#}
-{#            data: {#}
-{#              'selectedTag': tagValue#}
-{#            },#}
-{#            dataType: 'json',#}
-{#            success: function (data) {#}
-{#              // Обработка возвращаемых данных#}
-{#            }#}
-{#          });#}
-{#        });#}
-{#    </script>#}
-{#<script>#}
-{#    function updatePrice() {#}
-{#        var selectedTag = document.getElementById("tag-select").value;#}
-{#        var price = 0;#}
-{##}
-{#        // Здесь вы можете добавить логику для определения цены в зависимости от выбранного параметра#}
-{#        if (selectedTag === "tag6") {#}
-{#            price = 1000;#}
-{#        } else if (selectedTag === "tag5") {#}
-{#            price = 10000;#}
-{#        } else if (selectedTag === "tag1") {#}
-{#            var userInput = document.getElementById("user-input").value;#}
-{#            price = parseInt(userInput);#}
-{#        }#}
-{#        else if (selectedTag === "tag2") {#}
-{#            var userInput = document.getElementById("user-input").value;#}
-{#            price = parseInt(userInput);#}
-{#    }#}
-{#        else if (selectedTag === "tag3") {#}
-{#            var userInput = document.getElementById("user-input").value;#}
-{#            price = parseInt(userInput);#}
-{#    }#}
-{#        else if (selectedTag === "tag4") {#}
-{#            var userInput = document.getElementById("user-input").value;#}
-{#            price = parseInt(userInput);#}
-{#        }#}
-{##}
-{#        document.getElementById("price").innerText = price;#}
-{#    }#}
-{#</script>#}
+            $("#{{form.record_type.id_for_label}}").change(function(){
+                let selectedOption = $(this).children("option:selected").val();
+                if (price_list.hasOwnProperty(parseInt(selectedOption))) {
+                    $("#{{form.price.id_for_label}}").val(price_list[selectedOption]).prop('disabled', true);
+                }else{
+                    $("#{{form.price.id_for_label}}").prop('disabled', false)
+                }
+            });
+        });
+    </script>
 
 {% endblock %}
