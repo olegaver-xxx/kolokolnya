@@ -18,24 +18,9 @@
                     <form method="post">
                         {% csrf_token %}
                         {{ form }}
-{#                        <select id="tag-select">#}
-{#                            <option value="tag1">Tag 1</option>#}
-{#                            <option value="tag2">Tag 2</option>#}
-{#                            <option value="tag3">Tag 3</option>#}
-{#                        </select>#}
-
-{#                        <p>Стоимость: <span id="wordCount">0</span></p>#}
                         <p id="errorMessage" style="color: red;"></p>
-                        <select id="tag-select" onchange="updatePrice()">
-                            <option value="tag1">Панихида</option>
-                            <option value="tag2">Молебен</option>
-                            <option value="tag3">Сорокоуст</option>
-                            <option value="tag4">Заказная</option>
-                            <option value="tag5">Вечное поминовение</option>
-                            <option value="tag6">Именной кирпичик</option>
-                        </select>
-                    <p>Цена: <span id="price">0</span></p>
-                        <button class="btn btn-outline-maincolor mt-30">Отправить</button>
+
+                        <button type="submit" class="btn btn-outline-maincolor mt-30">Отправить</button>
                     </form>
 
                 </main>
@@ -70,35 +55,35 @@
 {#          });#}
 {#        });#}
 {#    </script>#}
-<script>
-    function updatePrice() {
-        var selectedTag = document.getElementById("tag-select").value;
-        var price = 0;
-
-        // Здесь вы можете добавить логику для определения цены в зависимости от выбранного параметра
-        if (selectedTag === "tag6") {
-            price = 1000;
-        } else if (selectedTag === "tag5") {
-            price = 10000;
-        } else if (selectedTag === "tag1") {
-            var userInput = document.getElementById("user-input").value;
-            price = parseInt(userInput);
-        }
-        else if (selectedTag === "tag2") {
-            var userInput = document.getElementById("user-input").value;
-            price = parseInt(userInput);
-    }
-        else if (selectedTag === "tag3") {
-            var userInput = document.getElementById("user-input").value;
-            price = parseInt(userInput);
-    }
-        else if (selectedTag === "tag4") {
-            var userInput = document.getElementById("user-input").value;
-            price = parseInt(userInput);
-        }
-
-        document.getElementById("price").innerText = price;
-    }
-</script>
+{#<script>#}
+{#    function updatePrice() {#}
+{#        var selectedTag = document.getElementById("tag-select").value;#}
+{#        var price = 0;#}
+{##}
+{#        // Здесь вы можете добавить логику для определения цены в зависимости от выбранного параметра#}
+{#        if (selectedTag === "tag6") {#}
+{#            price = 1000;#}
+{#        } else if (selectedTag === "tag5") {#}
+{#            price = 10000;#}
+{#        } else if (selectedTag === "tag1") {#}
+{#            var userInput = document.getElementById("user-input").value;#}
+{#            price = parseInt(userInput);#}
+{#        }#}
+{#        else if (selectedTag === "tag2") {#}
+{#            var userInput = document.getElementById("user-input").value;#}
+{#            price = parseInt(userInput);#}
+{#    }#}
+{#        else if (selectedTag === "tag3") {#}
+{#            var userInput = document.getElementById("user-input").value;#}
+{#            price = parseInt(userInput);#}
+{#    }#}
+{#        else if (selectedTag === "tag4") {#}
+{#            var userInput = document.getElementById("user-input").value;#}
+{#            price = parseInt(userInput);#}
+{#        }#}
+{##}
+{#        document.getElementById("price").innerText = price;#}
+{#    }#}
+{#</script>#}
 
 {% endblock %}

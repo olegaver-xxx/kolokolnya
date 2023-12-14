@@ -25,11 +25,14 @@ class ImageForm(forms.ModelForm):
 
 
 class RecordForm(forms.ModelForm):
-    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 20,  'id': 'description_area',
-                                                               'placeholder': 'Укажите имена'}))
+    description = forms.CharField(
+        label='Список имён', widget=forms.Textarea(
+        attrs={'rows': 2, 'cols': 20,  'id': 'description_area', 'placeholder': 'Укажите имена'},
+        ),
+        required=True)
     cart = forms.ModelChoiceField(queryset=Cart.objects.all(), empty_label=None, required=True,
                                   widget=forms.HiddenInput)
 
     class Meta:
         model = Record
-        fields = 'description', 'cart', 'price'
+        fields = 'description', 'cart', 'price', 'record_type'

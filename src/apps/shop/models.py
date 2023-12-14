@@ -78,10 +78,18 @@ class CartProduct(models.Model):
 
 
 class Record(models.Model):
-    description = models.TextField(max_length=10000, blank=True, null=True)
+    description = models.TextField('Список имён', max_length=10000, blank=True, null=True)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='records')
     creation_date = models.DateTimeField(auto_now_add=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    price = models.DecimalField('Ваша цена', max_digits=10, decimal_places=2, default=0)
+    record_type = models.IntegerField('Записка', default=1, choices=[
+        (1, 'Панихида'),
+        (2, 'Молебен'),
+        (3, 'Сорокоуст'),
+        (4, 'Заказная'),
+        (5, 'Вечное поминовение'),
+        (6, 'Именной кирпичик'),
+    ])
 
 
 class CartRecord(models.Model):

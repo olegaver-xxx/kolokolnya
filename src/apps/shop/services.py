@@ -30,15 +30,15 @@ def calculate_record_price(descriptions):
     return total_cost
 
 
-def get_record_price(rec_id, record_price):
-    record = Record.objects.get(id=rec_id)
-    record.price = record_price
-    record.save()
+# def get_record_price(rec_id, record_price):
+#     record = Record.objects.get(id=rec_id)
+#     record.price = record_price
+#     record.save()
 
 
 def add_record_to_cart(record, user):
-    price = get_record_price(record, record.price)
-    record.price = price
+    # price = get_record_price(record, record.price)
+    # record.price = price
     cart = get_user_cart(user)
     record.cart = cart
     record.save()
