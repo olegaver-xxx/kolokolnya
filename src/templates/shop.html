@@ -21,12 +21,12 @@
                     <div class="img-wrap">
                         <img src="{{ product.images.first.image|thumbnail_url:"shop" }}" alt="img">
                     </div>
-                    <div class="product-wrap">
-                        <div class="star-rating">
-													<span style="width:60%">Rated
-                                                        <strong class="rating">3.00</strong> out of 5</span>
-                        </div>
+                    <div class="product-wrap pt-4">
+{#													<span style="width:60%">Rated#}
+{#                                                        <strong class="rating">3.00</strong> out of 5</span>#}
+
                         <h2>{{ product.name }}</h2>
+
                         <span class="price">
 													<span>
 														<span>P</span>{{ product.price }}
