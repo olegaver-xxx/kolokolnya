@@ -3,7 +3,11 @@
 
 {% block base %}
 
-    	<div class="preloader">
+ <!--[if lt IE 9]>
+		<div class="bg-danger text-center">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" class="color-main">upgrade your browser</a> to improve your experience.</div>
+	<![endif]-->
+
+	<div class="preloader">
 		<div class="preloader_image"></div>
 	</div>
 
@@ -44,12 +48,10 @@
 			<div class="header_absolute cover-background ds s-overlay s-parallax">
 				<!--topline section visible only on small screens|-->
 				{% include 'head-panel.html' %}
-				<!--eof topline-->
-
-				<!-- header with two Bootstrap columns - left for logo and right for navigation and includes (search, social icons, additional links and buttons etc -->
 
 
-            {% block content %}
+
+{#            {% block content %}#}
 
 			<section class="page_slider">
 				<div class="flexslider vertical home_slider">
@@ -179,7 +181,7 @@
 				</div>
 			</section>
 
-            {% endblock %}
+{#            {% endblock %}#}
 
 			{% include 'footer.html' %}
 
